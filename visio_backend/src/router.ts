@@ -41,6 +41,10 @@ export default class Router {
                 auth: false,
                 handler: videoStreamController.handleIncomingFramePayload,
                 description: 'upload and process an incoming frame payload',
+                payload: {
+                    timeout: false,
+                    maxBytes: 10485760,
+                }
             },
         })
 
