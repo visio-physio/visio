@@ -8,7 +8,6 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
 
-
 pipeline = dai.Pipeline()
 
 spatial_location_calculator = pipeline.createSpatialLocationCalculator()
