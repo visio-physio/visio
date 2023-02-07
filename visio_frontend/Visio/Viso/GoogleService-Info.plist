@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>807246903194-s7hfs19njtfrlhcc88p78be3ju8cd6g3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.807246903194-s7hfs19njtfrlhcc88p78be3ju8cd6g3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDSPQ3RxB2430wc1qB77WJd1JNZaTy-Gu8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>807246903194</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.vazulu.Viso</string>
+	<key>PROJECT_ID</key>
+	<string>viso-51231</string>
+	<key>STORAGE_BUCKET</key>
+	<string>viso-51231.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:807246903194:ios:d31ac02d5da05978b4ac23</string>
+</dict>
+</plist>
