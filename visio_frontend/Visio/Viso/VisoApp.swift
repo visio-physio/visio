@@ -22,6 +22,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct VisoApp: App {
     @StateObject private var modelData = ModelData()
     @StateObject private var fb_data = FirebaseDataLoader()
+    @StateObject private var client = VisioClient(host: "127.0.0.1", port: 8888, delegate: nil)
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
@@ -29,6 +31,7 @@ struct VisoApp: App {
             ContentView()
                 .environmentObject(modelData)
                 .environmentObject(fb_data)
+                .environmentObject(client)
         }
     }
 }

@@ -45,10 +45,17 @@ struct ExerciseDetail: View {
             Text(exercise.description)
                 .padding()
             
-            NavigationLink("Start Teast") {
+            NavigationLink("Start Test") {
+                
                 PoseVideoPlayer()
             }
             .foregroundColor(.green)
+            Spacer()
+            
+//            NavigationLink("Connet to server Test") {
+//                ServerConnectionTest()
+//            }
+//            .foregroundColor(.green)
             Spacer()
         }
         .padding()
