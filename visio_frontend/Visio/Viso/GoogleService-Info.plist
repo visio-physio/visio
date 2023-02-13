@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>807246903194-s7hfs19njtfrlhcc88p78be3ju8cd6g3.apps.googleusercontent.com</string>
+	<string>314018613274-jko5ia314h1ipt1u82mprbaaqacjme71.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.807246903194-s7hfs19njtfrlhcc88p78be3ju8cd6g3</string>
+	<string>com.googleusercontent.apps.314018613274-jko5ia314h1ipt1u82mprbaaqacjme71</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDSPQ3RxB2430wc1qB77WJd1JNZaTy-Gu8</string>
+	<string>AIzaSyALVbMRw5A2sMekENuYBkPCvXJZ-gwbJfM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>807246903194</string>
+	<string>314018613274</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.vazulu.Viso</string>
+	<string>com.vazulu.Visio</string>
 	<key>PROJECT_ID</key>
-	<string>viso-51231</string>
+	<string>viso-8e35e</string>
 	<key>STORAGE_BUCKET</key>
-	<string>viso-51231.appspot.com</string>
+	<string>viso-8e35e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:807246903194:ios:d31ac02d5da05978b4ac23</string>
+	<string>1:314018613274:ios:ca7d6041f3352ce42669a3</string>
 </dict>
 </plist>

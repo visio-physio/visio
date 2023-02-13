@@ -7,17 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		380989CB299A92BF0059287C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 380989CA299A92BF0059287C /* GoogleService-Info.plist */; };
 		3821A71D298C328600981D6B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3821A71C298C328600981D6B /* FirebaseDatabase */; };
 		3821A71F298C356000981D6B /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3821A71E298C356000981D6B /* test.swift */; };
 		3821A721298C360100981D6B /* ExerciseFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3821A720298C360100981D6B /* ExerciseFB.swift */; };
 		3862BD1A2991922700B670E0 /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3862BD192991922700B670E0 /* FirebaseData.swift */; };
-		38DF16E7298C0F1C0020113C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38DF16E6298C0F1C0020113C /* GoogleService-Info.plist */; };
 		38DF16EA298C10780020113C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16E9298C10780020113C /* FirebaseAnalytics */; };
 		38DF16EC298C10780020113C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16EB298C10780020113C /* FirebaseAuth */; };
 		38DF16EE298C10780020113C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16ED298C10780020113C /* FirebaseFirestore */; };
 		38DF16F0298C10780020113C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16EF298C10780020113C /* FirebaseStorage */; };
 		38EFB7A32985CFCD0018F668 /* ExercisesInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 38EFB7A22985CFCD0018F668 /* ExercisesInfo.json */; };
-		38EFB7A92985D3910018F668 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7A82985D3910018F668 /* Exercise.swift */; };
 		38EFB7AD2985D6A80018F668 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7AC2985D6A80018F668 /* ModelData.swift */; };
 		38EFB7B12985D7BF0018F668 /* ExerciseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B02985D7BF0018F668 /* ExerciseRow.swift */; };
 		38EFB7B32985D9B40018F668 /* ExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B22985D9B40018F668 /* ExerciseList.swift */; };
@@ -42,12 +41,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		380989CA299A92BF0059287C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3821A71E298C356000981D6B /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		3821A720298C360100981D6B /* ExerciseFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFB.swift; sourceTree = "<group>"; };
 		3862BD192991922700B670E0 /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
-		38DF16E6298C0F1C0020113C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		38EFB7A22985CFCD0018F668 /* ExercisesInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExercisesInfo.json; sourceTree = "<group>"; };
-		38EFB7A82985D3910018F668 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		38EFB7AC2985D6A80018F668 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		38EFB7B02985D7BF0018F668 /* ExerciseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRow.swift; sourceTree = "<group>"; };
 		38EFB7B22985D9B40018F668 /* ExerciseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseList.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				38EFB7AC2985D6A80018F668 /* ModelData.swift */,
-				38EFB7A82985D3910018F668 /* Exercise.swift */,
 				38EFB7C7298633CD0018F668 /* ExerciseHist.swift */,
 				3821A720298C360100981D6B /* ExerciseFB.swift */,
 				3862BD192991922700B670E0 /* FirebaseData.swift */,
@@ -207,7 +204,7 @@
 		38F653D32985A115004CD110 /* Viso */ = {
 			isa = PBXGroup;
 			children = (
-				38DF16E6298C0F1C0020113C /* GoogleService-Info.plist */,
+				380989CA299A92BF0059287C /* GoogleService-Info.plist */,
 				38F653D42985A115004CD110 /* VisoApp.swift */,
 				38EFB7A52985D2980018F668 /* Views */,
 				38EFB7AA2985D39D0018F668 /* Model */,
@@ -296,7 +293,7 @@
 			files = (
 				38EFB7A32985CFCD0018F668 /* ExercisesInfo.json in Resources */,
 				38F653DC2985A116004CD110 /* Preview Assets.xcassets in Resources */,
-				38DF16E7298C0F1C0020113C /* GoogleService-Info.plist in Resources */,
+				380989CB299A92BF0059287C /* GoogleService-Info.plist in Resources */,
 				38EFB7C6298630D10018F668 /* exerciseResults.json in Resources */,
 				38F653D92985A116004CD110 /* Assets.xcassets in Resources */,
 			);
@@ -314,7 +311,6 @@
 				38EFB7C429862C8D0018F668 /* Badge.swift in Sources */,
 				38EFB7DE298752120018F668 /* UserView.swift in Sources */,
 				38EFB7DB2987452B0018F668 /* PoseVideoPlayer.swift in Sources */,
-				38EFB7A92985D3910018F668 /* Exercise.swift in Sources */,
 				3821A721298C360100981D6B /* ExerciseFB.swift in Sources */,
 				38EFB7B32985D9B40018F668 /* ExerciseList.swift in Sources */,
 				38EFB7C029862C8D0018F668 /* RotatedBadgeSymbol.swift in Sources */,
@@ -472,7 +468,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vazulu.Viso;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vazulu.Visio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -501,7 +497,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.vazulu.Viso;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vazulu.Visio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
