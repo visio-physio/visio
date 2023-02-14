@@ -38,7 +38,7 @@ KEYPOINT_DICT = {
     "right_foot_index": 32
 }
 
-class Body():
+class VisioBody():
   def __init__(self, landmarks):
     self.landmarks = [np.array([lm.x, lm.y, lm.z]) for lm in landmarks]
     self.visibility = [lm.visibility for lm in landmarks]
@@ -108,8 +108,6 @@ if __name__ == "__main__":
   while rgb_cap.isOpened():
     ret, rgb_frame = rgb_cap.read()
     ret, depth_frame = depth_cap.read()
-    # print(rgb_frame.shape)
-    # print(depth_frame.shape)
 
     if not ret:
       print("Can't read frame")
@@ -117,7 +115,7 @@ if __name__ == "__main__":
 
     pose = vp.process_frame(rgb_frame)
 
-    body = Body(pose.pose_landmarks.landmark)
+    body = VisioBody(pose.pose_landmarks.landmark)
     right_arm = body.get_landmark_vector('right_shoulder', 'right_elbow')
     right_arm = body.project_on_anatomical_plane(right_arm, 'frontal')
     left_arm = body.get_landmark_vector('left_shoulder', 'left_elbow')
