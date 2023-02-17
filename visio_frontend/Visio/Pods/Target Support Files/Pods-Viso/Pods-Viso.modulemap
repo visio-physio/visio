@@ -1,0 +1,6 @@
+module Pods_Viso {
+  umbrella header "Pods-Viso-umbrella.h"
+
+  export *
+  module * { export * }
+}

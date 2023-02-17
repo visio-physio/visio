@@ -18,15 +18,6 @@ struct ContentView: View {
                 .tabItem {
                     Label("User", systemImage: "person")
                 }
-            TestView()
-                .tabItem {
-                    Label("test", systemImage: "person")
-                }
-            let url = URL(string: "http://172.20.10.3:8090/")!
-            HttpVideoPlayer(url:url)
-                .tabItem {
-                    Label("test video", systemImage: "person")
-                }
         }
     }
 }
@@ -35,5 +26,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(ModelData())
+            .environmentObject(FirebaseDataLoader())
     }
 }
