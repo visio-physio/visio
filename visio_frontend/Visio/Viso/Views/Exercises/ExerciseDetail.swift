@@ -57,11 +57,15 @@ struct ExerciseDetail: View {
 }
 
 
-//struct ExerciseDetail_Previews: PreviewProvider {
-//    static let modelData = ModelData()
-//
-//    static var previews: some View {
-//        ExerciseDetail(exercise: modelData.exercises[0])
-//            .environmentObject(modelData)
-//    }
-//}
+struct ExerciseDetail_Previews: PreviewProvider {
+    static let modelData = ModelData()
+    static let fb = FirebaseDataLoader()
+    static let exercise = fb.exercises_fb[0]
+
+    static var previews: some View {
+        ExerciseDetail(exercise: exercise)
+            .environmentObject(modelData)
+            .environmentObject(fb)
+            
+    }
+}
