@@ -1,9 +1,14 @@
+import json
 import cv2
+import firebase_admin
 from collections import defaultdict
 
 class ResultCompiler:
+    PATH_TO_CREDENTIALS = "" # TODO: Add file path to firebase credentials
+    PATH_TO_DESTINATION = "" # TODO: Add destination file in firebase storage
+
     def __init__(self):
-        self.results = defaultdict(defaultdict(list))
+        self.results = defaultdict(lambda: defaultdict(list))
         self.out = cv2.VideoWriter("results.avi", cv2.VideoWriter_fourcc('M','J','P','G'), 10, (1152, 648))
     
     def record_angle(self, angle) -> None:
@@ -28,4 +33,10 @@ class ResultCompiler:
         pass
 
     def store_results_in_firebase(self) -> None:
-        pass
+        json_object = json.dumps(self.results)
+        cred = firebase_admin.credentials.Certificate(self.PATH_TO_CREDENTIALS)
+        firebase_admin.initialize_app(cred)
+
+        storage_service = firebase_admin.storage.bucket()
+        blob = storage_service.blob(self.PATH_TO_DESTINATION)
+        blob.upload_from_string(json_object)
