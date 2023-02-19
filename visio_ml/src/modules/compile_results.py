@@ -1,10 +1,10 @@
-import json
 import cv2
 import firebase_admin
 from collections import defaultdict
 
 class ResultCompiler:
     PATH_TO_CREDENTIALS = "" # TODO: Add file path to firebase credentials
+    PATH_TO_DATABASE = ""    # TODO: Add URL to the realtime database
     PATH_TO_DESTINATION = "" # TODO: Add destination file in firebase storage
 
     def __init__(self):
@@ -33,10 +33,10 @@ class ResultCompiler:
         pass
 
     def store_results_in_firebase(self) -> None:
-        json_object = json.dumps(self.results)
         cred = firebase_admin.credentials.Certificate(self.PATH_TO_CREDENTIALS)
-        firebase_admin.initialize_app(cred)
+        firebase_admin.initialize_app(cred, {
+            "databaseURL": self.PATH_TO_DATABASE
+        })
 
-        storage_service = firebase_admin.storage.bucket()
-        blob = storage_service.blob(self.PATH_TO_DESTINATION)
-        blob.upload_from_string(json_object)
+        ref = firebase_admin.db.reference(self.PATH_TO_DESTINATION)
+        ref.set(self.results)
