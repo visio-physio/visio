@@ -18,10 +18,6 @@ struct ContentView: View {
                 .tabItem {
                     Label("User", systemImage: "person")
                 }
-            TestView()
-                .tabItem {
-                    Label("test", systemImage: "person")
-                }
         }
     }
 }
@@ -29,6 +25,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(ModelData())
+            .environmentObject(FirebaseDataLoader())
     }
 }

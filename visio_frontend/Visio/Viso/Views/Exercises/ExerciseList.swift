@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ExerciseList: View {
-//    @EnvironmentObject var modelData: ModelData
     @EnvironmentObject var fb_data: FirebaseDataLoader
     @State private var showFavoritesOnly = false
     
