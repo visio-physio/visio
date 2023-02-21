@@ -24,6 +24,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct VisoApp: App {
     @StateObject private var modelData = ModelData()
     @StateObject private var fb_data = FirebaseDataLoader()
+    @StateObject private var camera_socket = CameraWebsocket()
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
@@ -31,6 +33,7 @@ struct VisoApp: App {
             ContentView()
                 .environmentObject(modelData)
                 .environmentObject(fb_data)
+                .environmentObject(camera_socket)
         }
     }
 }

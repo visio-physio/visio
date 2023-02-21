@@ -3,6 +3,9 @@ import SwiftUI
 struct ExerciseDetail: View {
     @EnvironmentObject var modelData: ModelData
     @EnvironmentObject var fb_data: FirebaseDataLoader
+    @EnvironmentObject var cam: CameraWebsocket
+    @State private var isLiveCameraViewActive = false
+
     var exercise: ExerciseFB
     
     var exerciseIndex: Int {
@@ -46,10 +49,16 @@ struct ExerciseDetail: View {
             Text(exercise.description)
                 .padding()
             
-            NavigationLink("Start Teast") {
-                PoseVideoPlayer()
+            Button("Start Test") {
+                cam.connect()
+                isLiveCameraViewActive = true
             }
-            .foregroundColor(.green)
+            NavigationLink(destination: LiveCameraView(),
+                isActive: $isLiveCameraViewActive
+            ) {
+                EmptyView()
+            }
+
             Spacer()
         }
         .padding()

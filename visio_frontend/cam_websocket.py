@@ -7,8 +7,6 @@ import base64
 async def hello(websocket):
     cap = cv2.VideoCapture(0)
     status = await websocket.recv()
-    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
-
     if status == "start":
         i = 0
         while True:
