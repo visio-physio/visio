@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 # from o3d_utils import Visu3D
-import mediapipe_utils as mpu
 
 
 

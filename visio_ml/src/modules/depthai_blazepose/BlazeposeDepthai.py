@@ -1,5 +1,5 @@
 import numpy as np
-import mediapipe_utils as mpu
+from . import mediapipe_utils as mpu
 import cv2
 from pathlib import Path
 from FPS import FPS, now

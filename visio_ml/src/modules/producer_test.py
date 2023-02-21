@@ -8,6 +8,8 @@ import websockets
 
 async def hello(websocket):
     cap = cv2.VideoCapture(0)
+    ret, frame = cap.read()
+    print(frame.shape)
     status = await websocket.recv()
     if status == "hello there!":
         i = 0
@@ -24,8 +26,6 @@ async def hello(websocket):
                 break
         cv2.destroyAllWindows()
         cap.release()
-
-            
 
 async def main():
 
