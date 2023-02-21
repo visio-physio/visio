@@ -29,7 +29,6 @@ class OakdProducer():
         renderer = BlazeposeRenderer(self.tracker, show_3d=False)
 
         while True:
-            await asyncio.sleep(0.1)
             if self.state == 'produce':
                 frame, body = tracker.next_frame()
                 if frame is None:
