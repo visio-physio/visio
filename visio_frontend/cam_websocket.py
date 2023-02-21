@@ -3,6 +3,7 @@ import asyncio
 import cv2
 import websockets
 import base64
+import gzip
 
 async def hello(websocket):
     cap = cv2.VideoCapture(0)
@@ -16,13 +17,16 @@ async def hello(websocket):
                 break
             cv2.imshow("frame", frame)
             key = cv2.waitKey(1)
-            # result, frame = cv2.imencode('.jpg', frame, encode_param)
             
              # Convert the frame to a byte string
             _, buffer = cv2.imencode('.jpg', frame)
             frame_bytes = buffer.tobytes()
+
+            # Compress the frame_bytes
+            compressed_frame_bytes = gzip.compress(frame_bytes)
+
             # Encode the byte string as a base64 string
-            frame_base64 = base64.b64encode(frame_bytes).decode('utf-8')
+            frame_base64 = base64.b64encode(compressed_frame_bytes).decode('utf-8')
             # Send the base64 string to the client
             await websocket.send(frame_base64)
 

@@ -17,8 +17,8 @@ struct LiveCameraView: View {
             Button("Disconnect"){
                 cam.disconnect()
             }
-            let data = Data(base64Encoded: cam.text) ?? cam.img
-            if let image = UIImage(data: data) {
+//            let data = Data(base64Encoded: cam.text) ?? cam.img
+            if let image = UIImage(data: cam.img) {
                 Image(uiImage: image)
                   .resizable()
                   .scaledToFit()

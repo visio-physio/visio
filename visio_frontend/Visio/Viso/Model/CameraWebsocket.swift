@@ -7,21 +7,21 @@
 
 import Foundation
 import Starscream
-
+import Gzip
 class CameraWebsocket: ObservableObject, WebSocketDelegate {
     var socket: WebSocket!
     var isConnected = false
     let server = WebSocketServer()
-    @Published var text = "None"
     @Published var img = Data()
 
-    
     init(){
-        var request = URLRequest(url: URL(string: "https://localhost:8080")!) //https://localhost:8080
+        var request = URLRequest(url: URL(string: "http://localhost:8080/")!) //https://localhost:8080
         request.timeoutInterval = 5
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
+        print("trying to connect");
+
     }
     
     func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocket) {
@@ -33,12 +33,16 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
             isConnected = false
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let string):
-//            print("Received text: \(string)")
-            text = string
+            let compressedData = Data(base64Encoded: string) ?? Data()
+            do {
+                img = try compressedData.gunzipped()
+            } catch {
+                print("Error: \(error)")
+            }
+
             
         case .binary(let data):
-//            print("Received data: \(data.count)")
-            img = data
+            print("got some data: \(data.count) bytes")
         case .ping(_):
             break
         case .pong(_):
