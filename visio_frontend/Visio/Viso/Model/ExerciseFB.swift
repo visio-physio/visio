@@ -14,8 +14,8 @@ class ExerciseFB: ObservableObject, Identifiable {
     let description: String
     let descriptionTitle: String
     let imageName: String
-    let isFavorite: Bool
-    let isFeatured: Bool
+    var isFavorite: Bool
+    var isFeatured: Bool
     let measurementField: String
     let measurementRange: String
     let test: String

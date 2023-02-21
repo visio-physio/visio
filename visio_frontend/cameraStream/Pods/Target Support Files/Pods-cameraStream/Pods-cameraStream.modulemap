@@ -1,0 +1,6 @@
+module Pods_cameraStream {
+  umbrella header "Pods-cameraStream-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -2,10 +2,11 @@ import SwiftUI
 
 struct ExerciseDetail: View {
     @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject var fb_data: FirebaseDataLoader
     var exercise: ExerciseFB
     
     var exerciseIndex: Int {
-        modelData.exercises.firstIndex(where: { $0.id == exercise.id })!
+        fb_data.exercises_fb.firstIndex(where: { $0.id == exercise.id })!
     }
     
     var chartIndex: Int? {
@@ -27,7 +28,7 @@ struct ExerciseDetail: View {
                     HStack {
                         Text(exercise.test)
                             .font(.title2)
-                        FavoriteButton(isSet: $modelData.exercises[exerciseIndex].isFavorite)
+                        FavoriteButton(isSet: $fb_data.exercises_fb[exerciseIndex].isFavorite)
 
                     }
                     HStack {
@@ -56,11 +57,15 @@ struct ExerciseDetail: View {
 }
 
 
-//struct ExerciseDetail_Previews: PreviewProvider {
-//    static let modelData = ModelData()
-//
-//    static var previews: some View {
-//        ExerciseDetail(exercise: modelData.exercises[0])
-//            .environmentObject(modelData)
-//    }
-//}
+struct ExerciseDetail_Previews: PreviewProvider {
+    static let modelData = ModelData()
+    static let fb = FirebaseDataLoader()
+    static let exercise = fb.exercises_fb[0]
+
+    static var previews: some View {
+        ExerciseDetail(exercise: exercise)
+            .environmentObject(modelData)
+            .environmentObject(fb)
+            
+    }
+}
