@@ -8,6 +8,6 @@ target 'Viso' do
   # Pods for Viso
 source 'https://github.com/CocoaPods/Specs.git'
 pod 'Starscream', '~> 4.0.0'
-
+pod 'GzipSwift'
 end
 
