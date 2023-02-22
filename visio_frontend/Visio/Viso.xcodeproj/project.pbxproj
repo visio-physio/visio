@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3803F55329A66892007D21D5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3803F55229A66892007D21D5 /* SettingsView.swift */; };
 		380989CB299A92BF0059287C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 380989CA299A92BF0059287C /* GoogleService-Info.plist */; };
 		3821A71D298C328600981D6B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3821A71C298C328600981D6B /* FirebaseDatabase */; };
 		3821A721298C360100981D6B /* ExerciseFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3821A720298C360100981D6B /* ExerciseFB.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3803F55229A66892007D21D5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		380989CA299A92BF0059287C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3821A720298C360100981D6B /* ExerciseFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFB.swift; sourceTree = "<group>"; };
 		3825271329A45131008F6DF7 /* CameraWebsocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWebsocket.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				38F653D62985A115004CD110 /* ContentView.swift */,
+				3803F55229A66892007D21D5 /* SettingsView.swift */,
 				38EFB7B8298607FF0018F668 /* Helpers */,
 				38EFB7BA29862C8D0018F668 /* Badges */,
 				38EFB7C92986380D0018F668 /* ExercisePlots */,
@@ -356,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38EFB7D7298730F60018F668 /* ExerciseGraph.swift in Sources */,
+				3803F55329A66892007D21D5 /* SettingsView.swift in Sources */,
 				3825271429A45131008F6DF7 /* CameraWebsocket.swift in Sources */,
 				38EFB7C129862C8D0018F668 /* HexagonParameters.swift in Sources */,
 				38EFB7C429862C8D0018F668 /* Badge.swift in Sources */,

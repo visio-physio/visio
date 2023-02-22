@@ -7,7 +7,7 @@ import cv2
 import base64
 import gzip
 from concurrent.futures import ProcessPoolExecutor
-
+import os
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
 
@@ -33,9 +33,10 @@ class OakdProducer():
                     crop=True,
                     internal_frame_height=600
                     )
-        renderer = BlazeposeRenderer(self.tracker, show_3d=False)
+        renderer = BlazeposeRenderer(tracker, show_3d=False)
 
         while True:
+            await asyncio.sleep(0.001)
             if self.state == 'produce':
                 frame, body = tracker.next_frame()
                 if frame is None:
@@ -64,4 +65,6 @@ class OakdProducer():
 
 if __name__ == "__main__":
     server = OakdProducer()
-    asyncio.run(server.serve('127.0.0.1', 8001))
+    ip = os.popen('ipconfig getifaddr en0').read()[:-1]
+    print("ip:",ip)
+    asyncio.run(server.serve(ip, 8080))
