@@ -5,6 +5,7 @@ import asyncio
 import websockets
 import cv2
 import base64
+import gzip
 from concurrent.futures import ProcessPoolExecutor
 
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
@@ -49,8 +50,9 @@ class OakdProducer():
                  # Convert the frame to a byte string
                 _, buffer = cv2.imencode('.jpg', frame)
                 frame_bytes = buffer.tobytes()
+                compressed_frame_bytes = gzip.compress(frame_bytes)
                 # Encode the byte string as a base64 string
-                frame_base64 = base64.b64encode(frame_bytes).decode('utf-8')
+                frame_base64 = base64.b64encode(compressed_frame_bytes).decode('utf-8')
                 # Send the base64 string to the client
                 await self.websocket.send(frame_base64)
 
