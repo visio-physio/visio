@@ -14,6 +14,7 @@ from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
 class OakdProducer():
     def __init__(self):
         self.state = 'idle' # 'produce'
+        self.excercise = None
         self.websocket = None
 
     async def serve(self, host, port):
@@ -24,7 +25,8 @@ class OakdProducer():
     async def handler(self, websocket):
         self.websocket = websocket
         async for message in websocket:
-            self.state = message
+            self.state = message['state']
+            self.excercise = message['exercise']
         print(f"State updated to: {self.state}")
     
     async def produce(self):
@@ -60,6 +62,8 @@ class OakdProducer():
                 key = renderer.waitKey(delay=1)
                 if key == ord('q') or key == 27:
                     break
+
+                # send to results compiler based on exercise
         renderer.exit()
         tracker.exit()
 
