@@ -3,6 +3,8 @@
 import pickle
 import asyncio
 import websockets
+import cv2
+import base64
 from concurrent.futures import ProcessPoolExecutor
 
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
@@ -25,7 +27,11 @@ class OakdProducer():
         print(f"State updated to: {self.state}")
     
     async def produce(self):
-        tracker = BlazeposeDepthai(xyz=True)
+        tracker = BlazeposeDepthai(
+                    xyz=True,
+                    crop=True,
+                    internal_frame_height=600
+                    )
         renderer = BlazeposeRenderer(self.tracker, show_3d=False)
 
         while True:
@@ -39,7 +45,14 @@ class OakdProducer():
                     print(f"Left: {left_shoulder}, right: {right_shoulder}")
 
                 frame = renderer.draw(frame, body)
-                await self.websocket.send(pickle.dumps(frame))
+
+                 # Convert the frame to a byte string
+                _, buffer = cv2.imencode('.jpg', frame)
+                frame_bytes = buffer.tobytes()
+                # Encode the byte string as a base64 string
+                frame_base64 = base64.b64encode(frame_bytes).decode('utf-8')
+                # Send the base64 string to the client
+                await self.websocket.send(frame_base64)
 
                 key = renderer.waitKey(delay=1)
                 if key == ord('q') or key == 27:
