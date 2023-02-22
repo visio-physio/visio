@@ -4,16 +4,16 @@ import firebase_admin
 class ResultCompiler:
     PATH_TO_CREDENTIALS = "" # TODO: Add file path to firebase credentials
 
-    # db_path: URL to the realtime database for results
+    # results_db_path: URL to the realtime database for results
+    # results_destination_path: destination file in firebase storage for results
     # video_db_name: name of the realtime database for videos
-    # destination_path: destination file in firebase storage
-    def __init__(self, exercise, body_part, db_path, video_db_name, destination_path):
+    def __init__(self, exercise, body_part, results_db_path, results_destination_path, video_db_name):
         self.cred = firebase_admin.credentials.Certificate(self.PATH_TO_CREDENTIALS)
         self.exercise = exercise
         self.body_part = body_part
-        self.results_db_path = db_path
+        self.results_db_path = results_db_path
+        self.results_destination_path = results_destination_path
         self.video_db_name = video_db_name
-        self.destination_path = destination_path
         self.results = []
         self.total = 0
         self.out = cv2.VideoWriter("results.avi", cv2.VideoWriter_fourcc('M','J','P','G'), 10, (1152, 648))
@@ -34,11 +34,14 @@ class ResultCompiler:
             "databaseURL": self.results_db_path
         })
 
-    def store_results_in_firebase(self) -> None:
-        firebase_admin.initialize_app(self.cred, {
-            "storageBucket": self.video_db_name
-        })
-
         bucket = firebase_admin.storage.bucket()
         blob = bucket.blob("./results.avi")
         blob.upload_from_filename("./results.avi")
+
+    def store_results_in_firebase(self) -> None:
+        firebase_admin.initialize_app(self.cred, {
+            "databaseURL": self.results_db_path
+        })
+
+        ref = firebase_admin.db.reference(self.results_destination_path)
+        ref.set(self.results)
