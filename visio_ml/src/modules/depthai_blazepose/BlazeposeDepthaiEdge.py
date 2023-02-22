@@ -1,9 +1,9 @@
 import numpy as np
 import cv2
 from numpy.core.fromnumeric import trace
-import mediapipe_utils as mpu
+from . import mediapipe_utils as mpu
 from pathlib import Path
-from FPS import FPS, now
+from .FPS import FPS, now
 import depthai as dai
 import marshal
 import sys
