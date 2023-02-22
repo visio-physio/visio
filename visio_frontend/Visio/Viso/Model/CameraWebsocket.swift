@@ -8,14 +8,18 @@
 import Foundation
 import Starscream
 import Gzip
+import Network
+
 class CameraWebsocket: ObservableObject, WebSocketDelegate {
     var socket: WebSocket!
     var isConnected = false
     let server = WebSocketServer()
     @Published var img = Data()
-
     init(){
-        var request = URLRequest(url: URL(string: "http://localhost:8080/")!) //https://localhost:8080
+        let monitor = NWPathMonitor()
+        monitor.start(queue: .main)
+        
+        var request = URLRequest(url: URL(string: "http://192.168.0.192:8080/")!) //https://localhost:8080
         request.timeoutInterval = 5
         socket = WebSocket(request: request)
         socket.delegate = self
@@ -69,7 +73,7 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
    }
     
     func connect(){
-        socket.write(string: "start")
+        socket.write(string: "produce")
     }
     func disconnect(){
         socket.write(string: "end")
