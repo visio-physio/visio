@@ -23,11 +23,11 @@ class ResultCompiler:
     
     def record_angle(self, angle) -> None:
         for key, val in angle.items():
-            if len(self.results) > 1:
-                prev_delta = self.results[-1] - self.results[-2]
-                curr_delta = val - self.results[-1]
+            if len(self.results[key]) > 1:
+                prev_delta = self.results[key][-1] - self.results[key][-2]
+                curr_delta = val - self.results[key][-1]
                 if prev_delta * curr_delta < 0:
-                    self.peaks_and_valleys[key].append(self.results[-1])
+                    self.peaks_and_valleys[key].append(self.results[key][-1])
 
             self.results[key].append(val)
 
