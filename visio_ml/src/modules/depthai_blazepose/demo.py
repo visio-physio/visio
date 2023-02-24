@@ -68,7 +68,8 @@ while True:
     if frame is None: break
     
     if body is not None:
-        right_shoulder, left_shoulder = body.get_shoulder_angles()
+        result = body.get_measurement('shoulder','abduction')
+        left_shoulder, right_shoulder = result["left_shoulder"], result["right_shoulder"]
         print(f"Left: {left_shoulder}, right: {right_shoulder}")
     
     # Draw 2d skeleton
