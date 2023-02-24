@@ -27,11 +27,12 @@ class OakdProducer():
     async def handler(self, websocket):
         self.websocket = websocket
         async for message in websocket:
-            event = pickle.loads(message)
-            self.state = event['state']
-            self.excercise = event['exercise']
-            self.name = event['name']
-            self.date = event['date']
+            # event = pickle.loads(message)
+            # self.state = event['state']
+            # self.excercise = event['exercise']
+            # self.name = event['name']
+            # self.date = event['date']
+            self.state = message
         print(f"State updated to: {self.state}")
     
     async def produce(self):
@@ -44,16 +45,27 @@ class OakdProducer():
 
         while True:
             await asyncio.sleep(0.001)
-            if self.state == 'produce':
+            # exercises
+            states = ['shoulder', 'hip']
+            if self.state in states:
                 frame, body = tracker.next_frame()
                 if frame is None:
                     break
 
-                if body is not None:
-                    result = body.get_measurement('shoulder','abduction')
-                    left_shoulder, right_shoulder = result["left_shoulder"], result["right_shoulder"]
-                    print(f"Left: {left_shoulder}, right: {right_shoulder}")
-
+                if body:
+                    # To_do task: reformat the get_measurement para, passed in self.state only
+                    '''
+                    example: if you want hip abduction use: state = "hip_abduction"
+                    '''
+                    result = body.get_measurement(self.state, "abduction")
+                    y_coord = 50
+                    for body_part, measurement in result.items():
+                        # Append text to each frame in the top left corner with minimum usage of space on the frame
+                        cv2.putText(frame, f"{body_part}: {round(measurement, 5)}", (10, y_coord),
+                                    cv2.FONT_HERSHEY_PLAIN, 1,
+                                    (0, 0, 255), 2)
+                        print(f"{body_part}: {measurement}\n")
+                        y_coord += 15
                 frame = renderer.draw(frame, body)
 
                  # Convert the frame to a byte string
