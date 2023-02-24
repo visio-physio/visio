@@ -50,7 +50,7 @@ struct ExerciseDetail: View {
                 .padding()
             
             Button("Start Test") {
-                cam.connect()
+                cam.send(exerciseName: self.exercise.test)
                 isLiveCameraViewActive = true
             }
             NavigationLink(destination: LiveCameraView(),
