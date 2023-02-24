@@ -15,6 +15,8 @@ class OakdProducer():
     def __init__(self):
         self.state = 'idle' # 'produce'
         self.excercise = None
+        self.name = None
+        self.date = None
         self.websocket = None
 
     async def serve(self, host, port):
@@ -25,8 +27,11 @@ class OakdProducer():
     async def handler(self, websocket):
         self.websocket = websocket
         async for message in websocket:
-            self.state = message['state']
-            self.excercise = message['exercise']
+            event = pickle.loads(message)
+            self.state = event['state']
+            self.excercise = event['exercise']
+            self.name = event['name']
+            self.date = event['date']
         print(f"State updated to: {self.state}")
     
     async def produce(self):
