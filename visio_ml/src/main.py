@@ -1,19 +1,14 @@
 import argparse
 import asyncio
-from modules.websocket_server import WebSocketServer
+from modules.oakd_producer import OakdProducer
 
 HOST = "127.0.0.1"
-PORT = 8001
+PORT = 8080
 
 async def main(host=HOST, port=PORT):
     print(f"Starting server on {HOST}:{PORT}")
-    websocket_server = WebSocketServer()
-    asyncio.create_task(websocket_server.serve(HOST, PORT))
-
-    while True:
-        print("still alive")
-        # insert main loop code here
-        await asyncio.sleep(10)
+    server = OakdProducer()
+    asyncio.run(server.serve(HOST, PORT))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(add_help=False)
