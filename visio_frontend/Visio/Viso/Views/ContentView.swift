@@ -18,10 +18,6 @@ struct ContentView: View {
                 .tabItem {
                     Label("User", systemImage: "person")
                 }
-            SettingsView()
-                .tabItem {
-                    Label("User", systemImage: "person")
-                }
         }
     }
 }

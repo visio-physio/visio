@@ -18,13 +18,15 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
     init(){
         let monitor = NWPathMonitor()
         monitor.start(queue: .main)
-        
-        var request = URLRequest(url: URL(string: "http://172.20.10.5:8080/")!) //https://localhost:8080
+        let ip = getIPAddress()
+        let port = "8080"
+        let url = "http://" + ip + ":" + port + "/"
+        var request = URLRequest(url: URL(string: url)!) //https://localhost:8080
         request.timeoutInterval = 5
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
-        print("trying to connect");
+        print("trying to connect with: \(url)");
 
     }
     
@@ -81,4 +83,31 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
     func send(exerciseName:String){
         socket.write(string: exerciseName)
     }
+}
+
+func getIPAddress() -> String {
+    var address: String?
+
+    // Get list of all network interfaces
+    var ifaddr: UnsafeMutablePointer<ifaddrs>?
+    guard getifaddrs(&ifaddr) == 0 else { return "localhost" }
+    defer { freeifaddrs(ifaddr) }
+
+    // Iterate over each network interface
+    var pointer = ifaddr
+    while pointer != nil {
+        let info = pointer!.pointee
+
+        // Get address for the "en0" interface
+        if String(cString: info.ifa_name) == "en0", info.ifa_addr.pointee.sa_family == AF_INET {
+            var addr = info.ifa_addr.pointee
+            var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+            getnameinfo(&addr, socklen_t(addr.sa_len), &hostname, socklen_t(hostname.count), nil, socklen_t(0), NI_NUMERICHOST)
+            address = String(cString: hostname)
+        }
+
+        pointer = pointer?.pointee.ifa_next
+    }
+
+    return address ?? "localhost"
 }
