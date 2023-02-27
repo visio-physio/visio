@@ -37,7 +37,7 @@ class BlazeposeRenderer:
         self.show_rot_rect = False
         self.show_landmarks = True
         self.show_score = False
-        self.show_fps = True
+        self.show_fps = False
 
         self.show_xyz_zone = self.show_xyz = self.tracker.xyz
 
@@ -104,10 +104,10 @@ class BlazeposeRenderer:
             x0, y0 = body.xyz_ref_coords_pixel.astype(int)
             x0 -= 50
             y0 += 40
-            cv2.rectangle(self.frame, (x0,y0), (x0+100, y0+85), (220,220,240), -1)
-            cv2.putText(self.frame, f"X:{body.xyz[0]/10:3.0f} cm", (x0+10, y0+20), cv2.FONT_HERSHEY_PLAIN, 1, (20,180,0), 2)
-            cv2.putText(self.frame, f"Y:{body.xyz[1]/10:3.0f} cm", (x0+10, y0+45), cv2.FONT_HERSHEY_PLAIN, 1, (255,0,0), 2)
-            cv2.putText(self.frame, f"Z:{body.xyz[2]/10:3.0f} cm", (x0+10, y0+70), cv2.FONT_HERSHEY_PLAIN, 1, (0,0,255), 2)
+            # cv2.rectangle(self.frame, (x0,y0), (x0+100, y0+85), (220,220,240), -1)
+            # cv2.putText(self.frame, f"X:{body.xyz[0]/10:3.0f} cm", (x0+10, y0+20), cv2.FONT_HERSHEY_PLAIN, 1, (20,180,0), 2)
+            # cv2.putText(self.frame, f"Y:{body.xyz[1]/10:3.0f} cm", (x0+10, y0+45), cv2.FONT_HERSHEY_PLAIN, 1, (255,0,0), 2)
+            # cv2.putText(self.frame, f"Z:{body.xyz[2]/10:3.0f} cm", (x0+10, y0+70), cv2.FONT_HERSHEY_PLAIN, 1, (0,0,255), 2)
         if self.show_xyz_zone and body.xyz_ref:
             # Show zone on which the spatial data were calculated
             cv2.rectangle(self.frame, tuple(body.xyz_zone[0:2]), tuple(body.xyz_zone[2:4]), (180,0,180), 2)

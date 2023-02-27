@@ -61,8 +61,8 @@ class OakdProducer():
                     y_coord = 50
                     for body_part, measurement in result.items():
                         # Append text to each frame in the top left corner with minimum usage of space on the frame
-                        cv2.putText(frame, f"{body_part}: {round(measurement, 5)}", (10, y_coord),
-                                    cv2.FONT_HERSHEY_PLAIN, 1,
+                        cv2.putText(frame, f"{body_part}: {round(measurement, 5)}", (5, y_coord),
+                                    cv2.FONT_HERSHEY_PLAIN, 1.5,
                                     (0, 0, 255), 2)
                         print(f"{body_part}: {measurement}\n")
                         y_coord += 15
@@ -87,6 +87,5 @@ class OakdProducer():
 
 if __name__ == "__main__":
     server = OakdProducer()
-    ip = os.popen('ipconfig getifaddr en0').read()[:-1]
-    print("ip:",ip)
+    ip = "172.20.10.5"
     asyncio.run(server.serve(ip, 8080))
