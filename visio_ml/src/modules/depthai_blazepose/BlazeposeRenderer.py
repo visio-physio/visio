@@ -1,8 +1,5 @@
 import cv2
 import numpy as np
-# from o3d_utils import Visu3D
-
-
 
 # LINE_BODY and COLORS_BODY are used when drawing the skeleton in 3D. 
 rgb = {"right":(0,1,0), "left":(1,0,0), "middle":(1,1,0)}
@@ -21,14 +18,10 @@ COLORS_BODY = ["middle","right","left",
 COLORS_BODY = [rgb[x] for x in COLORS_BODY]
 
 
-
-
 class BlazeposeRenderer:
     def __init__(self,
-                tracker,
                 show_3d=None,
                 output=None):
-        self.tracker = tracker
         self.show_3d = show_3d
         self.fram = None
         self.pause = False
@@ -40,36 +33,6 @@ class BlazeposeRenderer:
         self.show_fps = False
 
         self.show_xyz_zone = self.show_xyz = self.tracker.xyz
-
-        # if self.show_3d == "mixed" and not self.tracker.xyz:
-        #     print("'mixed' 3d visualization needs the tracker to be in 'xyz' mode !")
-        #     print("3d visualization falling back to 'world' mode.")
-        #     self.show_3d = 'world'
-        # if self.show_3d == "image":
-        #     self.vis3d = Visu3D(zoom=0.7, segment_radius=3)
-        #     z = min(tracker.img_h, tracker.img_w)/3
-        #     self.vis3d.create_grid([0,tracker.img_h,-z],[tracker.img_w,tracker.img_h,-z],[tracker.img_w,tracker.img_h,z],[0,tracker.img_h,z],5,2) # Floor
-        #     self.vis3d.create_grid([0,0,z],[tracker.img_w,0,z],[tracker.img_w,tracker.img_h,z],[0,tracker.img_h,z],5,2) # Wall
-        #     self.vis3d.init_view()
-        # elif self.show_3d == "world":
-        #     self.vis3d = Visu3D(bg_color=(0.2, 0.2, 0.2), zoom=1.1, segment_radius=0.01)
-        #     self.vis3d.create_grid([-1,1,-1],[1,1,-1],[1,1,1],[-1,1,1],2,2) # Floor
-        #     self.vis3d.create_grid([-1,1,1],[1,1,1],[1,-1,1],[-1,-1,1],2,2) # Wall
-        #     self.vis3d.init_view()
-        # elif self.show_3d == "mixed":
-        #     self.vis3d = Visu3D(bg_color=(0.4, 0.4, 0.4), zoom=0.7, segment_radius=0.01)
-        #     half_length = 3
-        #     grid_depth = 5
-        #     self.vis3d.create_grid([-half_length,1,0],[half_length,1,0],[half_length,1,grid_depth],[-half_length,1,grid_depth],2*half_length,grid_depth) # Floor
-        #     self.vis3d.create_grid([-half_length,1,grid_depth],[half_length,1,grid_depth],[half_length,-1,grid_depth],[-half_length,-1,grid_depth],2*half_length,2) # Wall
-        #     self.vis3d.create_camera()
-        #     self.vis3d.init_view()
-
-        if output is None:
-            self.output = None
-        else:
-            fourcc = cv2.VideoWriter_fourcc(*"MJPG")
-            self.output = cv2.VideoWriter(output,fourcc,tracker.video_fps,(tracker.img_w, tracker.img_h)) 
 
     def is_present(self, body, lm_id):
         return body.presence[lm_id] > self.tracker.presence_threshold
@@ -111,43 +74,7 @@ class BlazeposeRenderer:
         if self.show_xyz_zone and body.xyz_ref:
             # Show zone on which the spatial data were calculated
             cv2.rectangle(self.frame, tuple(body.xyz_zone[0:2]), tuple(body.xyz_zone[2:4]), (180,0,180), 2)
-
-    # def draw_3d(self, body):
-    #     self.vis3d.clear()
-    #     self.vis3d.try_move()
-    #     self.vis3d.add_geometries()
-    #     if body is not None:
-    #         points = body.landmarks if self.show_3d == "image" else body.landmarks_world
-    #         draw_skeleton = True
-    #         if self.show_3d == "mixed":  
-    #             if body.xyz_ref:
-    #                 """
-    #                 Beware, the y value of landmarks_world coordinates is negative for landmarks 
-    #                 above the mid hips (like shoulders) and negative for landmarks below (like feet).
-    #                 The y value of (x,y,z) coordinates given by depth sensor is negative in the lower part
-    #                 of the image and positive in the upper part.
-    #                 """
-    #                 translation = body.xyz / 1000
-    #                 translation[1] = -translation[1]
-    #                 if body.xyz_ref == "mid_hips":                   
-    #                     points = points + translation
-    #                 elif body.xyz_ref == "mid_shoulders":
-    #                     mid_hips_to_mid_shoulders = np.mean([
-    #                         points[mpu.KEYPOINT_DICT['right_shoulder']],
-    #                         points[mpu.KEYPOINT_DICT['left_shoulder']]],
-    #                         axis=0) 
-    #                     points = points + translation - mid_hips_to_mid_shoulders   
-    #             else: 
-    #                 draw_skeleton = False
-    #         if draw_skeleton:
-    #             lines = LINES_BODY
-    #             colors = COLORS_BODY
-    #             for i,a_b in enumerate(lines):
-    #                 a, b = a_b
-    #                 if self.is_present(body, a) and self.is_present(body, b):
-    #                         self.vis3d.add_segment(points[a], points[b], color=colors[i])
-    #     self.vis3d.render()
-                
+              
         
     def draw(self, frame, body):
         if not self.pause:
@@ -158,9 +85,7 @@ class BlazeposeRenderer:
         elif self.frame is None:
             self.frame = frame
             self.body = None
-        # else: self.frame points to previous frame
-        # if self.show_3d:
-        #     self.draw_3d(self.body)
+
         return self.frame
     
     def exit(self):

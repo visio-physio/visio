@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import pickle
 import asyncio
 import websockets
 import cv2
@@ -10,14 +9,16 @@ from concurrent.futures import ProcessPoolExecutor
 import os
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
+from visio_pose import VisioPose
 
 class OakdProducer():
-    def __init__(self):
+    def __init__(self, cpu=False):
         self.state = 'idle' # 'produce'
         self.excercise = None
         self.name = None
         self.date = None
         self.websocket = None
+        self.cpu = cpu
 
     async def serve(self, host, port):
         server = await websockets.serve(self.handler, host, port)
@@ -36,12 +37,18 @@ class OakdProducer():
         print(f"State updated to: {self.state}")
     
     async def produce(self):
-        tracker = BlazeposeDepthai(
-                    xyz=True,
-                    crop=True,
-                    internal_frame_height=600
-                    )
-        renderer = BlazeposeRenderer(tracker, show_3d=False)
+        if self.cpu:
+            tracker = VisioPose(
+                crop=True,
+                internal_frame_height=600
+            )
+        else:
+            tracker = BlazeposeDepthai(
+                xyz=True,
+                crop=True,
+                internal_frame_height=600
+            )
+        renderer = BlazeposeRenderer(show_3d=False)
 
         while True:
             await asyncio.sleep(0.001)
