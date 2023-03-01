@@ -18,6 +18,7 @@ class ResultCompiler:
         self.video_db_name = video_db_name
         self.results = defaultdict(lambda: [0])
         self.peaks_and_valleys = defaultdict(list)
+        self.results["user_id"] = user_id
         self.video_file_name = f"{local_file_path}/{user_id}_{exercise}_{body_part}_{frame_rate}fps_{datetime.now()}.avi"
         self.out = cv2.VideoWriter(self.video_file_name, cv2.VideoWriter_fourcc('M','J','P','G'), frame_rate, frame_size)
     

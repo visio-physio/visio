@@ -14,6 +14,8 @@
 		3825271429A45131008F6DF7 /* CameraWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3825271329A45131008F6DF7 /* CameraWebsocket.swift */; };
 		3825271629A45161008F6DF7 /* LiveCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3825271529A45161008F6DF7 /* LiveCameraView.swift */; };
 		3862BD1A2991922700B670E0 /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3862BD192991922700B670E0 /* FirebaseData.swift */; };
+		38AEA84429AFF867003ACDB0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84329AFF867003ACDB0 /* LoginView.swift */; };
+		38AEA84629AFF87B003ACDB0 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84529AFF87B003ACDB0 /* RegisterView.swift */; };
 		38DF16EA298C10780020113C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16E9298C10780020113C /* FirebaseAnalytics */; };
 		38DF16EC298C10780020113C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16EB298C10780020113C /* FirebaseAuth */; };
 		38DF16EE298C10780020113C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16ED298C10780020113C /* FirebaseFirestore */; };
@@ -51,7 +53,9 @@
 		3825271329A45131008F6DF7 /* CameraWebsocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWebsocket.swift; sourceTree = "<group>"; };
 		3825271529A45161008F6DF7 /* LiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCameraView.swift; sourceTree = "<group>"; };
 		3862BD192991922700B670E0 /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
-		38EB34E1299EFC5C00C0E4CF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		38AEA84329AFF867003ACDB0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		38AEA84529AFF87B003ACDB0 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		38EB34E1299EFC5C00C0E4CF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		38EFB7A22985CFCD0018F668 /* ExercisesInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ExercisesInfo.json; sourceTree = "<group>"; };
 		38EFB7AC2985D6A80018F668 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		38EFB7B02985D7BF0018F668 /* ExerciseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRow.swift; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 			children = (
 				38F653D62985A115004CD110 /* ContentView.swift */,
 				3803F55229A66892007D21D5 /* SettingsView.swift */,
+				38AEA84329AFF867003ACDB0 /* LoginView.swift */,
+				38AEA84529AFF87B003ACDB0 /* RegisterView.swift */,
 				38EFB7B8298607FF0018F668 /* Helpers */,
 				38EFB7BA29862C8D0018F668 /* Badges */,
 				38EFB7C92986380D0018F668 /* ExercisePlots */,
@@ -364,10 +370,12 @@
 				38EFB7C129862C8D0018F668 /* HexagonParameters.swift in Sources */,
 				38EFB7C429862C8D0018F668 /* Badge.swift in Sources */,
 				38EFB7DE298752120018F668 /* UserView.swift in Sources */,
+				38AEA84429AFF867003ACDB0 /* LoginView.swift in Sources */,
 				38EFB7DB2987452B0018F668 /* PoseVideoPlayer.swift in Sources */,
 				3821A721298C360100981D6B /* ExerciseFB.swift in Sources */,
 				38EFB7B32985D9B40018F668 /* ExerciseList.swift in Sources */,
 				38EFB7C029862C8D0018F668 /* RotatedBadgeSymbol.swift in Sources */,
+				38AEA84629AFF87B003ACDB0 /* RegisterView.swift in Sources */,
 				3825271629A45161008F6DF7 /* LiveCameraView.swift in Sources */,
 				38EFB7B12985D7BF0018F668 /* ExerciseRow.swift in Sources */,
 				3862BD1A2991922700B670E0 /* FirebaseData.swift in Sources */,
