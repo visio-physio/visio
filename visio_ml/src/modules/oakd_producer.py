@@ -9,7 +9,7 @@ from concurrent.futures import ProcessPoolExecutor
 import os
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
-from visio_pose import VisioPose
+from visio_pose import VisioPose, VisioPoseRenderer
 
 class OakdProducer():
     def __init__(self, cpu=False):
@@ -26,6 +26,7 @@ class OakdProducer():
         await asyncio.gather(server.serve_forever(), producer_task)
     
     async def handler(self, websocket):
+        print("New connection")
         self.websocket = websocket
         async for message in websocket:
             # event = pickle.loads(message)
@@ -42,13 +43,15 @@ class OakdProducer():
                 crop=True,
                 internal_frame_height=600
             )
+            renderer = VisioPoseRenderer(tracker)
         else:
             tracker = BlazeposeDepthai(
                 xyz=True,
                 crop=True,
                 internal_frame_height=600
             )
-        renderer = BlazeposeRenderer(show_3d=False)
+            renderer = BlazeposeRenderer(tracker=tracker, show_3d=False)
+        
 
         while True:
             await asyncio.sleep(0.001)
@@ -59,7 +62,7 @@ class OakdProducer():
                 if frame is None:
                     break
 
-                if body:
+                if body.landmarks:
                     # To_do task: reformat the get_measurement para, passed in self.state only
                     '''
                     example: if you want hip abduction use: state = "hip_abduction"
@@ -93,6 +96,7 @@ class OakdProducer():
         tracker.exit()
 
 if __name__ == "__main__":
-    server = OakdProducer()
-    ip = "172.20.10.5"
+    server = OakdProducer(cpu=False)
+    ip = "127.0.0.1"
+    print(f"Starting server at {ip}:8080")
     asyncio.run(server.serve(ip, 8080))

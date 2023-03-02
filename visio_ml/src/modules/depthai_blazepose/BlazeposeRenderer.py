@@ -20,19 +20,27 @@ COLORS_BODY = [rgb[x] for x in COLORS_BODY]
 
 class BlazeposeRenderer:
     def __init__(self,
+                tracker=None,
                 show_3d=None,
                 output=None):
         self.show_3d = show_3d
         self.fram = None
         self.pause = False
+        self.output = output
 
         # Rendering flags
         self.show_rot_rect = False
         self.show_landmarks = True
         self.show_score = False
         self.show_fps = False
+        self.tracker = tracker
 
-        self.show_xyz_zone = self.show_xyz = self.tracker.xyz
+        if tracker is not None:
+            self.show_xyz_zone = self.show_xyz = self.tracker.xyz
+        else:
+            self.show_xyz_zone = False
+
+        self.nb_kps = 33
 
     def is_present(self, body, lm_id):
         return body.presence[lm_id] > self.tracker.presence_threshold
@@ -46,7 +54,7 @@ class BlazeposeRenderer:
             cv2.polylines(self.frame, lines, False, (255, 180, 90), 2, cv2.LINE_AA)
             
             # for i,x_y in enumerate(body.landmarks_padded[:,:2]):
-            for i,x_y in enumerate(body.landmarks[:self.tracker.nb_kps,:2]):
+            for i,x_y in enumerate(body.landmarks[:self.nb_kps,:2]):
                 if self.is_present(body, i):
                     if i > 10:
                         color = (0,255,0) if i%2==0 else (0,0,255)
@@ -79,7 +87,7 @@ class BlazeposeRenderer:
     def draw(self, frame, body):
         if not self.pause:
             self.frame = frame
-            if body:
+            if body.landmarks is not None:
                 self.draw_landmarks(body)
             self.body = body
         elif self.frame is None:

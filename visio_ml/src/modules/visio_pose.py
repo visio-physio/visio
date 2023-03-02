@@ -3,8 +3,8 @@ import numpy as np
 import mediapipe as mp
 import depthai as dai
 
-from .depthai_blazepose import mediapipe_utils as mpu
-from .depthai_blazepose.FPS import FPS, now
+import depthai_blazepose.mediapipe_utils as mpu
+from depthai_blazepose.FPS import FPS, now
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 
 class VisioPose:
@@ -27,7 +27,7 @@ class VisioPose:
             self.resolution = (3840, 2160)
 
         if internal_fps is None:
-            if lm_model == "heavy"
+            if lm_model == "heavy":
                 self.internal_fps = 10
             elif lm_model == "full":
                 self.internal_fps = 8
@@ -60,6 +60,8 @@ class VisioPose:
                                                 min_tracking_confidence=0.5,
                                                 model_complexity=self.complexity[lm_model],
                                                 smooth_landmarks=True)
+        self.presence_threshold = 0.5
+        self.xyz = False
 
     def create_pipeline(self):
         pipeline = dai.Pipeline()
@@ -72,8 +74,8 @@ class VisioPose:
         cam.setBoardSocket(dai.CameraBoardSocket.RGB)
 
         if self.crop:
-                cam.setVideoSize(self.frame_size, self.frame_size)
-                cam.setPreviewSize(self.frame_size, self.frame_size)
+            cam.setVideoSize(self.frame_size, self.frame_size)
+            cam.setPreviewSize(self.frame_size, self.frame_size)
         else: 
             cam.setVideoSize(self.img_w, self.img_h)
             cam.setPreviewSize(self.img_w, self.img_h)
@@ -96,7 +98,73 @@ class VisioPose:
         else:
             rgb_frame = video_frame
 
+        rgb_frame = cv2.cvtColor(rgb_frame, cv2.COLOR_BGR2RGB)
+        rgb_frame.flags.writeable = False
         result = self.pose_model.process(rgb_frame)
+        rgb_frame.flags.writeable = True
+        rgb_frame = cv2.cvtColor(rgb_frame, cv2.COLOR_RGB2BGR)
+
         body = mpu.Body()
-        body.landmarks = result.pose_landmarks.landmark
+        if result.pose_landmarks is not None:
+            body.pose_landmarks = result.pose_landmarks
+            landmarks = [np.array([lm.x, lm.y, lm.z]) for lm in result.pose_landmarks.landmark]
+            body.landmarks = np.asarray(landmarks)
+            body.presence = [lm.visibility for lm in result.pose_landmarks.landmark]
+
         return rgb_frame, body
+    
+class VisioPoseRenderer():
+    def __init__(self, tracker):
+        self.tracker = tracker
+        self.mp_drawing = mp.solutions.drawing_utils
+        self.mp_drawing_styles = mp.solutions.drawing_styles
+        self.pose_connection = mp.solutions.pose.POSE_CONNECTIONS
+
+    def draw(self, frame, body):
+        self.frame = frame
+        if body.pose_landmarks is not None:
+            self.mp_drawing.draw_landmarks(
+                self.frame,
+                body.pose_landmarks,
+                self.pose_connection,
+                landmark_drawing_spec=self.mp_drawing_styles.get_default_pose_landmarks_style())
+        
+        self.tracker.fps.draw(self.frame, orig=(50,50), size=1, color=(240,180,100))
+        
+        return self.frame
+    
+    def waitKey(self, delay=1):
+        cv2.imshow("Blazepose", self.frame)
+        key = cv2.waitKey(delay)
+        return key
+
+
+if __name__ == "__main__":
+
+    tracker = VisioPose(
+                crop=True,
+                internal_frame_height=600,
+                lm_model='lite'
+            )
+    # renderer = BlazeposeRenderer(tracker=tracker, show_3d=False)
+    renderer = VisioPoseRenderer(tracker)
+
+    while True:
+        frame, body = tracker.next_frame()
+        frame.flags.writeable = True
+        frame = renderer.draw(frame, body)
+
+        if body.landmarks is not None:
+            result = body.get_measurement("shoulder", "abduction")
+            y_coord = 50
+            for body_part, measurement in result.items():
+                # Append text to each frame in the top left corner with minimum usage of space on the frame
+                cv2.putText(frame, f"{body_part}: {round(measurement, 5)}", (5, y_coord),
+                            cv2.FONT_HERSHEY_PLAIN, 1.5,
+                            (0, 0, 255), 2)
+                print(f"{body_part}: {measurement}\n")
+                y_coord += 15
+        
+        key = renderer.waitKey(delay=1)
+        if key == ord('q') or key == 27:
+            break

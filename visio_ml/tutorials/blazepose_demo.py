@@ -14,6 +14,8 @@ cam_rgb.setInterleaved(False)
 
 xout_rgb = pipeline.create(dai.node.XLinkOut)
 xout_rgb.setStreamName("rgb")
+xout_rgb.input.setQueueSize(1)
+xout_rgb.input.setBlocking(False)
 cam_rgb.preview.link(xout_rgb.input)
 
 with dai.Device(pipeline) as device:
