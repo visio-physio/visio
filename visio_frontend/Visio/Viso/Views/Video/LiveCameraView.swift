@@ -9,21 +9,24 @@ import SwiftUI
 
 struct LiveCameraView: View {
     @EnvironmentObject var cam: CameraWebsocket
-   
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
-        
-        VStack{
-        
-            Button("Disconnect"){
-                cam.disconnect()
-            }
-//            let data = Data(base64Encoded: cam.text) ?? cam.img
-            if let image = UIImage(data: cam.img) {
-                Image(uiImage: image)
-                  .resizable()
-                  .scaledToFit()
-            } else {
-                Text("Invalid image data")
+        NavigationStack {
+            VStack{
+            
+                Button("Disconnect"){
+                    cam.disconnect()
+                    dismiss()
+                }
+    //            let data = Data(base64Encoded: cam.text) ?? cam.img
+                if let image = UIImage(data: cam.img) {
+                    Image(uiImage: image)
+                      .resizable()
+                      .scaledToFit()
+                } else {
+                    Text("Invalid image data")
+                }
             }
         }
     }

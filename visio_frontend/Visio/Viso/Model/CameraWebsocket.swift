@@ -19,7 +19,7 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
         let monitor = NWPathMonitor()
         monitor.start(queue: .main)
         
-        let url = "http://169.254.238.40:8080/"
+        let url = "https://3dc2-2607-9880-1aa0-cd-1374-87be-b01b-c4c2.ngrok.io"
         var request = URLRequest(url: URL(string: url)!) //https://localhost:8080
         request.timeoutInterval = 5
         socket = WebSocket(request: request)

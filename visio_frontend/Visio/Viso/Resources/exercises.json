@@ -1,7 +1,7 @@
 [
     {
         "id" : 1,
-        "exercise_name": "Shoulder Abduction",
+        "exercise_name": "shoulder",
         "category": "Upper Body",
         "isFavorite": true,
         "measurementField": "Range of Motion",
@@ -12,7 +12,7 @@
     },
     {
         "id" : 2,
-        "exercise_name": "Hip Abduction",
+        "exercise_name": "hip",
         "category": "Upper Body",
         "isFavorite": true,
         "measurementField": "Range of Motion",

@@ -12,7 +12,6 @@ struct LoginView: View {
     
     var body: some View {
         NavigationStack {
-            
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color.green, Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
@@ -55,6 +54,7 @@ struct LoginView: View {
                         isPresented: $isActive) {
                             ExerciseList()
                         }
+                    
                     Button(action: {
                         self.isRegistering = true
                     }) {
@@ -68,7 +68,7 @@ struct LoginView: View {
                         isPresented: $isRegistering) {
                             RegisterView()
                         }
-
+                    
                     Spacer()
                 }
                 .padding()
@@ -76,7 +76,6 @@ struct LoginView: View {
         }
     }
 }
-
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

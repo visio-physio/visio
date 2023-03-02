@@ -19,47 +19,48 @@ struct ExerciseDetail: View {
     @State private var isShowVideo = false
 
     var body: some View {
-        VStack {
-            if let index = chartIndex {
-                Text("Historical Test Results")
-                    .font(.title2)
-                    .padding()
-                ExercisePlotView(exerciseHist: modelData.exerciseHists[index])
-            }
-            HStack {
-                CircleImage(image: exercise.image)
-                VStack (alignment: .leading){
-                    HStack {
-                        Text(exercise.exercise_name)
-                            .font(.title2)
-                        FavoriteButton(isSet: $load_exercises.exercises[exerciseIndex].isFavorite)
+        NavigationStack{
+            VStack {
+                if let index = chartIndex {
+                    Text("Historical Test Results")
+                        .font(.title2)
+                        .padding()
+                    ExercisePlotView(exerciseHist: modelData.exerciseHists[index])
+                }
+                HStack {
+                    CircleImage(image: exercise.image)
+                    VStack (alignment: .leading){
+                        HStack {
+                            Text(exercise.exercise_name)
+                                .font(.title2)
+                            FavoriteButton(isSet: $load_exercises.exercises[exerciseIndex].isFavorite)
 
-                    }
-                    HStack {
-                        Text(exercise.measurementField)
-                            .font(.subheadline)
-                        Spacer()
-                        Text(exercise.measurementRange)
-                            .font(.subheadline)
+                        }
+                        HStack {
+                            Text(exercise.measurementField)
+                                .font(.subheadline)
+                            Spacer()
+                            Text(exercise.measurementRange)
+                                .font(.subheadline)
+                        }
                     }
                 }
+                Divider()
+                Text(exercise.descriptionTitle)
+                    .font(.title3)
+                Text(exercise.description)
+                    .padding()
+                
+                Button("Start Test") {
+                    cam.send(exerciseName: self.exercise.exercise_name)
+                    print("sending to server: \(self.exercise.exercise_name)")
+                    isLiveCameraViewActive = true
+                }
+                .sheet(isPresented: $isLiveCameraViewActive) {
+                        LiveCameraView()
+                        }
+                Spacer()
             }
-            Divider()
-            Text(exercise.descriptionTitle)
-                .font(.title3)
-            Text(exercise.description)
-                .padding()
-            
-            Button("Start Test") {
-                cam.send(exerciseName: self.exercise.exercise_name)
-                isLiveCameraViewActive = true
-            }
-            NavigationLink(destination: LiveCameraView(),
-                isActive: $isLiveCameraViewActive
-            ) {
-                EmptyView()
-            }
-            Spacer()
         }
         .padding()
     }
