@@ -19,12 +19,13 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
         let monitor = NWPathMonitor()
         monitor.start(queue: .main)
         
-        var request = URLRequest(url: URL(string: "http://169.254.238.40:8080/")!) //https://localhost:8080
+        let url = "http://169.254.238.40:8080/"
+        var request = URLRequest(url: URL(string: url)!) //https://localhost:8080
         request.timeoutInterval = 5
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
-        print("trying to connect");
+        print("connecting to websocket at: \(url)");
 
     }
     

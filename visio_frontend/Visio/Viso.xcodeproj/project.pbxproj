@@ -24,7 +24,6 @@
 		38DF16F0298C10780020113C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16EF298C10780020113C /* FirebaseStorage */; };
 		38EB34E2299EFC5C00C0E4CF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 38EB34E1299EFC5C00C0E4CF /* Podfile */; };
 		38EFB7A32985CFCD0018F668 /* exercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 38EFB7A22985CFCD0018F668 /* exercises.json */; };
-		38EFB7AD2985D6A80018F668 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7AC2985D6A80018F668 /* ModelData.swift */; };
 		38EFB7B12985D7BF0018F668 /* ExerciseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B02985D7BF0018F668 /* ExerciseRow.swift */; };
 		38EFB7B32985D9B40018F668 /* ExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B22985D9B40018F668 /* ExerciseList.swift */; };
 		38EFB7B52985DBA50018F668 /* ExerciseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B42985DBA50018F668 /* ExerciseDetail.swift */; };
@@ -54,7 +53,6 @@
 		38AEA84D29B0F61D003ACDB0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		38EB34E1299EFC5C00C0E4CF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		38EFB7A22985CFCD0018F668 /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
-		38EFB7AC2985D6A80018F668 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		38EFB7B02985D7BF0018F668 /* ExerciseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRow.swift; sourceTree = "<group>"; };
 		38EFB7B22985D9B40018F668 /* ExerciseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseList.swift; sourceTree = "<group>"; };
 		38EFB7B42985DBA50018F668 /* ExerciseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetail.swift; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 			children = (
 				38AEA84729B0F4E8003ACDB0 /* LoadData.swift */,
 				38AEA84B29B0F5A1003ACDB0 /* Exercise.swift */,
-				38EFB7AC2985D6A80018F668 /* ModelData.swift */,
 				38EFB7C7298633CD0018F668 /* ExerciseHist.swift */,
 				3821A720298C360100981D6B /* ExerciseFB.swift */,
 				3862BD192991922700B670E0 /* FirebaseData.swift */,
@@ -175,10 +172,10 @@
 		38F653C82985A115004CD110 = {
 			isa = PBXGroup;
 			children = (
-				38EB34E1299EFC5C00C0E4CF /* Podfile */,
 				38F653D32985A115004CD110 /* Viso */,
 				38AEA84D29B0F61D003ACDB0 /* Constants.swift */,
 				380989CA299A92BF0059287C /* GoogleService-Info.plist */,
+				38EB34E1299EFC5C00C0E4CF /* Podfile */,
 				38F653D82985A116004CD110 /* Assets.xcassets */,
 				38F653D22985A115004CD110 /* Products */,
 				3821A71B298C328600981D6B /* Frameworks */,
@@ -352,7 +349,6 @@
 				38EFB7B52985DBA50018F668 /* ExerciseDetail.swift in Sources */,
 				38F653D52985A115004CD110 /* VisoApp.swift in Sources */,
 				38F653E32985A72E004CD110 /* CircleImage.swift in Sources */,
-				38EFB7AD2985D6A80018F668 /* ModelData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +479,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Viso/Preview Content\"";
-				DEVELOPMENT_TEAM = GCMP99GZ3Y;
+				DEVELOPMENT_TEAM = TM8YKMSWB6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Viso/Info.plist;
@@ -516,7 +512,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Viso/Preview Content\"";
-				DEVELOPMENT_TEAM = GCMP99GZ3Y;
+				DEVELOPMENT_TEAM = TM8YKMSWB6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Viso/Info.plist;
