@@ -8,8 +8,8 @@ import base64
 import gzip
 from concurrent.futures import ProcessPoolExecutor
 import os
-from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
-from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
+from .depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
+from .depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
 
 class OakdProducer():
     def __init__(self):
