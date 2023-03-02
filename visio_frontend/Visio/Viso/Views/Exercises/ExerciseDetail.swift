@@ -2,16 +2,15 @@ import SwiftUI
 
 struct ExerciseDetail: View {
     @EnvironmentObject var modelData: ExerciseResults
-    @EnvironmentObject var fb_data: FirebaseDataLoader
+//    @EnvironmentObject var fb_data: FirebaseDataLoader
     @EnvironmentObject var cam: CameraWebsocket
-    @State private var isLiveCameraViewActive = false
     @EnvironmentObject var load_exercises: LoadExercises
-    var exercise: Exercise
+    @State private var isLiveCameraViewActive = false
 
-//    var exercise: ExerciseFB
+    var exercise: Exercise
     
     var exerciseIndex: Int {
-        fb_data.exercises_fb.firstIndex(where: { $0.id == exercise.id })!
+        load_exercises.exercises.firstIndex(where: { $0.id == exercise.id })!
     }
     
     var chartIndex: Int? {
@@ -33,7 +32,7 @@ struct ExerciseDetail: View {
                     HStack {
                         Text(exercise.exercise_name)
                             .font(.title2)
-                        FavoriteButton(isSet: $fb_data.exercises_fb[exerciseIndex].isFavorite)
+                        FavoriteButton(isSet: $load_exercises.exercises[exerciseIndex].isFavorite)
 
                     }
                     HStack {
@@ -68,14 +67,15 @@ struct ExerciseDetail: View {
 
 struct ExerciseDetail_Previews: PreviewProvider {
     static let modelData = ExerciseResults()
-    static let fb = FirebaseDataLoader()
+//    static let fb = FirebaseDataLoader()
     static let load_data = LoadExercises()
     static var exercise = load_data.exercises[0]
 
     static var previews: some View {
         ExerciseDetail(exercise: exercise)
             .environmentObject(modelData)
-            .environmentObject(fb)
+            .environmentObject(load_data)
+//            .environmentObject(fb)
             
     }
 }

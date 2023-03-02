@@ -5,7 +5,7 @@ struct Exercise: Hashable, Codable, Identifiable {
     var id: Int
     let exercise_name: String
     let category: String
-    let isFavorite: Bool
+    var isFavorite: Bool
     let measurementField: String
     let measurementRange: String
     let descriptionTitle: String

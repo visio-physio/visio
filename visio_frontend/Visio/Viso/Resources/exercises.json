@@ -11,7 +11,7 @@
         "imageName": "shoulder_abduction"
     },
     {
-        "id" : 1,
+        "id" : 2,
         "exercise_name": "Hip Abduction",
         "category": "Upper Body",
         "isFavorite": true,
@@ -19,6 +19,6 @@
         "measurementRange": "0° - 150°",
         "descriptionTitle": "How to Perform Hip Abduction Test",
         "description": "This is a discription on how to perform hip abduction ",
-        "imageName": "hip"
+        "imageName": "hip_flexion"
     }
 ]
