@@ -7,10 +7,10 @@ struct LoginView: View {
     @State private var errorMessage: String = ""
     @State private var isRegistering: Bool = false
     @State private var isActive: Bool = false
-    @Environment(\.presentationMode) var presentationMode // add this
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color.green, Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
@@ -38,8 +38,8 @@ struct LoginView: View {
                                 self.errorMessage = error.localizedDescription
                                 print(self.errorMessage)
                             } else {
-                                self.isActive = true
                                 self.presentationMode.wrappedValue.dismiss() // dismiss LoginView
+                                self.isActive = true
                             }
                         }
                     }) {
@@ -70,8 +70,6 @@ struct LoginView: View {
                 }
                 .padding()
             }
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true) // hide back button
             .background(
                 NavigationLink(destination: ExerciseList(), isActive: $isActive) {
                     EmptyView()
