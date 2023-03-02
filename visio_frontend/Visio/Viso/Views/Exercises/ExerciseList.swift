@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct ExerciseList: View {
-    @EnvironmentObject var fb_data: FirebaseDataLoader
-    @State private var showFavoritesOnly = false
     
-    var filteredExercises: [ExerciseFB] {
-        fb_data.exercises_fb.filter { exercise in
+//    @EnvironmentObject var fb_data: FirebaseDataLoader
+    @EnvironmentObject var load_exercises: LoadExercises
+    @State private var showFavoritesOnly = false
+
+    var filteredExercises: [Exercise] {
+        load_exercises.exercises.filter { exercise in
             (!showFavoritesOnly || exercise.isFavorite)
         }
     }
-    
     
     var body: some View {
         NavigationView {
@@ -24,7 +25,6 @@ struct ExerciseList: View {
                 Toggle(isOn: $showFavoritesOnly) {
                     Text("Favorites only")
                 }
-
                 ForEach(filteredExercises) { exercise in
                     NavigationLink {
                         ExerciseDetail(exercise: exercise)
@@ -41,7 +41,6 @@ struct ExerciseList: View {
 struct ExerciseList_Previews: PreviewProvider {
     static var previews: some View {
         ExerciseList()
-            .environmentObject(FirebaseDataLoader())
-            
+            .environmentObject(LoadExercises())
     }
 }

@@ -17,7 +17,7 @@ extension AnyTransition {
     }
 }
 struct ExerciseGraph: View {
-    @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject var modelData: ExerciseResults
     var exerciseHist: ExerciseHist
     var path: KeyPath<ExerciseHist.Measurement, Int>
 
@@ -37,7 +37,7 @@ struct ExerciseGraph: View {
 }
 
 struct ExerciseGraph_Previews: PreviewProvider {
-    static let exerciseHist = ModelData().exerciseHists[0]
+    static let exerciseHist = ExerciseResults().exerciseHists[0]
 
     static var previews: some View {
         ExerciseGraph(exerciseHist:exerciseHist, path: \.roi_right)

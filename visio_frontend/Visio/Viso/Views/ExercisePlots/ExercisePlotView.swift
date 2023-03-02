@@ -41,7 +41,7 @@ struct ExercisePlotView: View {
 
 
 struct ExercisePlotDetails_Previews: PreviewProvider {
-    static let modelData = ModelData()
+    static let modelData = ExerciseResults()
 
     static var previews: some View {
         ExercisePlotView(exerciseHist: modelData.exerciseHists[0])

@@ -1,12 +1,14 @@
 import SwiftUI
 
 struct ExerciseDetail: View {
-    @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject var modelData: ExerciseResults
     @EnvironmentObject var fb_data: FirebaseDataLoader
     @EnvironmentObject var cam: CameraWebsocket
     @State private var isLiveCameraViewActive = false
+    @EnvironmentObject var load_exercises: LoadExercises
+    var exercise: Exercise
 
-    var exercise: ExerciseFB
+//    var exercise: ExerciseFB
     
     var exerciseIndex: Int {
         fb_data.exercises_fb.firstIndex(where: { $0.id == exercise.id })!
@@ -29,7 +31,7 @@ struct ExerciseDetail: View {
                 CircleImage(image: exercise.image)
                 VStack (alignment: .leading){
                     HStack {
-                        Text(exercise.test)
+                        Text(exercise.exercise_name)
                             .font(.title2)
                         FavoriteButton(isSet: $fb_data.exercises_fb[exerciseIndex].isFavorite)
 
@@ -50,7 +52,7 @@ struct ExerciseDetail: View {
                 .padding()
             
             Button("Start Test") {
-                cam.send(exerciseName: self.exercise.test)
+                cam.send(exerciseName: self.exercise.exercise_name)
                 isLiveCameraViewActive = true
             }
             NavigationLink(destination: LiveCameraView(),
@@ -58,18 +60,17 @@ struct ExerciseDetail: View {
             ) {
                 EmptyView()
             }
-
             Spacer()
         }
         .padding()
     }
 }
 
-
 struct ExerciseDetail_Previews: PreviewProvider {
-    static let modelData = ModelData()
+    static let modelData = ExerciseResults()
     static let fb = FirebaseDataLoader()
-    static let exercise = fb.exercises_fb[0]
+    static let load_data = LoadExercises()
+    static var exercise = load_data.exercises[0]
 
     static var previews: some View {
         ExerciseDetail(exercise: exercise)

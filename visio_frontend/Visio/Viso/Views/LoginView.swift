@@ -5,9 +5,9 @@ struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var errorMessage: String = ""
-    
     @State private var isRegistering: Bool = false
     @State private var isActive: Bool = false
+    @Environment(\.presentationMode) var presentationMode // add this
     
     var body: some View {
         NavigationView {
@@ -39,6 +39,7 @@ struct LoginView: View {
                                 print(self.errorMessage)
                             } else {
                                 self.isActive = true
+                                self.presentationMode.wrappedValue.dismiss() // dismiss LoginView
                             }
                         }
                     }) {
@@ -58,7 +59,7 @@ struct LoginView: View {
                             .background(Color.green)
                             .cornerRadius(5.0)
                     }
-                    .navigationBarHidden(true) 
+                    .navigationBarHidden(true)
                     .background(
                         NavigationLink(destination: RegisterView(), isActive: $isRegistering) {
                             EmptyView()
@@ -69,7 +70,8 @@ struct LoginView: View {
                 }
                 .padding()
             }
-            .navigationBarHidden(true) 
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true) // hide back button
             .background(
                 NavigationLink(destination: ExerciseList(), isActive: $isActive) {
                     EmptyView()

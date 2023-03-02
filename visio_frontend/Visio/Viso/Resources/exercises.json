@@ -1,0 +1,24 @@
+[
+    {
+        "id" : 1,
+        "exercise_name": "Shoulder Abduction",
+        "category": "Upper Body",
+        "isFavorite": true,
+        "measurementField": "Range of Motion",
+        "measurementRange": "150° - 180°",
+        "descriptionTitle": "How to Perfrom Shoulder Abduction Test",
+        "description": "Stand facing a wall with your arm at your side, reach up and out to touch the wall at shoulder heigh and keep the elbow straight.",
+        "imageName": "shoulder_abduction"
+    },
+    {
+        "id" : 1,
+        "exercise_name": "Hip Abduction",
+        "category": "Upper Body",
+        "isFavorite": true,
+        "measurementField": "Range of Motion",
+        "measurementRange": "0° - 150°",
+        "descriptionTitle": "How to Perform Hip Abduction Test",
+        "description": "This is a discription on how to perform hip abduction ",
+        "imageName": "hip"
+    }
+]
