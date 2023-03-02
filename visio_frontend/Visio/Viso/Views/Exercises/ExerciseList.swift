@@ -12,6 +12,7 @@ struct ExerciseList: View {
 //    @EnvironmentObject var fb_data: FirebaseDataLoader
     @EnvironmentObject var load_exercises: LoadExercises
     @State private var showFavoritesOnly = false
+    @StateObject private var camera_socket = CameraWebsocket()
 
     var filteredExercises: [Exercise] {
         load_exercises.exercises.filter { exercise in
@@ -27,7 +28,7 @@ struct ExerciseList: View {
                 }
                 ForEach(filteredExercises) { exercise in
                     NavigationLink {
-                        ExerciseDetail(exercise: exercise)
+                        ExerciseDetail(exercise: exercise).environmentObject(camera_socket)
                     } label: {
                         ExerciseRow(exercise: exercise)
                     }

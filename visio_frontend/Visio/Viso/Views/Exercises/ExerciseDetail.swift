@@ -17,7 +17,6 @@ struct ExerciseDetail: View {
         return modelData.exerciseHists.firstIndex(where: { $0.id == exercise.id })
     }
     @State private var isShowVideo = false
-
     var body: some View {
         NavigationStack{
             VStack {
@@ -77,6 +76,5 @@ struct ExerciseDetail_Previews: PreviewProvider {
             .environmentObject(modelData)
             .environmentObject(load_data)
 //            .environmentObject(fb)
-            
     }
 }
