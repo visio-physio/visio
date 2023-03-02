@@ -35,6 +35,7 @@ struct ExerciseList: View {
             }
             .navigationTitle("Exercises")
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

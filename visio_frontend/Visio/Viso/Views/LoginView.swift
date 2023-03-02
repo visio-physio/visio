@@ -1,5 +1,6 @@
 import SwiftUI
 import Firebase
+import UIKit
 
 struct LoginView: View {
     @State private var email: String = ""
@@ -11,6 +12,7 @@ struct LoginView: View {
     
     var body: some View {
         NavigationStack {
+            
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color.green, Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
@@ -49,7 +51,10 @@ struct LoginView: View {
                             .background(Color.blue)
                             .cornerRadius(5.0)
                     }
-                    
+                    .navigationDestination(
+                        isPresented: $isActive) {
+                            ExerciseList()
+                        }
                     Button(action: {
                         self.isRegistering = true
                     }) {
@@ -59,22 +64,15 @@ struct LoginView: View {
                             .background(Color.green)
                             .cornerRadius(5.0)
                     }
-                    .navigationBarHidden(true)
-                    .background(
-                        NavigationLink(destination: RegisterView(), isActive: $isRegistering) {
-                            EmptyView()
+                    .navigationDestination(
+                        isPresented: $isRegistering) {
+                            RegisterView()
                         }
-                    )
-                    
+
                     Spacer()
                 }
                 .padding()
             }
-            .background(
-                NavigationLink(destination: ExerciseList(), isActive: $isActive) {
-                    EmptyView()
-                }
-            )
         }
     }
 }
