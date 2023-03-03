@@ -5,7 +5,7 @@ from modules.oakd_producer import OakdProducer
 HOST = "127.0.0.1"
 PORT = 8080
 
-async def main(host=HOST, port=PORT):
+def main(host=HOST, port=PORT):
     print(f"Starting server on {HOST}:{PORT}")
     server = OakdProducer()
     asyncio.run(server.serve(HOST, PORT))
@@ -16,5 +16,4 @@ if __name__ == "__main__":
     parser.add_argument('-p', '--port', required=False)
 
     argument = parser.parse_args()
-
-    asyncio.run(main(argument.host, argument.port))
+    main(argument.host, argument.port)
