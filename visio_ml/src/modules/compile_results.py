@@ -1,25 +1,22 @@
-import cv2
-import firebase_admin
+# import cv2
 import datetime
+import time
+import firebase_admin
+from firebase_admin import firestore
 from collections import defaultdict
 
 class ResultCompiler:
-    PATH_TO_CREDENTIALS = "" # TODO: Add file path to firebase credentials
+    PATH_TO_CREDENTIALS = "./auth.json"
 
-    # results_db_path: URL to the realtime database for results
-    # results_destination_path: destination file in firebase storage for results
-    # video_db_name: name of the realtime database for videos
-    def __init__(self, user_id, exercise, body_part, results_db_path, results_destination_path, video_db_name, frame_rate, frame_size, local_file_path):
+    def __init__(self, user_id, exercise, body_part, frame_rate, frame_size, local_file_path):
         self.cred = firebase_admin.credentials.Certificate(self.PATH_TO_CREDENTIALS)
         self.exercise = exercise
         self.body_part = body_part
-        self.results_db_path = results_db_path
-        self.results_destination_path = results_destination_path
-        self.video_db_name = video_db_name
         self.results = defaultdict(lambda: [0])
+        self.user_id = user_id
         self.peaks_and_valleys = defaultdict(list)
-        self.video_file_name = f"{local_file_path}/{user_id}_{exercise}_{body_part}_{frame_rate}fps_{datetime.now()}.avi"
-        self.out = cv2.VideoWriter(self.video_file_name, cv2.VideoWriter_fourcc('M','J','P','G'), frame_rate, frame_size)
+        self.video_file_name = f"{local_file_path}/{user_id}_{exercise}_{body_part}_{frame_rate}fps_{datetime.datetime.now()}.avi"
+        # self.out = cv2.VideoWriter(self.video_file_name, cv2.VideoWriter_fourcc('M','J','P','G'), frame_rate, frame_size)
     
     def record_angle(self, angle) -> None:
         for key, val in angle.items():
@@ -43,6 +40,17 @@ class ResultCompiler:
 
         return total / (len(arr) - 1)
 
+    def store_results_in_firebase(self) -> None:
+        app = firebase_admin.initialize_app(self.cred)
+        db = firestore.client()
+        doc = db.collection(u'results').document(self.user_id)
+        doc.set({
+            self.exercise: {
+                str(time.time()): self.peaks_and_valleys
+            }
+        }, merge=True)
+
+    """
     def store_video_in_firebase(self) -> None:
         self.out.release()
         firebase_admin.initialize_app(self.cred, {
@@ -52,11 +60,4 @@ class ResultCompiler:
         bucket = firebase_admin.storage.bucket()
         blob = bucket.blob(f"./{self.video_file_name}")
         blob.upload_from_filename(f"./{self.video_file_name}")
-
-    def store_results_in_firebase(self) -> None:
-        firebase_admin.initialize_app(self.cred, {
-            "databaseURL": self.results_db_path
-        })
-
-        ref = firebase_admin.db.reference(self.results_destination_path)
-        ref.set(self.results)
+    """
