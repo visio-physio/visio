@@ -89,7 +89,24 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
     func disconnect(){
         socket.write(string: "end")
     }
-    func send(exerciseName:String){
-        socket.write(string: exerciseName)
+    func send(userId: String, bodyPart: String, exercise: String, state: String) {
+        let json: [String: Any] = [
+            "user_id": userId,
+            "body_part": bodyPart,
+            "exercise": exercise,
+            "state": state
+        ]
+    
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                socket.write(string: jsonString)
+            } else {
+                print("Error converting JSON data to string")
+            }
+        } catch {
+            print("Error creating JSON message: \(error.localizedDescription)")
+        }
     }
+
 }

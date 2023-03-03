@@ -1,8 +1,8 @@
 [
     {
         "id" : 1,
-        "exercise_name": "shoulder",
-        "category": "Upper Body",
+        "exercise": "abduction",
+        "bodyPart": "shoulder",
         "isFavorite": true,
         "measurementField": "Range of Motion",
         "measurementRange": "150° - 180°",
@@ -12,8 +12,8 @@
     },
     {
         "id" : 2,
-        "exercise_name": "hip",
-        "category": "Upper Body",
+        "exercise": "abduction",
+        "bodyPart": "hip",
         "isFavorite": true,
         "measurementField": "Range of Motion",
         "measurementRange": "0° - 150°",

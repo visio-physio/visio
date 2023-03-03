@@ -28,12 +28,11 @@ struct ExerciseDetail: View {
                         .padding()
                     ExercisePlotView(exerciseHist: modelData.exerciseHists[index])
                 }
-                Text(Auth.auth().description)
                 HStack {
                     CircleImage(image: exercise.image)
                     VStack (alignment: .leading){
                         HStack {
-                            Text(exercise.exercise_name)
+                            Text(exercise.exercise)
                                 .font(.title2)
                             FavoriteButton(isSet: $load_exercises.exercises[exerciseIndex].isFavorite)
 
@@ -54,8 +53,13 @@ struct ExerciseDetail: View {
                     .padding()
                 
                 Button("Start Test") {
-                    cam.send(exerciseName: self.exercise.exercise_name)
-                    print("sending to server: \(self.exercise.exercise_name)")
+                    
+                    let userID = Auth.auth().currentUser?.uid ?? "none"
+                    print(userID)
+                    
+                    cam.send(userId: userID, bodyPart: self.exercise.bodyPart, exercise: self.exercise.exercise, state: "start")
+                
+                    print("sending to server: \(self.exercise.exercise)")
                     isLiveCameraViewActive = true
                 }
                 .sheet(isPresented: $isLiveCameraViewActive) {

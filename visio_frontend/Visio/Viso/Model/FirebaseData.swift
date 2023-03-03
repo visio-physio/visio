@@ -27,7 +27,6 @@ final class FirebaseDataLoader: ObservableObject {
                 let isFavorite = exerciseData["isFavorite"] as! Bool
                 let isFeatured = exerciseData["isFeatured"] as! Bool
                 let measurementField = exerciseData["measurementField"] as? String ?? "none"
-//                let measurementField = exerciseData["measurementField"] as! String :["none"]
                 let measurementRange = exerciseData["measurementRange"] as! String
                 let test = exerciseData["test"] as! String
 

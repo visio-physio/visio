@@ -3,8 +3,8 @@ import SwiftUI
 
 struct Exercise: Hashable, Codable, Identifiable {
     var id: Int
-    let exercise_name: String
-    let category: String
+    let exercise: String
+    let bodyPart: String
     var isFavorite: Bool
     let measurementField: String
     let measurementRange: String

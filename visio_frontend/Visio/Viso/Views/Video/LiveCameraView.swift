@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct LiveCameraView: View {
     @EnvironmentObject var cam: CameraWebsocket
@@ -23,12 +24,14 @@ struct LiveCameraView: View {
                 }
                 
                 Button("End Examination"){
-                    cam.disconnect()
+                    let userID = Auth.auth().currentUser?.uid ?? "none"
+                    
+                    cam.send(userId: userID, bodyPart: "String", exercise: "String", state: "end")
                     dismiss()
                 }
                 .foregroundColor(.white)
                 .padding()
-                .background(Color.green)
+                .background(Color.red)
                 .cornerRadius(10.0)
             }
         }
