@@ -3,9 +3,9 @@ import numpy as np
 import mediapipe as mp
 import depthai as dai
 
-import depthai_blazepose.mediapipe_utils as mpu
-from depthai_blazepose.FPS import FPS, now
-from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
+from .depthai_blazepose import mediapipe_utils as mpu
+from .depthai_blazepose.FPS import FPS, now
+from .depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 
 class VisioPose:
     complexity = {'lite': 0, 'full': 1, 'heavy': 2}
