@@ -30,9 +30,9 @@ class VisioPose:
             if lm_model == "heavy":
                 self.internal_fps = 10
             elif lm_model == "full":
-                self.internal_fps = 8
+                self.internal_fps = 20
             else:
-                self.internal_fps = 13
+                self.internal_fps = 20
         
         if self.crop:
             self.frame_size, self.scale_nd = mpu.find_isp_scale_params(internal_frame_height)

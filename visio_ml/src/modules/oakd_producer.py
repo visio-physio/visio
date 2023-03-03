@@ -58,7 +58,7 @@ class OakdProducer():
             tracker = VisioPose(
                 crop=True,
                 internal_frame_height=600,
-                lm_model='lite'
+                lm_model='full'
             )
             renderer = VisioPoseRenderer(tracker)
         else:
