@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>314018613274-jko5ia314h1ipt1u82mprbaaqacjme71.apps.googleusercontent.com</string>
+	<string>314018613274-ctoduv9hn1foghg8itspqd9nqsko0npc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.314018613274-jko5ia314h1ipt1u82mprbaaqacjme71</string>
+	<string>com.googleusercontent.apps.314018613274-ctoduv9hn1foghg8itspqd9nqsko0npc</string>
 	<key>API_KEY</key>
 	<string>AIzaSyALVbMRw5A2sMekENuYBkPCvXJZ-gwbJfM</string>
 	<key>GCM_SENDER_ID</key>
@@ -19,16 +19,18 @@
 	<key>STORAGE_BUCKET</key>
 	<string>viso-8e35e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:314018613274:ios:ca7d6041f3352ce42669a3</string>
+	<string>1:314018613274:ios:83f935dc0db496602669a3</string>
+	<key>DATABASE_URL</key>
+	<string>https://viso-8e35e-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

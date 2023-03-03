@@ -1,4 +1,5 @@
 import SwiftUI
+import Firebase
 
 struct ExerciseDetail: View {
     @EnvironmentObject var modelData: ExerciseResults
@@ -6,6 +7,7 @@ struct ExerciseDetail: View {
     @EnvironmentObject var cam: CameraWebsocket
     @EnvironmentObject var load_exercises: LoadExercises
     @State private var isLiveCameraViewActive = false
+    
 
     var exercise: Exercise
     
@@ -26,6 +28,7 @@ struct ExerciseDetail: View {
                         .padding()
                     ExercisePlotView(exerciseHist: modelData.exerciseHists[index])
                 }
+                Text(Auth.auth().description)
                 HStack {
                     CircleImage(image: exercise.image)
                     VStack (alignment: .leading){

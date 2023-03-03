@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		380989CB299A92BF0059287C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 380989CA299A92BF0059287C /* GoogleService-Info.plist */; };
+		381A1A8329B174C0009BF648 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A1A8229B174C0009BF648 /* ResultsView.swift */; };
+		381A1A8529B17F3D009BF648 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 381A1A8429B17F3D009BF648 /* GoogleService-Info.plist */; };
+		381A1A8729B19254009BF648 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A1A8629B19254009BF648 /* SettingView.swift */; };
 		3821A71D298C328600981D6B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3821A71C298C328600981D6B /* FirebaseDatabase */; };
 		3821A721298C360100981D6B /* ExerciseFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3821A720298C360100981D6B /* ExerciseFB.swift */; };
 		3825271429A45131008F6DF7 /* CameraWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3825271329A45131008F6DF7 /* CameraWebsocket.swift */; };
@@ -41,7 +43,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		380989CA299A92BF0059287C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		381A1A8229B174C0009BF648 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		381A1A8429B17F3D009BF648 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		381A1A8629B19254009BF648 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3821A720298C360100981D6B /* ExerciseFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFB.swift; sourceTree = "<group>"; };
 		3825271329A45131008F6DF7 /* CameraWebsocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWebsocket.swift; sourceTree = "<group>"; };
 		3825271529A45161008F6DF7 /* LiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCameraView.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				38F653D62985A115004CD110 /* ContentView.swift */,
 				38AEA84329AFF867003ACDB0 /* LoginView.swift */,
 				38AEA84529AFF87B003ACDB0 /* RegisterView.swift */,
+				381A1A8229B174C0009BF648 /* ResultsView.swift */,
+				381A1A8629B19254009BF648 /* SettingView.swift */,
 				38EFB7B92986080E0018F668 /* Exercises */,
 				38EFB7C92986380D0018F668 /* ExercisePlots */,
 				38EFB7DC298745300018F668 /* Video */,
@@ -174,7 +180,7 @@
 			children = (
 				38F653D32985A115004CD110 /* Viso */,
 				38AEA84D29B0F61D003ACDB0 /* Constants.swift */,
-				380989CA299A92BF0059287C /* GoogleService-Info.plist */,
+				381A1A8429B17F3D009BF648 /* GoogleService-Info.plist */,
 				38EB34E1299EFC5C00C0E4CF /* Podfile */,
 				38F653D82985A116004CD110 /* Assets.xcassets */,
 				38F653D22985A115004CD110 /* Products */,
@@ -292,9 +298,9 @@
 				38EB34E2299EFC5C00C0E4CF /* Podfile in Resources */,
 				38EFB7A32985CFCD0018F668 /* exercises.json in Resources */,
 				38F653DC2985A116004CD110 /* Preview Assets.xcassets in Resources */,
-				380989CB299A92BF0059287C /* GoogleService-Info.plist in Resources */,
 				38EFB7C6298630D10018F668 /* exerciseResults.json in Resources */,
 				38F653D92985A116004CD110 /* Assets.xcassets in Resources */,
+				381A1A8529B17F3D009BF648 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +339,7 @@
 				38EFB7D7298730F60018F668 /* ExerciseGraph.swift in Sources */,
 				3825271429A45131008F6DF7 /* CameraWebsocket.swift in Sources */,
 				38AEA84429AFF867003ACDB0 /* LoginView.swift in Sources */,
+				381A1A8729B19254009BF648 /* SettingView.swift in Sources */,
 				3821A721298C360100981D6B /* ExerciseFB.swift in Sources */,
 				38EFB7B32985D9B40018F668 /* ExerciseList.swift in Sources */,
 				38AEA84629AFF87B003ACDB0 /* RegisterView.swift in Sources */,
@@ -343,6 +350,7 @@
 				38EFB7C8298633CD0018F668 /* ExerciseHist.swift in Sources */,
 				38EFB7B7298607790018F668 /* FavoriteButton.swift in Sources */,
 				38EFB7D3298715520018F668 /* ExercisePlotView.swift in Sources */,
+				381A1A8329B174C0009BF648 /* ResultsView.swift in Sources */,
 				38F653D72985A115004CD110 /* ContentView.swift in Sources */,
 				38AEA84829B0F4E8003ACDB0 /* LoadData.swift in Sources */,
 				38AEA84E29B0F61D003ACDB0 /* Constants.swift in Sources */,

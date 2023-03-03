@@ -14,19 +14,22 @@ struct LiveCameraView: View {
     var body: some View {
         NavigationStack {
             VStack{
-            
-                Button("Disconnect"){
-                    cam.disconnect()
-                    dismiss()
-                }
-    //            let data = Data(base64Encoded: cam.text) ?? cam.img
                 if let image = UIImage(data: cam.img) {
                     Image(uiImage: image)
                       .resizable()
                       .scaledToFit()
                 } else {
-                    Text("Invalid image data")
+                    Text("Livestream is not connected!")
                 }
+                
+                Button("End Examination"){
+                    cam.disconnect()
+                    dismiss()
+                }
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.green)
+                .cornerRadius(10.0)
             }
         }
     }

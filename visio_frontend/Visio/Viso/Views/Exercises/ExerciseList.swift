@@ -7,12 +7,14 @@
 
 import SwiftUI
 
+
 struct ExerciseList: View {
     
 //    @EnvironmentObject var fb_data: FirebaseDataLoader
     @EnvironmentObject var load_exercises: LoadExercises
     @State private var showFavoritesOnly = false
-    @StateObject private var camera_socket = CameraWebsocket()
+    var camera_socket = CameraWebsocket()
+    @State private var url = "https://b898-2607-9880-1aa0-cd-1374-87be-b01b-c4c2.ngrok.io/"
 
     var filteredExercises: [Exercise] {
         load_exercises.exercises.filter { exercise in
@@ -26,6 +28,15 @@ struct ExerciseList: View {
                 Toggle(isOn: $showFavoritesOnly) {
                     Text("Favorites only")
                 }
+                HStack {
+                    Text("URL:")
+                    TextField("Enter URL", text: $url)
+                    Button("Reconnect"){
+                        print("URL: \(url)")
+                        camera_socket.url = url
+                    }
+                }
+    
                 ForEach(filteredExercises) { exercise in
                     NavigationLink {
                         ExerciseDetail(exercise: exercise).environmentObject(camera_socket)

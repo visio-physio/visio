@@ -12,22 +12,32 @@ import Network
 
 class CameraWebsocket: ObservableObject, WebSocketDelegate {
     var socket: WebSocket!
-    var isConnected = false
-    let server = WebSocketServer()
-    @Published var img = Data()
-    init(){
-        let monitor = NWPathMonitor()
-        monitor.start(queue: .main)
-        
-        let url = "https://3dc2-2607-9880-1aa0-cd-1374-87be-b01b-c4c2.ngrok.io"
-        var request = URLRequest(url: URL(string: url)!) //https://localhost:8080
-        request.timeoutInterval = 5
-        socket = WebSocket(request: request)
-        socket.delegate = self
-        socket.connect()
-        print("connecting to websocket at: \(url)");
-
-    }
+      var isConnected = false
+      var url: String {
+          didSet {
+              // Reconnect the socket when the URL changes
+              reconnect()
+          }
+      }
+      @Published var img = Data()
+      
+      init(url: String = "https://b898-2607-9880-1aa0-cd-1374-87be-b01b-c4c2.ngrok.io/") {
+          self.url = url
+          let request = URLRequest(url: URL(string: self.url)!, timeoutInterval: 5)
+          socket = WebSocket(request: request)
+          socket.delegate = self
+          socket.connect()
+          print("Connecting to websocket at: \(self.url)")
+      }
+      
+      func reconnect() {
+          socket.disconnect()
+          let request = URLRequest(url: URL(string: self.url)!, timeoutInterval: 5)
+          socket = WebSocket(request: request)
+          socket.delegate = self
+          socket.connect()
+          print("Reconnecting to websocket at: \(self.url)")
+      }
     
     func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocket) {
         switch event {
