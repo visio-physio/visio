@@ -6,7 +6,7 @@ from firebase_admin import firestore
 from collections import defaultdict
 
 class ResultCompiler:
-    PATH_TO_CREDENTIALS = "./auth.json"
+    PATH_TO_CREDENTIALS = "src/modules/auth.json"
 
     def __init__(self, user_id, exercise, body_part, frame_rate=15, frame_size=(600, 600), local_file_path="."):
         self.cred = firebase_admin.credentials.Certificate(self.PATH_TO_CREDENTIALS)

@@ -5,6 +5,7 @@ import websockets
 import cv2
 import base64
 import gzip
+import json
 from concurrent.futures import ProcessPoolExecutor
 import os
 import argparse
@@ -17,12 +18,11 @@ from compile_results import ResultCompiler
 class OakdProducer():
     def __init__(self, cpu=False):
         self.state = 'idle' # 'produce'
-        self.excercise = None
-        self.name = None
-        self.date = None
+        self.exercise = None
+        self.body_part = None
+        self.user_id = None
         self.websocket = None
         self.cpu = cpu
-        self.states = ['shoulder', 'hip']
         self.result_compilers = {}
 
         print(f"Running Blazepose model in {'cpu' if self.cpu else 'Oak-D'}")
@@ -36,12 +36,11 @@ class OakdProducer():
         print("New connection")
         self.websocket = websocket
         async for message in websocket:
-            # event = pickle.loads(message)
-            # self.state = event['state']
-            # self.excercise = event['exercise']
-            # self.name = event['name']
-            # self.date = event['date']
-            self.state = message
+            event = json.loads(message)
+            self.state = event['state']
+            self.exercise = event['exercise']
+            self.body_part = event['body_part']
+            self.user_id = event['user_id']
 
         print(f"State updated to: {self.state}")
 
@@ -80,21 +79,13 @@ class OakdProducer():
             if frame is None:
                 break
             frame = renderer.draw(frame, body)
-            
-            if self.state in self.states:
-                if user_id not in self.result_compilers or (self.result_compilers[user_id].get_exercise(), self.result_compilers[user_id].get_body_part()) != (exercise, body_part):
-                    self.result_compilers[user_id] = ResultCompiler(user_id, exercise, body_part)
-                    
-                # frame, body = tracker.next_frame()
-                # if frame is None:
-                #     break
+
+            if self.state == 'start':
+                if self.user_id not in self.result_compilers or (self.result_compilers[self.user_id].get_exercise(), self.result_compilers[self.user_id].get_body_part()) != (self.exercise, self.body_part):
+                    self.result_compilers[self.user_id] = ResultCompiler(self.user_id, self.exercise, self.body_part)
 
                 if body.landmarks is not None:
-                    # To_do task: reformat the get_measurement para, passed in self.state only
-                    '''
-                    example: if you want hip abduction use: state = "hip_abduction"
-                    '''
-                    result = body.get_measurement(self.state, "abduction")
+                    result = body.get_measurement(self.body_part, self.exercise)
                     y_coord = 50
                     for body_part, measurement in result.items():
                         # Append text to each frame in the top left corner with minimum usage of space on the frame
@@ -104,20 +95,13 @@ class OakdProducer():
                         print(f"{body_part}: {measurement}\n")
                         y_coord += 15
 
+                    self.result_compilers[self.user_id].record_angle(result)
+
                 await self.send_frame(frame)
 
-                # key = renderer.waitKey(delay=1)
-                # if key == ord('q') or key == 27:
-                #     break
-
-                # send to results compiler based on exercise
-                self.result_compilers[user_id].record_angle(angle)
-
             elif self.state == 'end':
-                # TODO: Result compiler code
-                
-                if user_id in self.result_compilers:
-                    self.result_compilers[user_id].store_results_in_firebase()
+                if self.user_id in self.result_compilers:
+                    self.result_compilers[self.user_id].store_results_in_firebase()
 
                 self.state = 'idle'
             
