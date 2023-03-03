@@ -10,10 +10,12 @@ class ResultCompiler:
 
     def __init__(self, user_id, exercise, body_part, frame_rate=15, frame_size=(600, 600), local_file_path="."):
         self.cred = firebase_admin.credentials.Certificate(self.PATH_TO_CREDENTIALS)
+        if not firebase_admin._apps:
+            firebase_admin.initialize_app(self.cred)
         self.exercise = exercise
         self.body_part = body_part
         self.user_id = user_id
-        self.results = defaultdict(lambda: [0])
+        self.results = defaultdict(lambda: defaultdict(int))
         self.peaks_and_valleys = defaultdict(list)
         self.video_file_name = f"{local_file_path}/{user_id}_{exercise}_{body_part}_{frame_rate}fps_{datetime.datetime.now()}.avi"
         # self.out = cv2.VideoWriter(self.video_file_name, cv2.VideoWriter_fourcc('M','J','P','G'), frame_rate, frame_size)
@@ -26,35 +28,42 @@ class ResultCompiler:
 
     def record_angle(self, angle) -> None:
         for key, val in angle.items():
-            if len(self.results[key]) > 1:
-                prev_delta = self.results[key][-1] - self.results[key][-2]
-                curr_delta = val - self.results[key][-1]
-                if prev_delta * curr_delta < 0:
-                    self.peaks_and_valleys[key].append(self.results[key][-1])
-
-            self.results[key].append(val)
+            self.results[key][val // 1] += 1
 
     def record_frame(self, frame) -> None:
         self.out.write(frame)
 
     # side should be left or right
     def get_average_range(self, side) -> float:
-        total = 0
-        arr = self.peaks_and_valleys[side]
-        for i in range(1, len(arr)):
-            total += abs(arr[i] - arr[i - 1])
+        hist = self.results[side]
+        keys = list(hist.keys())
+        mid = (max(keys) + min(keys)) / 2
+        low = []
+        high = []
 
-        return total / (len(arr) - 1)
+        for key in keys:
+            if key <= mid:
+                low.append(key)
+            else:
+                high.append(key)
+
+        low.sort(key=lambda x: -hist[x])
+        high.sort(key=lambda x: -hist[x])
+
+        return max(high[:min(len(high), 5)]) - min(low[:min(len(low), 5)])
 
     def store_results_in_firebase(self) -> None:
-        app = firebase_admin.initialize_app(self.cred)
         db = firestore.client()
+
+        res = {}
+        for key in self.results:
+            res[key] = self.get_average_range(key)
 
         identifier = f"{self.exercise}-{self.body_part}"
         doc = db.collection(u'results').document(self.user_id)
         doc.set({
             identifier: {
-                str(time.time()): self.peaks_and_valleys
+                str(time.time()): res
             }
         }, merge=True)
 
