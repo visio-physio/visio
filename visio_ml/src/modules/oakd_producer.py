@@ -7,6 +7,8 @@ import base64
 import gzip
 from concurrent.futures import ProcessPoolExecutor
 import os
+import argparse
+
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
 from visio_pose import VisioPose, VisioPoseRenderer
@@ -19,7 +21,9 @@ class OakdProducer():
         self.date = None
         self.websocket = None
         self.cpu = cpu
-        self.state = ['shoulder', 'hip']
+        self.states = ['shoulder', 'hip']
+
+        print(f"Running Blazepose model in {'cpu' if self.cpu else 'Oak-D'}")
 
     async def serve(self, host, port):
         server = await websockets.serve(self.handler, host, port)
@@ -72,7 +76,7 @@ class OakdProducer():
             frame, body = tracker.next_frame()
             if frame is None:
                 break
-
+            frame = renderer.draw(frame, body)
             
             if self.state in self.states:
                 # frame, body = tracker.next_frame()
@@ -93,7 +97,6 @@ class OakdProducer():
                                     (0, 0, 255), 2)
                         print(f"{body_part}: {measurement}\n")
                         y_coord += 15
-                frame = renderer.draw(frame, body)
 
                 await self.send_frame(frame)
 
@@ -115,7 +118,14 @@ class OakdProducer():
         tracker.exit()
 
 if __name__ == "__main__":
-    server = OakdProducer(cpu=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--cpu', action="store_true",
+                        help="True for running Blazepose in CPU, False for running in Oak-D")
+    
+    args = parser.parse_args()
+    print(args.cpu)
+
+    server = OakdProducer(cpu=args.cpu)
     ip = "127.0.0.1"
     print(f"Starting server at {ip}:8080")
     asyncio.run(server.serve(ip, 8080))

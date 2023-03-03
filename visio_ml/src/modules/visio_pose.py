@@ -113,6 +113,9 @@ class VisioPose:
 
         return rgb_frame, body
     
+    def exit(self):
+        pass
+    
 class VisioPoseRenderer():
     def __init__(self, tracker):
         self.tracker = tracker
@@ -137,6 +140,9 @@ class VisioPoseRenderer():
         cv2.imshow("Blazepose", self.frame)
         key = cv2.waitKey(delay)
         return key
+    
+    def exit(self):
+        pass
 
 
 if __name__ == "__main__":
