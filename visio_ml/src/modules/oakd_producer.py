@@ -9,9 +9,9 @@ from concurrent.futures import ProcessPoolExecutor
 import os
 import argparse
 
-from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
-from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
-from visio_pose import VisioPose, VisioPoseRenderer
+from .depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
+from .depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
+from .visio_pose import VisioPose, VisioPoseRenderer
 
 class OakdProducer():
     def __init__(self, cpu=False):
