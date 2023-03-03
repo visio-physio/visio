@@ -8,16 +8,18 @@ from collections import defaultdict
 class ResultCompiler:
     PATH_TO_CREDENTIALS = "./auth.json"
 
-    def __init__(self, user_id, exercise, body_part, frame_rate, frame_size, local_file_path):
+    def __init__(self, user_id, exercise, frame_rate=15, frame_size=(600, 600), local_file_path="."):
         self.cred = firebase_admin.credentials.Certificate(self.PATH_TO_CREDENTIALS)
         self.exercise = exercise
-        self.body_part = body_part
-        self.results = defaultdict(lambda: [0])
         self.user_id = user_id
+        self.results = defaultdict(lambda: [0])
         self.peaks_and_valleys = defaultdict(list)
-        self.video_file_name = f"{local_file_path}/{user_id}_{exercise}_{body_part}_{frame_rate}fps_{datetime.datetime.now()}.avi"
+        self.video_file_name = f"{local_file_path}/{user_id}_{exercise}_{frame_rate}fps_{datetime.datetime.now()}.avi"
         # self.out = cv2.VideoWriter(self.video_file_name, cv2.VideoWriter_fourcc('M','J','P','G'), frame_rate, frame_size)
-    
+
+    def get_exercise(self):
+        return self.exercise
+
     def record_angle(self, angle) -> None:
         for key, val in angle.items():
             if len(self.results[key]) > 1:

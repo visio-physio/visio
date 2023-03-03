@@ -12,6 +12,7 @@ import argparse
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
 from visio_pose import VisioPose, VisioPoseRenderer
+from compile_results import ResultCompiler
 
 class OakdProducer():
     def __init__(self, cpu=False):
@@ -22,6 +23,7 @@ class OakdProducer():
         self.websocket = None
         self.cpu = cpu
         self.states = ['shoulder', 'hip']
+        self.result_compilers = {}
 
         print(f"Running Blazepose model in {'cpu' if self.cpu else 'Oak-D'}")
 
@@ -40,6 +42,7 @@ class OakdProducer():
             # self.name = event['name']
             # self.date = event['date']
             self.state = message
+
         print(f"State updated to: {self.state}")
 
     async def send_frame(self, frame):
@@ -79,6 +82,9 @@ class OakdProducer():
             frame = renderer.draw(frame, body)
             
             if self.state in self.states:
+                if user_id not in self.result_compilers or self.result_compilers[user_id].get_exercise() != exercise:
+                    self.result_compilers[user_id] = ResultCompiler(user_id, exercise)
+                    
                 # frame, body = tracker.next_frame()
                 # if frame is None:
                 #     break
@@ -105,9 +111,14 @@ class OakdProducer():
                 #     break
 
                 # send to results compiler based on exercise
+                self.result_compilers[user_id].record_angle(angle)
+
             elif self.state == 'end':
                 # TODO: Result compiler code
                 
+                if user_id in self.result_compilers:
+                    self.result_compilers[user_id].store_results_in_firebase()
+
                 self.state = 'idle'
             
             key = renderer.waitKey(delay=1)
