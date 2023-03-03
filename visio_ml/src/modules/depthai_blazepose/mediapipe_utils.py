@@ -75,6 +75,9 @@ class Body:
         self.pd_box = pd_box
         self.pd_kps = pd_kps
         self.landmarks = None
+        self.presence = None
+        self.pose_landmarks = None
+
     def get_transverse_plane_n(self):
         return self.get_spine()
   
