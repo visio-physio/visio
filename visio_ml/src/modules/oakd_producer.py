@@ -82,8 +82,8 @@ class OakdProducer():
             frame = renderer.draw(frame, body)
             
             if self.state in self.states:
-                if user_id not in self.result_compilers or self.result_compilers[user_id].get_exercise() != exercise:
-                    self.result_compilers[user_id] = ResultCompiler(user_id, exercise)
+                if user_id not in self.result_compilers or (self.result_compilers[user_id].get_exercise(), self.result_compilers[user_id].get_body_part()) != (exercise, body_part):
+                    self.result_compilers[user_id] = ResultCompiler(user_id, exercise, body_part)
                     
                 # frame, body = tracker.next_frame()
                 # if frame is None:
