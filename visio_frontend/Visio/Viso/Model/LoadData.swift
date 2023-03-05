@@ -89,44 +89,96 @@ struct Datapoint: Identifiable{
     }
 }
 
+//final class Results: ObservableObject {
+//    let db = Firestore.firestore()
+//    @Published var leftValues: [Double] = []
+//    @Published var rightValues: [Double] = []
+//    @Published var timestamps: [Double] = []
+//    @Published var datapoints: [Datapoint] = []
+//    let collection: String
+//    let document: String
+//    let exerciseType: String
+//    init(collection: String, document: String, exerciseType: String) {
+//        self.collection = collection
+//        self.document = document
+//        self.exerciseType = exerciseType
+//        print(self.document)
+//        print(self.exerciseType)
+//        let docRef = db.collection(collection).document(document)
+//        docRef.getDocument { (documentSnapshot, error) in
+//            if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
+//                if let data = documentSnapshot.data(), let exercise_results = data[self.exerciseType] as? [String: [String: Any]] {
+//
+//                    // parse data and store locally
+//                    for (timestamp, values) in exercise_results {
+//                        if let left = values["left"] as? Double, let right = values["right"] as? Double {
+//                            self.leftValues.append(left)
+//                            self.rightValues.append(right)
+//                            self.timestamps.append(Double(timestamp) ?? 0.0)
+//                            self.datapoints.append(Datapoint(id:timestamp , roi_left: left, roi_right: right))
+//                        }
+//                    }
+//
+//                    // save locally using User Defaults
+////                    let defaults = UserDefaults.standard
+////                    defaults.set(self.leftValues, forKey: "leftValues")
+////                    defaults.set(self.rightValues, forKey: "rightValues")
+////                    defaults.set(self.timestamps, forKey: "timestamps")
+//
+//                    print(self.leftValues)
+//                    print(self.rightValues)
+//                    print(self.timestamps)
+//                }
+//                else {
+//                    print("No data was found")
+//                }
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
+//    }
+//}
+
+
 final class Results: ObservableObject {
     let db = Firestore.firestore()
-    @Published var leftValues: [Double] = []
-    @Published var rightValues: [Double] = []
-    @Published var timestamps: [Double] = []
     @Published var datapoints: [Datapoint] = []
     let collection: String
     let document: String
     let exerciseType: String
+    
+    private var listenerRegistration: ListenerRegistration?
+    
     init(collection: String, document: String, exerciseType: String) {
         self.collection = collection
         self.document = document
         self.exerciseType = exerciseType
-        
+        print(self.document)
+        print(self.exerciseType)
+        loadData()
+    }
+    
+    deinit {
+        listenerRegistration?.remove()
+    }
+    
+    private func loadData() {
         let docRef = db.collection(collection).document(document)
-        docRef.getDocument { (documentSnapshot, error) in
+        listenerRegistration = docRef.addSnapshotListener { documentSnapshot, error in
             if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
                 if let data = documentSnapshot.data(), let exercise_results = data[self.exerciseType] as? [String: [String: Any]] {
+                    
+                    // reset local data
+                    self.datapoints.removeAll()
 
                     // parse data and store locally
                     for (timestamp, values) in exercise_results {
                         if let left = values["left"] as? Double, let right = values["right"] as? Double {
-                            self.leftValues.append(left)
-                            self.rightValues.append(right)
-                            self.timestamps.append(Double(timestamp) ?? 0.0)
                             self.datapoints.append(Datapoint(id:timestamp , roi_left: left, roi_right: right))
                         }
                     }
-
-                    // save locally using User Defaults
-//                    let defaults = UserDefaults.standard
-//                    defaults.set(self.leftValues, forKey: "leftValues")
-//                    defaults.set(self.rightValues, forKey: "rightValues")
-//                    defaults.set(self.timestamps, forKey: "timestamps")
-                    
-                    print(self.leftValues)
-                    print(self.rightValues)
-                    print(self.timestamps)
+                    // sort datapoints based on timestamp
+                    self.datapoints.sort(by: { $0.id < $1.id })
                 }
                 else {
                     print("No data was found")
@@ -136,6 +188,4 @@ final class Results: ObservableObject {
             }
         }
     }
-
-
 }

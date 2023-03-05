@@ -25,9 +25,7 @@ struct ExerciseList: View {
     var body: some View {
         
         NavigationStack {
-            Button("test"){
-                let r = Results(collection: "results", document: "60OZjZbwHEPAEBdXzXoRriqXdcQ2", exerciseType: "abduction-shoulder")
-            }
+
             List {
                 Toggle(isOn: $showFavoritesOnly) {
                     Text("Favorites only")

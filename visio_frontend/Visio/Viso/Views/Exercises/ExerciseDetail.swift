@@ -6,12 +6,10 @@ struct ExerciseDetail: View {
     @EnvironmentObject var cam: CameraWebsocket
     @EnvironmentObject var load_exercises: LoadExercises
     @State private var isLiveCameraViewActive = false
-    
-    let results = Results(collection: "results", document: "60OZjZbwHEPAEBdXzXoRriqXdcQ2", exerciseType: "abduction-shoulder")
 
     var exercise: Exercise
     let userID = Auth.auth().currentUser?.uid ?? "none"
-    
+//    let results = Results(collection: "results", document: "60OZjZbwHEPAEBdXzXoRriqXdcQ2", exerciseType: exercise.bodyPart + "-" + exercise.exercise)
     
     var exerciseIndex: Int {
         load_exercises.exercises.firstIndex(where: { $0.id == exercise.id })!
@@ -25,6 +23,8 @@ struct ExerciseDetail: View {
     @State private var isShowVideo = false
     var body: some View {
         NavigationStack{
+            let results = Results(collection: "results", document: userID, exerciseType: exercise.exercise + "-" + exercise.bodyPart)
+
             VStack {
                 
                 ExerciseRangeOfMotionPlotView()
