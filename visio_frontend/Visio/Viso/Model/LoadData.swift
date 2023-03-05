@@ -77,7 +77,7 @@ func load2<T: Decodable>(_ data: Data) -> T {
 //
 //
 
-struct Datapoint: Identifiable{
+struct DataPoint: Identifiable{
     var id: String
     var roi_left: Double
     var roi_right: Double
@@ -142,7 +142,7 @@ struct Datapoint: Identifiable{
 
 final class Results: ObservableObject {
     let db = Firestore.firestore()
-    @Published var datapoints: [Datapoint] = []
+    @Published var datapoints: [DataPoint] = []
     let collection: String
     let document: String
     let exerciseType: String
@@ -174,7 +174,7 @@ final class Results: ObservableObject {
                     // parse data and store locally
                     for (timestamp, values) in exercise_results {
                         if let left = values["left"] as? Double, let right = values["right"] as? Double {
-                            self.datapoints.append(Datapoint(id:timestamp , roi_left: left, roi_right: right))
+                            self.datapoints.append(DataPoint(id:timestamp , roi_left: left, roi_right: right))
                         }
                     }
                     // sort datapoints based on timestamp
