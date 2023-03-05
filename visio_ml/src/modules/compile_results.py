@@ -3,7 +3,7 @@ import datetime
 import firebase_admin
 from firebase_admin import firestore
 from collections import defaultdict
-from time import time
+from time import time, sleep
 
 class ResultCompiler:
     PATH_TO_CREDENTIALS = "src/modules/auth.json"
@@ -35,9 +35,11 @@ class ResultCompiler:
             self.results[key][val // 1] += 1
             self.timestamped_angles[key].append((t, val // 1))
 
-    # def record_frame(self, frame) -> None:
-    #     self.out.write(frame)
-
+    """
+    def record_frame(self, frame) -> None:
+        self.out.write(frame)
+    """
+        
     def get_max_range(self, side) -> float:
         hist = self.results[side]
         keys = list(hist.keys())
@@ -73,15 +75,16 @@ class ResultCompiler:
 
         res = {}
         for key in self.results:
-            res[key] = self.get_max_range(key)
+            res[f"max {key}"] = self.get_max_range(key)
 
         timestamped_results = self.get_timestamped_results()
+        res["timestamped_data"] = timestamped_results
+        res["delta (s)"] = self.delta
+
         identifier = f"{self.exercise}-{self.body_part}"
         doc = db.collection(u'results').document(self.user_id)
         doc.set({
             identifier: {
                 str(time()): res
             },
-            "delta": self.delta,
-            "data": timestamped_results
         }, merge=True)
