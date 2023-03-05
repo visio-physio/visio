@@ -1,0 +1,126 @@
+#!/usr/bin/env python
+
+import asyncio
+import websockets
+import cv2
+import base64
+import gzip
+import json
+from concurrent.futures import ProcessPoolExecutor
+import os
+import argparse
+
+from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
+from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
+from visio_pose import VisioPose, VisioPoseRenderer
+from compile_results import ResultCompiler
+
+class OakdProducer():
+    def __init__(self, cpu=False):
+        self.state = 'idle' # 'produce'
+        self.exercise = None
+        self.body_part = None
+        self.user_id = None
+        self.websocket = None
+        self.cpu = cpu
+        self.result_compilers = {}
+
+        print(f"Running Blazepose model in {'cpu' if self.cpu else 'Oak-D'}")
+
+    async def serve(self, host, port):
+        server = await websockets.serve(self.handler, host, port)
+        producer_task = asyncio.create_task(self.produce())
+        await asyncio.gather(server.serve_forever(), producer_task)
+    
+    async def handler(self, websocket):
+        print("New connection")
+        self.websocket = websocket
+        async for message in websocket:
+            event = json.loads(message)
+            self.state = event['state']
+            self.exercise = event['exercise']
+            self.body_part = event['body_part']
+            self.user_id = event['user_id']
+
+        print(f"State updated to: {self.state}")
+
+    async def send_frame(self, frame):
+        # Convert the frame to a byte string
+        _, buffer = cv2.imencode('.jpg', frame)
+        frame_bytes = buffer.tobytes()
+        compressed_frame_bytes = gzip.compress(frame_bytes)
+        # Encode the byte string as a base64 string
+        frame_base64 = base64.b64encode(compressed_frame_bytes).decode('utf-8')
+        # Send the base64 string to the client
+        await self.websocket.send(frame_base64)
+
+    
+    async def produce(self):
+        if self.cpu:
+            tracker = VisioPose(
+                crop=True,
+                internal_frame_height=600,
+                lm_model='full'
+            )
+            renderer = VisioPoseRenderer(tracker)
+        else:
+            tracker = BlazeposeDepthai(
+                xyz=True,
+                crop=True,
+                internal_frame_height=600
+            )
+            renderer = BlazeposeRenderer(tracker=tracker, show_3d=False)
+        
+
+        while True:
+            await asyncio.sleep(0.001)
+
+            frame, body = tracker.next_frame()
+            if frame is None:
+                break
+            frame = renderer.draw(frame, body)
+
+            if self.state == 'start':
+                if self.user_id not in self.result_compilers or (self.result_compilers[self.user_id].get_exercise(), self.result_compilers[self.user_id].get_body_part()) != (self.exercise, self.body_part):
+                    self.result_compilers[self.user_id] = ResultCompiler(self.user_id, self.exercise, self.body_part)
+
+                if body.landmarks is not None:
+                    result = body.get_measurement(self.body_part, self.exercise)
+                    y_coord = 50
+                    for body_part, measurement in result.items():
+                        # Append text to each frame in the top left corner with minimum usage of space on the frame
+                        cv2.putText(frame, f"{body_part}: {round(measurement, 5)}", (5, y_coord),
+                                    cv2.FONT_HERSHEY_PLAIN, 1.5,
+                                    (0, 0, 255), 2)
+                        print(f"{body_part}: {measurement}\n")
+                        y_coord += 15
+
+                    self.result_compilers[self.user_id].record_angle(result)
+
+                await self.send_frame(frame)
+
+            elif self.state == 'end':
+                if self.user_id in self.result_compilers:
+                    self.result_compilers[self.user_id].store_results_in_firebase()
+
+                self.state = 'idle'
+            
+            key = renderer.waitKey(delay=1)
+            if key == ord('q') or key == 27:
+                break
+
+        renderer.exit()
+        tracker.exit()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--cpu', action="store_true",
+                        help="True for running Blazepose in CPU, False for running in Oak-D")
+    
+    args = parser.parse_args()
+    print(args.cpu)
+
+    server = OakdProducer(cpu=args.cpu)
+    ip = "127.0.0.1"
+    print(f"Starting server at {ip}:8080")
+    asyncio.run(server.serve(ip, 8080))
