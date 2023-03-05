@@ -11,6 +11,7 @@
 		3821A71D298C328600981D6B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3821A71C298C328600981D6B /* FirebaseDatabase */; };
 		3825271429A45131008F6DF7 /* CameraWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3825271329A45131008F6DF7 /* CameraWebsocket.swift */; };
 		3825271629A45161008F6DF7 /* LiveCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3825271529A45161008F6DF7 /* LiveCameraView.swift */; };
+		3891317F29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3891317E29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift */; };
 		38AEA84429AFF867003ACDB0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84329AFF867003ACDB0 /* LoginView.swift */; };
 		38AEA84629AFF87B003ACDB0 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84529AFF87B003ACDB0 /* RegisterView.swift */; };
 		38AEA84829B0F4E8003ACDB0 /* LoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84729B0F4E8003ACDB0 /* LoadData.swift */; };
@@ -27,7 +28,7 @@
 		38EFB7B52985DBA50018F668 /* ExerciseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B42985DBA50018F668 /* ExerciseDetail.swift */; };
 		38EFB7B7298607790018F668 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B6298607790018F668 /* FavoriteButton.swift */; };
 		38EFB7C6298630D10018F668 /* exerciseResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 38EFB7C5298630D10018F668 /* exerciseResults.json */; };
-		38EFB7C8298633CD0018F668 /* ExerciseHist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7C7298633CD0018F668 /* ExerciseHist.swift */; };
+		38EFB7C8298633CD0018F668 /* ExerciseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7C7298633CD0018F668 /* ExerciseResult.swift */; };
 		38EFB7D3298715520018F668 /* ExercisePlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7D2298715520018F668 /* ExercisePlotView.swift */; };
 		38EFB7D7298730F60018F668 /* ExerciseGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7D6298730F60018F668 /* ExerciseGraph.swift */; };
 		38F653D52985A115004CD110 /* VisoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F653D42985A115004CD110 /* VisoApp.swift */; };
@@ -42,6 +43,7 @@
 		381A1A8429B17F3D009BF648 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3825271329A45131008F6DF7 /* CameraWebsocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWebsocket.swift; sourceTree = "<group>"; };
 		3825271529A45161008F6DF7 /* LiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCameraView.swift; sourceTree = "<group>"; };
+		3891317E29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRangeOfMotionPlotView.swift; sourceTree = "<group>"; };
 		38AEA84329AFF867003ACDB0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		38AEA84529AFF87B003ACDB0 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		38AEA84729B0F4E8003ACDB0 /* LoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadData.swift; sourceTree = "<group>"; };
@@ -54,7 +56,7 @@
 		38EFB7B42985DBA50018F668 /* ExerciseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetail.swift; sourceTree = "<group>"; };
 		38EFB7B6298607790018F668 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		38EFB7C5298630D10018F668 /* exerciseResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exerciseResults.json; sourceTree = "<group>"; };
-		38EFB7C7298633CD0018F668 /* ExerciseHist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseHist.swift; sourceTree = "<group>"; };
+		38EFB7C7298633CD0018F668 /* ExerciseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseResult.swift; sourceTree = "<group>"; };
 		38EFB7D2298715520018F668 /* ExercisePlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePlotView.swift; sourceTree = "<group>"; };
 		38EFB7D6298730F60018F668 /* ExerciseGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGraph.swift; sourceTree = "<group>"; };
 		38F653D12985A115004CD110 /* Viso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viso.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +114,7 @@
 			children = (
 				38AEA84729B0F4E8003ACDB0 /* LoadData.swift */,
 				38AEA84B29B0F5A1003ACDB0 /* Exercise.swift */,
-				38EFB7C7298633CD0018F668 /* ExerciseHist.swift */,
+				38EFB7C7298633CD0018F668 /* ExerciseResult.swift */,
 				3825271329A45131008F6DF7 /* CameraWebsocket.swift */,
 			);
 			path = Model;
@@ -151,6 +153,7 @@
 			children = (
 				38EFB7D2298715520018F668 /* ExercisePlotView.swift */,
 				38EFB7D6298730F60018F668 /* ExerciseGraph.swift */,
+				3891317E29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift */,
 			);
 			path = ExercisePlots;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3891317F29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift in Sources */,
 				38EFB7D7298730F60018F668 /* ExerciseGraph.swift in Sources */,
 				3825271429A45131008F6DF7 /* CameraWebsocket.swift in Sources */,
 				38AEA84429AFF867003ACDB0 /* LoginView.swift in Sources */,
@@ -332,7 +336,7 @@
 				3825271629A45161008F6DF7 /* LiveCameraView.swift in Sources */,
 				38EFB7B12985D7BF0018F668 /* ExerciseRow.swift in Sources */,
 				38AEA84C29B0F5A1003ACDB0 /* Exercise.swift in Sources */,
-				38EFB7C8298633CD0018F668 /* ExerciseHist.swift in Sources */,
+				38EFB7C8298633CD0018F668 /* ExerciseResult.swift in Sources */,
 				38EFB7B7298607790018F668 /* FavoriteButton.swift in Sources */,
 				38EFB7D3298715520018F668 /* ExercisePlotView.swift in Sources */,
 				38F653D72985A115004CD110 /* ContentView.swift in Sources */,

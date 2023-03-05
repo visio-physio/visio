@@ -18,8 +18,8 @@ extension AnyTransition {
 }
 struct ExerciseGraph: View {
     @EnvironmentObject var modelData: ExerciseResults
-    var exerciseHist: ExerciseHist
-    var path: KeyPath<ExerciseHist.Measurement, Int>
+    var exerciseHist: ExerciseResult
+    var path: KeyPath<ExerciseResult.Measurement, Int>
 
     var body: some View {
         let data = exerciseHist.measurements

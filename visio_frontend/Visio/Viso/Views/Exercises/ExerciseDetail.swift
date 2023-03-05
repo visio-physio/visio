@@ -3,13 +3,15 @@ import Firebase
 
 struct ExerciseDetail: View {
     @EnvironmentObject var modelData: ExerciseResults
-//    @EnvironmentObject var fb_data: FirebaseDataLoader
     @EnvironmentObject var cam: CameraWebsocket
     @EnvironmentObject var load_exercises: LoadExercises
     @State private var isLiveCameraViewActive = false
     
+    let results = Results(collection: "results", document: "60OZjZbwHEPAEBdXzXoRriqXdcQ2", exerciseType: "abduction-shoulder")
 
     var exercise: Exercise
+    let userID = Auth.auth().currentUser?.uid ?? "none"
+    
     
     var exerciseIndex: Int {
         load_exercises.exercises.firstIndex(where: { $0.id == exercise.id })!
@@ -18,10 +20,15 @@ struct ExerciseDetail: View {
     var chartIndex: Int? {
         return modelData.exerciseHists.firstIndex(where: { $0.id == exercise.id })
     }
+    
+    
     @State private var isShowVideo = false
     var body: some View {
         NavigationStack{
             VStack {
+                
+                ExerciseRangeOfMotionPlotView()
+                    .environmentObject(results)
                 if let index = chartIndex {
                     Text("Historical Test Results")
                         .font(.title2)
@@ -32,7 +39,7 @@ struct ExerciseDetail: View {
                     CircleImage(image: exercise.image)
                     VStack (alignment: .leading){
                         HStack {
-                            Text(exercise.exercise)
+                            Text(exercise.bodyPart + " " + exercise.exercise)
                                 .font(.title2)
                             FavoriteButton(isSet: $load_exercises.exercises[exerciseIndex].isFavorite)
 
@@ -53,14 +60,9 @@ struct ExerciseDetail: View {
                     .padding()
                 
                 Button("Start Test") {
-                    
-                    let userID = Auth.auth().currentUser?.uid ?? "none"
-                    print(userID)
-                    
                     cam.send(userId: userID, bodyPart: self.exercise.bodyPart, exercise: self.exercise.exercise, state: "start")
-                
-                    print("sending to server: \(self.exercise.exercise)")
                     isLiveCameraViewActive = true
+                    print("sending to server: \(self.exercise.exercise)")
                 }
                 .sheet(isPresented: $isLiveCameraViewActive) {
                         LiveCameraView()

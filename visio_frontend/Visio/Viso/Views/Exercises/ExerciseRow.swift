@@ -15,8 +15,7 @@ struct ExerciseRow: View {
             exercise.image
                 .resizable()
                 .frame(width: 50, height: 50)
-            Text(exercise.exercise)
-            
+            Text(exercise.bodyPart + " " + exercise.exercise)
             Spacer()
 
             if exercise.isFavorite {

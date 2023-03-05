@@ -10,12 +10,12 @@ import Charts
 
 
 struct ExercisePlotView: View {
-    let exerciseHist: ExerciseHist
-    @State var dataToShow = \ExerciseHist.Measurement.roi_left
+    let exerciseHist: ExerciseResult
+    @State var dataToShow = \ExerciseResult.Measurement.roi_left
 
     var buttons = [
-        ("ROI Left", \ExerciseHist.Measurement.roi_left),
-        ("ROI Right", \ExerciseHist.Measurement.roi_right)
+        ("ROI Left", \ExerciseResult.Measurement.roi_left),
+        ("ROI Right", \ExerciseResult.Measurement.roi_right)
     ]
     
     var body: some View {
@@ -37,8 +37,6 @@ struct ExercisePlotView: View {
         
     }
 }
-
-
 
 struct ExercisePlotDetails_Previews: PreviewProvider {
     static let modelData = ExerciseResults()
