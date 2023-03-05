@@ -23,8 +23,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct VisoApp: App {
     @StateObject private var exercise_results = ExerciseResults()
-    @StateObject private var fb_data = FirebaseDataLoader()
-//    @StateObject private var camera_socket = CameraWebsocket()
     @StateObject private var exercises = LoadExercises()
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
@@ -33,8 +31,6 @@ struct VisoApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(exercise_results)
-                .environmentObject(fb_data)
-//                .environmentObject(camera_socket)
                 .environmentObject(exercises)
         }
     }

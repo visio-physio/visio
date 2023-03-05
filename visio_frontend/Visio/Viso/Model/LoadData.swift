@@ -36,70 +36,10 @@ func load<T: Decodable>(_ filename: String) -> T {
 
 final class Results: ObservableObject {
     let db = Firestore.firestore()
+    var data = Data()
     
-    func loadResults(){
-        db.collection(K.FStore.results)
-            .addSnapshotListener { querySnapshot, error in
-                if let e = error{
-                    print("Error connecting to Firestore \(K.FStore.results). \(e)")
-                } else{
-                    print("Connected to Firestore \(K.FStore.results).")
-                    if let snapshotDocument = querySnapshot?.documents {
-                        print("snapshotDocument")
-                        print(snapshotDocument)
-                        for doc in snapshotDocument {
-                            let data = doc.data()
-                            print(data)
-                        }
-                    }
-                }
-            }
-    }
-    
-    func write(){
-        let citiesRef = db.collection("cities")
-
-        citiesRef.document("SF").setData([
-            "name": "San Francisco",
-            "state": "CA",
-            "country": "USA",
-            "capital": false,
-            "population": 860000,
-            "regions": ["west_coast", "norcal"]
-            ])
-        citiesRef.document("LA").setData([
-            "name": "Los Angeles",
-            "state": "CA",
-            "country": "USA",
-            "capital": false,
-            "population": 3900000,
-            "regions": ["west_coast", "socal"]
-            ])
-        citiesRef.document("DC").setData([
-            "name": "Washington D.C.",
-            "country": "USA",
-            "capital": true,
-            "population": 680000,
-            "regions": ["east_coast"]
-            ])
-        citiesRef.document("TOK").setData([
-            "name": "Tokyo",
-            "country": "Japan",
-            "capital": true,
-            "population": 9000000,
-            "regions": ["kanto", "honshu"]
-            ])
-        citiesRef.document("BJ").setData([
-            "name": "Beijing",
-            "country": "China",
-            "capital": true,
-            "population": 21500000,
-            "regions": ["jingjinji", "hebei"]
-            ])
-    }
-    func read(){
-        let docRef = db.collection("cities").document("SF")
-
+    func loadResults(collection:String, document:String, exercise:String){
+        let docRef = db.collection(collection).document(document)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
@@ -108,5 +48,6 @@ final class Results: ObservableObject {
                 print("Document does not exist")
             }
         }
+        
     }
 }

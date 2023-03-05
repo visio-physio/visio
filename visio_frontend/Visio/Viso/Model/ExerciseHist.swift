@@ -19,3 +19,14 @@ struct ExerciseHist: Codable, Hashable, Identifiable {
     }
 }
 
+struct ExerciseHist2: Codable, Hashable, Identifiable {
+    var id: Int
+    var name: String
+    var measurements: [Measurement]
+
+    struct Measurement: Codable, Hashable, Identifiable{
+        var id: Double
+        var roi_left: Int
+        var roi_right: Int
+    }
+}

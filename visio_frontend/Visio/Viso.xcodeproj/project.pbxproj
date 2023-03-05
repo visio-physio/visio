@@ -7,14 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		381A1A8329B174C0009BF648 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A1A8229B174C0009BF648 /* ResultsView.swift */; };
 		381A1A8529B17F3D009BF648 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 381A1A8429B17F3D009BF648 /* GoogleService-Info.plist */; };
-		381A1A8729B19254009BF648 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A1A8629B19254009BF648 /* SettingView.swift */; };
 		3821A71D298C328600981D6B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3821A71C298C328600981D6B /* FirebaseDatabase */; };
-		3821A721298C360100981D6B /* ExerciseFB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3821A720298C360100981D6B /* ExerciseFB.swift */; };
 		3825271429A45131008F6DF7 /* CameraWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3825271329A45131008F6DF7 /* CameraWebsocket.swift */; };
 		3825271629A45161008F6DF7 /* LiveCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3825271529A45161008F6DF7 /* LiveCameraView.swift */; };
-		3862BD1A2991922700B670E0 /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3862BD192991922700B670E0 /* FirebaseData.swift */; };
 		38AEA84429AFF867003ACDB0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84329AFF867003ACDB0 /* LoginView.swift */; };
 		38AEA84629AFF87B003ACDB0 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84529AFF87B003ACDB0 /* RegisterView.swift */; };
 		38AEA84829B0F4E8003ACDB0 /* LoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84729B0F4E8003ACDB0 /* LoadData.swift */; };
@@ -43,13 +39,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		381A1A8229B174C0009BF648 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		381A1A8429B17F3D009BF648 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		381A1A8629B19254009BF648 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		3821A720298C360100981D6B /* ExerciseFB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseFB.swift; sourceTree = "<group>"; };
 		3825271329A45131008F6DF7 /* CameraWebsocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWebsocket.swift; sourceTree = "<group>"; };
 		3825271529A45161008F6DF7 /* LiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCameraView.swift; sourceTree = "<group>"; };
-		3862BD192991922700B670E0 /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		38AEA84329AFF867003ACDB0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		38AEA84529AFF87B003ACDB0 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		38AEA84729B0F4E8003ACDB0 /* LoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadData.swift; sourceTree = "<group>"; };
@@ -107,8 +99,6 @@
 				38F653D62985A115004CD110 /* ContentView.swift */,
 				38AEA84329AFF867003ACDB0 /* LoginView.swift */,
 				38AEA84529AFF87B003ACDB0 /* RegisterView.swift */,
-				381A1A8229B174C0009BF648 /* ResultsView.swift */,
-				381A1A8629B19254009BF648 /* SettingView.swift */,
 				38EFB7B92986080E0018F668 /* Exercises */,
 				38EFB7C92986380D0018F668 /* ExercisePlots */,
 				38EFB7DC298745300018F668 /* Video */,
@@ -123,8 +113,6 @@
 				38AEA84729B0F4E8003ACDB0 /* LoadData.swift */,
 				38AEA84B29B0F5A1003ACDB0 /* Exercise.swift */,
 				38EFB7C7298633CD0018F668 /* ExerciseHist.swift */,
-				3821A720298C360100981D6B /* ExerciseFB.swift */,
-				3862BD192991922700B670E0 /* FirebaseData.swift */,
 				3825271329A45131008F6DF7 /* CameraWebsocket.swift */,
 			);
 			path = Model;
@@ -339,18 +327,14 @@
 				38EFB7D7298730F60018F668 /* ExerciseGraph.swift in Sources */,
 				3825271429A45131008F6DF7 /* CameraWebsocket.swift in Sources */,
 				38AEA84429AFF867003ACDB0 /* LoginView.swift in Sources */,
-				381A1A8729B19254009BF648 /* SettingView.swift in Sources */,
-				3821A721298C360100981D6B /* ExerciseFB.swift in Sources */,
 				38EFB7B32985D9B40018F668 /* ExerciseList.swift in Sources */,
 				38AEA84629AFF87B003ACDB0 /* RegisterView.swift in Sources */,
 				3825271629A45161008F6DF7 /* LiveCameraView.swift in Sources */,
 				38EFB7B12985D7BF0018F668 /* ExerciseRow.swift in Sources */,
-				3862BD1A2991922700B670E0 /* FirebaseData.swift in Sources */,
 				38AEA84C29B0F5A1003ACDB0 /* Exercise.swift in Sources */,
 				38EFB7C8298633CD0018F668 /* ExerciseHist.swift in Sources */,
 				38EFB7B7298607790018F668 /* FavoriteButton.swift in Sources */,
 				38EFB7D3298715520018F668 /* ExercisePlotView.swift in Sources */,
-				381A1A8329B174C0009BF648 /* ResultsView.swift in Sources */,
 				38F653D72985A115004CD110 /* ContentView.swift in Sources */,
 				38AEA84829B0F4E8003ACDB0 /* LoadData.swift in Sources */,
 				38AEA84E29B0F61D003ACDB0 /* Constants.swift in Sources */,
