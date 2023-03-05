@@ -58,29 +58,25 @@ class ResultCompiler:
 
         return max(high[:min(len(high), 5)]) - min(low[:min(len(low), 5)])
     
-    def get_timestamped_results(self):
-        res = {}
-        for key, arr in self.timestamped_angles.items():
+    def set_timestamped_results(self, res):
+        res["delta (s)"] = self.delta
+        for k, arr in self.timestamped_angles.items():
+            key = f"{k}_timestamped"
             prev = arr[0][0]
             res[key] = [arr[0][1]]
             for t, angle in arr[1:]:
                 if t - prev >= self.delta:
                     prev = t
                     res[key].append(angle)
-        
-        return res
 
     def store_results_in_firebase(self) -> None:
         db = firestore.client()
 
         res = {}
         for key in self.results:
-            res[f"max {key}"] = self.get_max_range(key)
+            res[f"max_{key}"] = self.get_max_range(key)
 
-        timestamped_results = self.get_timestamped_results()
-        res["timestamped_data"] = timestamped_results
-        res["delta (s)"] = self.delta
-
+        self.set_timestamped_results(res)
         identifier = f"{self.exercise}-{self.body_part}"
         doc = db.collection(u'results').document(self.user_id)
         doc.set({
