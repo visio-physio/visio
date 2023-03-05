@@ -24,6 +24,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct VisoApp: App {
     @StateObject private var exercise_results = ExerciseResults()
     @StateObject private var exercises = LoadExercises()
+    let cam  = CameraWebsocket(url:"localhost:8080")
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
@@ -32,6 +33,7 @@ struct VisoApp: App {
             ContentView()
                 .environmentObject(exercise_results)
                 .environmentObject(exercises)
+                .environmentObject(cam)
         }
     }
 }

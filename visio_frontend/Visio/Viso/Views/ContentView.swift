@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Viso
-//
-//  Created by person on 2023-01-28.
-//
-
 import SwiftUI
 
 struct ContentView: View {
@@ -14,6 +7,7 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    let cam = CameraWebsocket(url:"localhost:8080")
     static var previews: some View {
         ContentView()
             .environmentObject(LoadExercises())

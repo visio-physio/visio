@@ -41,6 +41,7 @@ struct LoginView: View {
                             } else {
                                 self.presentationMode.wrappedValue.dismiss() // dismiss LoginView
                                 self.isActive = true
+                                print("issss")
                             }
                         }
                     }) {

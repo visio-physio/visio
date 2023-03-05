@@ -16,3 +16,5 @@ struct Exercise: Hashable, Codable, Identifiable {
         Image(imageName)
     }
 }
+
+

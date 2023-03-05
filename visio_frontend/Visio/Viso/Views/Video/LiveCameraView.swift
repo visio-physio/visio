@@ -39,7 +39,7 @@ struct LiveCameraView: View {
 }
 
 struct LiveCameraView_Previews: PreviewProvider {
-    static let cam = CameraWebsocket()
+    static let cam = CameraWebsocket(url:"localhost:8080")
     static var previews: some View {
         LiveCameraView()
             .environmentObject(cam)
