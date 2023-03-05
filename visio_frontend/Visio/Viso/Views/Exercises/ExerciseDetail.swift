@@ -11,9 +11,8 @@ struct ExerciseDetail: View {
     
     @State private var isShowVideo = false
     var body: some View {
-
         TabView {
-            NavigationView {
+            NavigationStack {
                 VStack {
                     Text("Results")
                     ExerciseRangeOfMotionPlotView()
@@ -38,8 +37,14 @@ struct ExerciseDetail: View {
                     Divider()
                     Text(exercise.descriptionTitle)
                         .font(.title3)
-                    Text(exercise.description)
-                        .padding()
+                    
+                    HStack{
+                        Image(exercise.imageExample)
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                        Text(exercise.description)
+                            .padding()
+                    }
 
                     Button("Start Test") {
                         cam.send(userId: userID, bodyPart: self.exercise.bodyPart, exercise: self.exercise.exercise, state: "start")

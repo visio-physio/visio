@@ -11,6 +11,7 @@ struct Exercise: Hashable, Codable, Identifiable {
     let descriptionTitle: String
     let description: String
     let imageName: String
+    let imageExample: String
     
     var image: Image {
         Image(imageName)

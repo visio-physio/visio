@@ -1,10 +1,3 @@
-//
-//  VisoApp.swift
-//  Viso
-//
-//  Created by person on 2023-01-28.
-//
-
 import SwiftUI
 import Firebase
 import FirebaseCore

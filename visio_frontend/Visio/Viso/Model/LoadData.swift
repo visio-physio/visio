@@ -48,35 +48,6 @@ func load2<T: Decodable>(_ data: Data) -> T {
     }
 }
 
-
-
-//final class Results: ObservableObject {
-//    let db = Firestore.firestore()
-//    var data = Data()
-//    func loadResults(collection: String, document: String, exerciseType: String) {
-//        let docRef = db.collection(collection).document(document)
-//
-//        docRef.getDocument { (documentSnapshot, error) in
-//            if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
-//                if let data = documentSnapshot.data(){
-//                    if let exercise_results = data["abduction-shoulder"] {
-//
-//                        print(exercise_results)
-//                        //add code here chat gpt
-//                    }
-//                }
-//                else{
-//                    print("no data was found")
-//                }
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
-//    }
-//}
-//
-//
-
 struct DataPoint: Identifiable{
     var id: String
     var roi_left: Double
@@ -87,61 +58,16 @@ struct DataPoint: Identifiable{
         self.roi_left = roi_left
         self.roi_right = roi_right
     }
+    func date() -> String {
+           let formatter = DateFormatter()
+           formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+           let date = Date(timeIntervalSince1970: TimeInterval(Float(id)!))
+           return formatter.string(from: date)
+       }
 }
 
-//final class Results: ObservableObject {
-//    let db = Firestore.firestore()
-//    @Published var leftValues: [Double] = []
-//    @Published var rightValues: [Double] = []
-//    @Published var timestamps: [Double] = []
-//    @Published var datapoints: [Datapoint] = []
-//    let collection: String
-//    let document: String
-//    let exerciseType: String
-//    init(collection: String, document: String, exerciseType: String) {
-//        self.collection = collection
-//        self.document = document
-//        self.exerciseType = exerciseType
-//        print(self.document)
-//        print(self.exerciseType)
-//        let docRef = db.collection(collection).document(document)
-//        docRef.getDocument { (documentSnapshot, error) in
-//            if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
-//                if let data = documentSnapshot.data(), let exercise_results = data[self.exerciseType] as? [String: [String: Any]] {
-//
-//                    // parse data and store locally
-//                    for (timestamp, values) in exercise_results {
-//                        if let left = values["left"] as? Double, let right = values["right"] as? Double {
-//                            self.leftValues.append(left)
-//                            self.rightValues.append(right)
-//                            self.timestamps.append(Double(timestamp) ?? 0.0)
-//                            self.datapoints.append(Datapoint(id:timestamp , roi_left: left, roi_right: right))
-//                        }
-//                    }
-//
-//                    // save locally using User Defaults
-////                    let defaults = UserDefaults.standard
-////                    defaults.set(self.leftValues, forKey: "leftValues")
-////                    defaults.set(self.rightValues, forKey: "rightValues")
-////                    defaults.set(self.timestamps, forKey: "timestamps")
-//
-//                    print(self.leftValues)
-//                    print(self.rightValues)
-//                    print(self.timestamps)
-//                }
-//                else {
-//                    print("No data was found")
-//                }
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
-//    }
-//}
-
-
 final class Results: ObservableObject {
-    let db = Firestore.firestore()
+    var db = Firestore.firestore()
     @Published var datapoints: [DataPoint] = []
     let collection: String
     let document: String
@@ -174,7 +100,9 @@ final class Results: ObservableObject {
                     // parse data and store locally
                     for (timestamp, values) in exercise_results {
                         if let left = values["left"] as? Double, let right = values["right"] as? Double {
-                            self.datapoints.append(DataPoint(id:timestamp , roi_left: left, roi_right: right))
+                            var dp = DataPoint(id:timestamp , roi_left: left, roi_right: right)
+                            dp.id = dp.date()
+                            self.datapoints.append(dp)
                         }
                     }
                     // sort datapoints based on timestamp

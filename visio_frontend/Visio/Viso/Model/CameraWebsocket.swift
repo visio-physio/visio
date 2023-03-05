@@ -20,14 +20,14 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
         self.url = url
     }
     func makeConnection() {
-        if isConnected{
+        if self.isConnected{
             socket.disconnect()
             self.isConnected = false
         }
         let request = URLRequest(url: URL(string: self.url)!, timeoutInterval: 5)
-        socket = WebSocket(request: request)
-        socket.delegate = self
-        socket.connect()
+        self.socket = WebSocket(request: request)
+        self.socket.delegate = self
+        self.socket.connect()
         self.isConnected = true
         print("Connecting to websocket at: \(self.url)")
     }

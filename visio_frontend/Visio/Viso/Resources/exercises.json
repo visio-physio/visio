@@ -5,10 +5,11 @@
         "bodyPart": "shoulder",
         "isFavorite": true,
         "measurementField": "Range of Motion",
-        "measurementRange": "150° - 180°",
+        "measurementRange": "30° - 180°",
         "descriptionTitle": "How to Perfrom Shoulder Abduction Test",
-        "description": "Stand facing a wall with your arm at your side, reach up and out to touch the wall at shoulder heigh and keep the elbow straight.",
-        "imageName": "shoulder_abduction"
+        "description": "1. Stand up straight with relaxed arms and palms facing your body. \n2. Steadily perform lateral raise until your hands are as high as possible. \n3. Steadily lower to resting position.\n4. Repeat 3–5 times.",
+        "imageName": "shoulder_abduction",
+        "imageExample": "shoulder_abduction_example"
     },
     {
         "id" : 2,
@@ -16,9 +17,11 @@
         "bodyPart": "hip",
         "isFavorite": true,
         "measurementField": "Range of Motion",
-        "measurementRange": "0° - 150°",
+        "measurementRange": "0° - 40°",
         "descriptionTitle": "How to Perform Hip Abduction Test",
-        "description": "This is a discription on how to perform hip abduction ",
-        "imageName": "hip_flexion"
+        "description": "1. Stand upright with your feet hip-width apart, arms resting by your sides, and your core engaged. \n2. Shift your weight onto one leg, and keep a slight bend in the knee of that leg. \n3. Slowly lift the opposite leg out to the side, keeping it straight and the foot pointing forward. \n4. Lift the leg as high as you can without leaning your upper body to the side, and hold for a second or two. \n5. Slowly lower the leg back down to the starting position. \n6. Repeat the exercise for 10–15 repetitions on one leg before switching to the other side.",
+        "imageName": "hip_abduction",
+        "imageExample": "hip_abduction_example"
+
     }
 ]
