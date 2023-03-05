@@ -75,6 +75,9 @@ class Body:
         self.pd_box = pd_box
         self.pd_kps = pd_kps
         self.landmarks = None
+        self.presence = None
+        self.pose_landmarks = None
+
     def get_transverse_plane_n(self):
         return self.get_spine()
   
@@ -147,8 +150,8 @@ class Body:
             right_shoulder_angle = self.get_angle(self.project_on_anatomical_plane(right_arm, 'sagittal'), spine)
             left_shoulder_angle = self.get_angle(self.project_on_anatomical_plane(left_arm, 'sagittal'), spine)
 
-        results = {"right_shoulder": right_shoulder_angle,
-                   "left_shoulder": left_shoulder_angle}
+        results = {"right": right_shoulder_angle,
+                   "left": left_shoulder_angle}
         return results
     
     def get_hip_angles(self, exercise):
@@ -165,8 +168,8 @@ class Body:
             right_hip_angle = self.get_angle(self.project_on_anatomical_plane(right_thigh, 'sagittal'), spine)
             left_hip_angle = self.get_angle(self.project_on_anatomical_plane(left_thigh, 'sagittal'), spine)
 
-        results = {"right_hip": right_hip_angle,
-                   "left_hip": left_hip_angle}
+        results = {"right": right_hip_angle,
+                   "left": left_hip_angle}
         return results
 
     def print(self):
