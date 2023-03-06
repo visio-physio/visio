@@ -47,11 +47,11 @@ struct ExerciseList: View {
                 }
             }
             .navigationTitle("Exercises")
-            .onAppear {
-                // Connect to camera when the view appears
-                camera_socket.url = url
-                camera_socket.makeConnection()
-            }
+//            .onAppear {
+//                // Connect to camera when the view appears
+//                camera_socket.url = url
+//                camera_socket.makeConnection()
+//            }
         }
         .navigationBarBackButtonHidden(true)
     }

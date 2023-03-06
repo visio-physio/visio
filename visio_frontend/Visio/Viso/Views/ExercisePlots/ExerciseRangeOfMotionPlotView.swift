@@ -13,9 +13,8 @@ struct ExerciseRangeOfMotionPlotView: View {
                         x: .value("Range of Motion Left", $0.id),
                         y: .value("Date", $0.roi_left)
                     )
+                    
                 }
-
-
             } else if plotType == "roi_right" {
                 Chart(results.datapoints) {
                     LineMark(

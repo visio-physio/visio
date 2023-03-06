@@ -48,23 +48,38 @@ func load2<T: Decodable>(_ data: Data) -> T {
     }
 }
 
-struct DataPoint: Identifiable{
+struct DataPoint: Identifiable {
     var id: String
     var roi_left: Double
     var roi_right: Double
-    
-    init(id: String, roi_left: Double, roi_right: Double) {
+    var t_delta: Double
+    var t_deltas: [Double]
+    var left_timeseries: [Double]
+    var right_timeseries: [Double]
+
+    init(id: String, roi_left: Double, roi_right: Double, t_delta: Double,t_deltas:[Double], left_timeseries: [Double], right_timeseries: [Double]) {
         self.id = id
         self.roi_left = roi_left
         self.roi_right = roi_right
+        self.t_delta = t_delta
+        self.t_deltas = t_deltas
+        self.left_timeseries = left_timeseries
+        self.right_timeseries = right_timeseries
     }
+    
     func date() -> String {
-           let formatter = DateFormatter()
-           formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-           let date = Date(timeIntervalSince1970: TimeInterval(Float(id)!))
-           return formatter.string(from: date)
-       }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = Date(timeIntervalSince1970: TimeInterval(id)!)
+        return formatter.string(from: date)
+    }
+    
+    func make_deltas() -> [Double]{
+        return (0..<self.left_timeseries.count).map{Double($0) * t_delta}
+
+    }
 }
+
 
 final class Results: ObservableObject {
     var db = Firestore.firestore()
@@ -98,9 +113,15 @@ final class Results: ObservableObject {
                     self.datapoints.removeAll()
 
                     // parse data and store locally
+                    print(exercise_results.keys)
                     for (timestamp, values) in exercise_results {
-                        if let left = values["left"] as? Double, let right = values["right"] as? Double {
-                            var dp = DataPoint(id:timestamp , roi_left: left, roi_right: right)
+                        if let left = values["max_left"] as? Double, let right = values["max_right"] as? Double,
+                           let tDelta = values["delta (s)"] as? Double,
+                           let leftSeries = values["left_timestamped"] as? [Double],
+                           let rightSeries = values["right_timestamped"] as? [Double] {
+                            
+                            var dp = DataPoint(id: timestamp, roi_left: left, roi_right: right, t_delta: tDelta, t_deltas: [0.1], left_timeseries: leftSeries, right_timeseries: rightSeries)
+                            dp.t_deltas = dp.make_deltas()
                             dp.id = dp.date()
                             self.datapoints.append(dp)
                         }
