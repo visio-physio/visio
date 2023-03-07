@@ -1,0 +1,112 @@
+{
+  "Exercises": [
+    {
+      "category": "Upper Body",
+      "description": "Stand facing a wall with your arm at your side, reach up and out to touch the wall at shoulder heigh and keep the elbow straight.",
+      "descriptionTitle": "How to Perfrom Shoulder Abduction Test",
+      "id": 1,
+      "imageName": "shoulder_abduction",
+      "isFavorite": true,
+      "isFeatured": true,
+      "measurementField": "Range of Motion",
+      "measurementRange": "150° - 180°",
+      "test": "shoulder"
+    },
+    {
+      "category": "Upper Body",
+      "description": "Stand facing a wall with your arm extended out in front of you. Slowly bend and straighten your elbow, making sure to measure the range of motion between 0° and 140°.",
+      "descriptionTitle": "How to Perform Elbow Range of Motion Test",
+      "id": 2,
+      "imageName": "elbow",
+      "isFavorite": true,
+      "isFeatured": true,
+      "measurementField": "Range of Motion",
+      "measurementRange": "0° - 150°",
+      "test": "Elbow Range of Motion Test"
+    },
+    {
+      "category": "Back",
+      "description": "Stand with your feet shoulder width apart, bend forward at the waist and reach your hands towards your toes while keeping your legs straight.",
+      "descriptionTitle": "How to Perform Back Flexion Test",
+      "id": 3,
+      "imageName": "back",
+      "isFavorite": false,
+      "isFeatured": false,
+      "measurementField": "Range of Motion",
+      "measurementRange": "Extention 25° - Flexion 90°",
+      "test": "Back Extention and Flexion Test"
+    },
+    {
+      "category": "Upper Body",
+      "description": "Sit with your arm extended on a flat surface, palm facing up. Slowly rotate your hand so that your palm faces down. Measure the range of motion in degrees.",
+      "descriptionTitle": "How to Perform Forearm Pronation Test",
+      "id": 4,
+      "imageName": "forearm_pronation",
+      "isFavorite": false,
+      "isFeatured": false,
+      "measurementField": "Range of Motion",
+      "measurementRange": "Pronation 80° - Supination 80°",
+      "test": "Forearm Pronation"
+    },
+    {
+      "category": "Lower Body",
+      "description": "Stand with your back against a wall, place a piece of tape on the wall at the level of your hip joint. Slowly lift your knee towards your chest, making sure to keep your foot on the ground, and mark the highest point reached on the wall with another piece of tape. Measure the distance between the two marks to determine your hip flexion range of motion.",
+      "descriptionTitle": "How to Perform Hip Flexion Test",
+      "id": 5,
+      "imageName": "hip_flexion",
+      "isFavorite": true,
+      "isFeatured": true,
+      "measurementField": "Range of Motion",
+      "measurementRange": "Knee Flexed 100° - Knee Extended 100°",
+      "test": "hip"
+    },
+    {
+      "category": "Spine",
+      "description": "Stand tall and place one hand on your hip. Slowly bend to the side, keeping your hips facing forward and your feet planted on the ground. Measure the range of motion from your starting position to the furthest point reached.",
+      "descriptionTitle": "How to Perform Lateral Flexion Test",
+      "id": 6,
+      "imageName": "lateral_flexion",
+      "isFavorite": true,
+      "isFeatured": true,
+      "measurementField": "Range of Motion",
+      "measurementRange": "Left 25° - Right 25°",
+      "test": "Lateral Flexion"
+    },
+    {
+      "category": "Neck",
+      "description": "Stand or sit with your back straight and head facing forward. Slowly bend your head to the right and left, trying to touch your ear to your shoulder. Take note of the range of motion in each direction.",
+      "descriptionTitle": "How to Perform Neck Lateral Bending Test",
+      "id": 7,
+      "imageName": "neck_lateral_bending",
+      "isFavorite": true,
+      "isFeatured": true,
+      "measurementField": "Range of Motion",
+      "measurementRange": "Left 45° - Right 45°",
+      "test": "Neck Lateral Bending"
+    },
+    {
+      "category": "Upper Body",
+      "description": "Sit comfortably in a chair with your back straight. Slowly turn your head to the left as far as you can, hold for a second, and return to center. Repeat on the right side. Measure the range of motion in degrees.",
+      "descriptionTitle": "How to Perform Neck Range of Motion Test",
+      "id": 8,
+      "imageName": "neck",
+      "isFavorite": true,
+      "isFeatured": true,
+      "measurementField": "Range of Motion",
+      "measurementRange": "Left 80° - Right 80°",
+      "test": "Neck Range of Motion"
+    },
+    {
+      "category": "Upper Body",
+      "description": "Stand or sit with your arm at your side, raise your arm up in front of you as high as possible, keeping your elbow straight.",
+      "descriptionTitle": "How to Perform Shoulder Flexion Test",
+      "id": 9,
+      "imageName": "shoulder_flexion",
+      "isFavorite": true,
+      "isFeatured": true,
+      "measurementField": "Range of Motion",
+      "measurementRange": "90° - 180°",
+      "test": "Shoulder Flexion"
+    }
+  ]
+}

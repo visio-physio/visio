@@ -1,10 +1,3 @@
-//
-//  VisoApp.swift
-//  Viso
-//
-//  Created by person on 2023-01-28.
-//
-
 import SwiftUI
 import Firebase
 import FirebaseCore
@@ -22,19 +15,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct VisoApp: App {
-    @StateObject private var modelData = ModelData()
-    @StateObject private var fb_data = FirebaseDataLoader()
-    @StateObject private var camera_socket = CameraWebsocket()
- 
+    @StateObject private var exercise_results = ExerciseResults()
+    @StateObject private var exercises = LoadExercises()
+    let cam  = CameraWebsocket(url:"localhost:8080")
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(modelData)
-                .environmentObject(fb_data)
-                .environmentObject(camera_socket)
+                .environmentObject(exercise_results)
+                .environmentObject(exercises)
+                .environmentObject(cam)
         }
     }
 }
