@@ -89,11 +89,11 @@ class OakdProducer():
                     y_coord = 50
                     for body_part, measurement in result.items():
                         # Append text to each frame in the top left corner with minimum usage of space on the frame
-                        cv2.putText(frame, f"{body_part}: {round(measurement, 5)}", (5, y_coord),
+                        cv2.putText(frame, f"{body_part}: {round(measurement, 5)}", (390, y_coord),
                                     cv2.FONT_HERSHEY_PLAIN, 1.5,
                                     (0, 0, 255), 2)
                         print(f"{body_part}: {measurement}\n")
-                        y_coord += 15
+                        y_coord += 20
 
                     self.result_compilers[self.user_id].record_angle(result)
 
