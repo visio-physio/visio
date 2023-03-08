@@ -78,6 +78,20 @@ class Body:
         self.presence = None
         self.pose_landmarks = None
 
+    def is_present(self, landmark, presence_threshold=0.9):
+        if self.presence is not None:
+            return self.presence[KEYPOINT_DICT[landmark]] >= presence_threshold
+        else:
+            return False
+    
+    def is_body_part_present(self, body_part):
+        if body_part == "shoulder":
+            return self.is_present("right_shoulder") and self.is_present("left_shoulder")
+        elif body_part == "hip":
+            return self.is_present("left_hip") and self.is_present("right_hip")
+        else:
+            return False
+
     def get_transverse_plane_n(self):
         return self.get_spine()
   

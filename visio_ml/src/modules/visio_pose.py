@@ -56,8 +56,8 @@ class VisioPose:
         self.q_video = self.device.getOutputQueue(name="cam_out", maxSize=1, blocking=False)
         self.fps = FPS()
 
-        self.pose_model = mp.solutions.pose.Pose(min_detection_confidence=0.5, 
-                                                min_tracking_confidence=0.5,
+        self.pose_model = mp.solutions.pose.Pose(min_detection_confidence=0.8, 
+                                                min_tracking_confidence=0.6,
                                                 model_complexity=self.complexity[lm_model],
                                                 smooth_landmarks=True)
         self.presence_threshold = 0.5

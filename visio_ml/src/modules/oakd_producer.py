@@ -81,6 +81,11 @@ class OakdProducer():
             frame = renderer.draw(frame, body)
 
             if self.state == 'start':
+                if not body.is_body_part_present(self.body_part):
+                    cv2.putText(frame, "Shoulder not present", (50, 300),
+                                    cv2.FONT_HERSHEY_PLAIN, 2.5,
+                                    (0, 0, 255), 2)
+                
                 if self.user_id not in self.result_compilers or (self.result_compilers[self.user_id].get_exercise(), self.result_compilers[self.user_id].get_body_part()) != (self.exercise, self.body_part):
                     self.result_compilers[self.user_id] = ResultCompiler(self.user_id, self.exercise, self.body_part)
 
@@ -92,7 +97,7 @@ class OakdProducer():
                         cv2.putText(frame, f"{body_part}: {round(measurement, 5)}", (390, y_coord),
                                     cv2.FONT_HERSHEY_PLAIN, 1.5,
                                     (0, 0, 255), 2)
-                        print(f"{body_part}: {measurement}\n")
+                        # print(f"{body_part}: {measurement}\n")
                         y_coord += 20
 
                     self.result_compilers[self.user_id].record_angle(result)
