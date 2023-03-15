@@ -1,12 +1,4 @@
-//
-//  ExerciseList.swift
-//  Viso
-//
-//  Created by person on 2023-01-28.
-//
-
 import SwiftUI
-
 
 struct ExerciseList: View {
     @EnvironmentObject var load_exercises: LoadExercises
@@ -23,35 +15,62 @@ struct ExerciseList: View {
     
     var body: some View {
         NavigationStack {
-            List {
+            VStack {
+                VStack {
+                    Text("Viso")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    Text("Pose Estimation for Physiotherapists")
+                        .font(.headline)
+                        .foregroundColor(.gray)
+                }
+                .padding(.top, 20)
+
                 Toggle(isOn: $showFavoritesOnly) {
                     Text("Favorites only")
                 }
+                .toggleStyle(SwitchToggleStyle(tint: .blue))
+                .padding(.bottom, 10)
+
                 HStack {
-                    Text("URL:")
                     TextField("Enter URL", text: $url)
-                    Button("Connect"){
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+
+                    Button(action: {
                         print("URL: \(url)")
                         camera_socket.url = url
                         camera_socket.makeConnection()
                         UserDefaults.standard.set(url, forKey: "url")
-
+                    }) {
+                        Text("Connect")
+                            .fontWeight(.bold)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                            .foregroundColor(.white)
                     }
                 }
-                ForEach(filteredExercises) { exercise in
-                    NavigationLink {
-                        ExerciseDetail(exercise: exercise)
-                    } label: {
-                        ExerciseRow(exercise: exercise)
+                .padding(.bottom, 20)
+
+                let columns = [
+                    GridItem(.flexible()),
+                    GridItem(.flexible())
+                ]
+
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(filteredExercises) { exercise in
+                            NavigationLink(destination: ExerciseDetail(exercise: exercise)) {
+                                ExerciseRow(exercise: exercise)
+                            }
+                        }
                     }
                 }
             }
-            .navigationTitle("Exercises")
-//            .onAppear {
-//                // Connect to camera when the view appears
-//                camera_socket.url = url
-//                camera_socket.makeConnection()
-//            }
+            .padding()
         }
         .navigationBarBackButtonHidden(true)
     }
