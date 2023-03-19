@@ -1,13 +1,5 @@
-//
-//  ExercisePlotDetails.swift
-//  Viso
-//
-//  Created by person on 2023-01-29.
-//
-
 import SwiftUI
 import Charts
-
 
 struct ExercisePlotView: View {
     let exerciseHist: ExerciseResult
@@ -18,23 +10,35 @@ struct ExercisePlotView: View {
         ("ROI Right", \ExerciseResult.Measurement.roi_right)
     ]
     
+    @State private var notes: String = ""
+
     var body: some View {
-        ExerciseGraph(exerciseHist: exerciseHist, path: dataToShow)
-        HStack(spacing: 25) {
-            ForEach(buttons, id: \.0) { value in
-                Button {
-                    dataToShow = value.1
-                } label: {
-                    Text(value.0)
-                        .font(.system(size: 15))
-                        .foregroundColor(value.1 == dataToShow
-                            ? .gray
-                            : .accentColor)
-                        .animation(nil)
+        ScrollView {
+            VStack {
+                ExerciseGraph(exerciseHist: exerciseHist, path: dataToShow)
+                HStack(spacing: 25) {
+                    ForEach(buttons, id: \.0) { value in
+                        Button {
+                            dataToShow = value.1
+                        } label: {
+                            Text(value.0)
+                                .font(.system(size: 15))
+                                .foregroundColor(value.1 == dataToShow
+                                    ? .gray
+                                    : .accentColor)
+                                .animation(nil)
+                        }
+                    }
                 }
+                
+                TextField("Add notes here...", text: $notes)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.top, 20)
             }
+            .padding()
         }
-        
     }
 }
 

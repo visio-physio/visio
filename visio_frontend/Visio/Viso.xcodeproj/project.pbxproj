@@ -18,6 +18,7 @@
 		38AEA84829B0F4E8003ACDB0 /* LoadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84729B0F4E8003ACDB0 /* LoadData.swift */; };
 		38AEA84C29B0F5A1003ACDB0 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84B29B0F5A1003ACDB0 /* Exercise.swift */; };
 		38AEA84E29B0F61D003ACDB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84D29B0F61D003ACDB0 /* Constants.swift */; };
+		38DC5A9929C2257E003ADB2C /* SelectedExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DC5A9829C2257E003ADB2C /* SelectedExercises.swift */; };
 		38DF16EA298C10780020113C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16E9298C10780020113C /* FirebaseAnalytics */; };
 		38DF16EC298C10780020113C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16EB298C10780020113C /* FirebaseAuth */; };
 		38DF16EE298C10780020113C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF16ED298C10780020113C /* FirebaseFirestore */; };
@@ -51,6 +52,7 @@
 		38AEA84729B0F4E8003ACDB0 /* LoadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadData.swift; sourceTree = "<group>"; };
 		38AEA84B29B0F5A1003ACDB0 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		38AEA84D29B0F61D003ACDB0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		38DC5A9829C2257E003ADB2C /* SelectedExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedExercises.swift; sourceTree = "<group>"; };
 		38EB34E1299EFC5C00C0E4CF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		38EFB7A22985CFCD0018F668 /* exercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exercises.json; sourceTree = "<group>"; };
 		38EFB7B02985D7BF0018F668 /* ExerciseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRow.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				38EFB7B02985D7BF0018F668 /* ExerciseRow.swift */,
 				38EFB7B22985D9B40018F668 /* ExerciseList.swift */,
 				38EFB7B42985DBA50018F668 /* ExerciseDetail.swift */,
+				38DC5A9829C2257E003ADB2C /* SelectedExercises.swift */,
 			);
 			path = Exercises;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				38EFB7B12985D7BF0018F668 /* ExerciseRow.swift in Sources */,
 				38544FB429B46D2A000B8154 /* ResultsView.swift in Sources */,
 				38AEA84C29B0F5A1003ACDB0 /* Exercise.swift in Sources */,
+				38DC5A9929C2257E003ADB2C /* SelectedExercises.swift in Sources */,
 				38EFB7C8298633CD0018F668 /* ExerciseResult.swift in Sources */,
 				38EFB7B7298607790018F668 /* FavoriteButton.swift in Sources */,
 				38EFB7D3298715520018F668 /* ExercisePlotView.swift in Sources */,
