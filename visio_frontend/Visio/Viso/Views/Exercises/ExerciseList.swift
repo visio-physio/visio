@@ -1,17 +1,5 @@
 import SwiftUI
 
-struct GradientButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .fontWeight(.bold)
-            .padding(.horizontal, 20)
-            .padding(.vertical, 10)
-            .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.8)]), startPoint: .topLeading, endPoint: .bottomTrailing))
-            .cornerRadius(10)
-            .foregroundColor(.white)
-    }
-}
-
 struct ExerciseList: View {
     @EnvironmentObject var load_exercises: LoadExercises
     @EnvironmentObject var camera_socket: CameraWebsocket
@@ -36,19 +24,26 @@ struct ExerciseList: View {
         NavigationStack {
             VStack {
                 VStack {
-                    Text("Viso")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                
+                    HStack {
+                        Text("Viso")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        .foregroundColor(Color("HeadingColor"))
+                        
+                        Image("AppIcon")
+                    }
                     Text("Pose Estimation for Physiotherapists")
                         .font(.headline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(Color("SubHeadingColor"))
                 }
                 .padding(.top, 20)
 
                 Toggle(isOn: $showFavoritesOnly) {
                     Text("Favorites only")
+                        .foregroundColor(Color("HeadingColor"))
                 }
-                .toggleStyle(SwitchToggleStyle(tint: .blue))
+                .toggleStyle(SwitchToggleStyle(tint: Color("SubHeadingColor")))
                 .padding(.bottom, 10)
 
                 HStack {
@@ -65,7 +60,7 @@ struct ExerciseList: View {
                     }) {
                         Text("Connect")
                     }
-                    .buttonStyle(GradientButtonStyle())
+                    .buttonStyle(BlueButton())
                 }
                 .padding(.bottom, 20)
 
@@ -94,7 +89,7 @@ struct ExerciseList: View {
                     NavigationLink(destination: ExerciseDetail(selectedExercises: selectedExercisesArray)) {
                         Text("Perform Measurements")
                     }
-                    .buttonStyle(GradientButtonStyle())
+                    .buttonStyle(BlueButton())
                     .disabled(selectedExercisesArray.isEmpty)
                 }
                 .padding(.bottom, 20)
@@ -104,14 +99,15 @@ struct ExerciseList: View {
                   selectedExercises.removeAll()
               }
         }
+        .subtleBackgroundStyle()
         .navigationBarBackButtonHidden(true)
     }
 }
 
-struct ExerciseList_Previews: PreviewProvider {
-    static var previews: some View {
-        ExerciseList()
-            .environmentObject(LoadExercises())
-        
-    }
-}
+//struct ExerciseList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ExerciseList()
+//            .environmentObject(LoadExercises())
+//
+//    }
+//}

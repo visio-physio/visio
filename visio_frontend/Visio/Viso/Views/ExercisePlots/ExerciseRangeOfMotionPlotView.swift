@@ -48,11 +48,11 @@ struct ExerciseRangeOfMotionPlotView: View {
     
 }
 
-struct ExerciseRangeOfMotionPlotView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExerciseRangeOfMotionPlotView()
-    }
-}
-
-
+//struct ExerciseRangeOfMotionPlotView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ExerciseRangeOfMotionPlotView()
+//    }
+//}
+//
+//
 

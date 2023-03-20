@@ -42,48 +42,59 @@ struct ExerciseDetail: View {
                                 }
                             }) {
                                 Label("Next", systemImage: "arrow.right")
+                                    .buttonStyle(BlueButton())
                             }
                         }
                         .padding(.top)
                         
-                        Text("Results")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .padding(.top)
+          
+                        VStack {
+                            Text(selectedExercises[currentIndex].bodyPart.capitalized + " " + selectedExercises[currentIndex].exercise.capitalized + " Test")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color("HeadingColor"))
+                            HStack {
+                                
+//                                CircleImage(image: selectedExercises[currentIndex].image)
+//                                    .padding(.top, 20)
 
-                        ExerciseRangeOfMotionPlotView()
-                            .environmentObject(Results(collection: "results", document: userID, exerciseType: selectedExercises[currentIndex].exercise + "-" + selectedExercises[currentIndex].bodyPart))
+                                VStack(alignment: .leading) {
+                                
+                                    Text(selectedExercises[currentIndex].measurementField)
+                                        .font(.headline)
+                                        .padding(.top, 8)
+                                        .foregroundColor(Color("SubHeadingColor"))
+                                    Text(selectedExercises[currentIndex].measurementRange)
+                                        .font(.subheadline)
+                                        .foregroundColor(.black)
+                                }
+                                .padding(.leading)
 
-                        HStack {
-                            CircleImage(image: selectedExercises[currentIndex].image)
-                                .padding(.top, 20)
+                                Spacer()
 
-                            VStack(alignment: .leading) {
-                                Text(selectedExercises[currentIndex].bodyPart + " " + selectedExercises[currentIndex].exercise)
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                Text(selectedExercises[currentIndex].measurementField)
-                                    .font(.headline)
-                                    .padding(.top, 8)
-                                Text(selectedExercises[currentIndex].measurementRange)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
+                                FavoriteButton(isSet: $selectedExercises[currentIndex].isFavorite, exercise_id: selectedExercises[currentIndex].id)
+                                    .padding(.trailing)
                             }
-                            .padding(.leading)
+                            Text("Results")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .padding(.top)
+                                .foregroundColor(Color("HeadingColor"))
 
-                            Spacer()
+                            ExerciseRangeOfMotionPlotView()
+                                .environmentObject(Results(collection: "results", document: userID, exerciseType: selectedExercises[currentIndex].exercise + "-" + selectedExercises[currentIndex].bodyPart))
 
-                            FavoriteButton(isSet: $selectedExercises[currentIndex].isFavorite, exercise_id: selectedExercises[currentIndex].id)
-                                .padding(.trailing)
                         }
+                        .padding(.top)
 
                         Divider()
                             .padding(.vertical)
 
                         VStack(alignment: .leading, spacing: 16) {
                             Text(selectedExercises[currentIndex].descriptionTitle)
-                                .font(.title2)
+                                .font(.title3)
                                 .fontWeight(.bold)
+                                .foregroundColor(Color("SubHeadingColor"))
 
                             HStack(alignment: .top) {
                                 Image(selectedExercises[currentIndex].imageExample)
@@ -104,13 +115,15 @@ struct ExerciseDetail: View {
                                 isLiveCameraViewActive = true
                                 print("sending to server: \(selectedExercises[currentIndex].exercise)")
                             }
-                            .buttonStyle(LiveCameraButtonStyle())
+                            .buttonStyle(BlueButton())
                         }
                     }
                 }
                 .padding(.horizontal)
                 .navigationBarTitle(Text(selectedExercises[currentIndex].bodyPart + " " + selectedExercises[currentIndex].exercise), displayMode: .inline)
             }
+            .backgroundStyle()
+
             .tabItem {
                 Label("Exercise", systemImage: "person.circle")
             }
@@ -125,24 +138,13 @@ struct ExerciseDetail: View {
     }
 }
 
-struct LiveCameraButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(.horizontal, 20)
-            .padding(.vertical, 10)
-            .background(Color.green)
-            .cornerRadius(10)
-            .foregroundColor(.white)
+struct ExerciseDetail_Previews: PreviewProvider {
+    static let load_data = LoadExercises()
+    static var exercise = load_data.exercises[0]
+    static var selectedExercises = [load_data.exercises[0], load_data.exercises[1], load_data.exercises[2]]
+
+    static var previews: some View {
+        ExerciseDetail(selectedExercises: selectedExercises)
     }
 }
 
-//struct ExerciseDetail_Previews: PreviewProvider {
-//    static let load_data = LoadExercises()
-//    static var exercise = load_data.exercises[0]
-//    static var selectedExercises = [load_data.exercises[0], load_data.exercises[1], load_data.exercises[2]]
-//
-//    static var previews: some View {
-//        ExerciseDetail(selectedExercises: selectedExercises)
-//    }
-//}
-//

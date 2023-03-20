@@ -15,6 +15,7 @@ struct ExerciseRow: View {
                 .resizable()
                 .frame(width: 50, height: 50)
             Text(exercise.bodyPart + " " + exercise.exercise)
+                .foregroundColor(Color("SubHeadingColor"))
             Spacer()
 
             if exercise.isFavorite {

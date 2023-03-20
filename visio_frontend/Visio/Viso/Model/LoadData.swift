@@ -80,7 +80,6 @@ struct DataPoint: Identifiable {
     }
 }
 
-
 final class Results: ObservableObject {
     var db = Firestore.firestore()
     @Published var datapoints: [DataPoint] = []
@@ -94,8 +93,6 @@ final class Results: ObservableObject {
         self.collection = collection
         self.document = document
         self.exerciseType = exerciseType
-        print(self.document)
-        print(self.exerciseType)
         loadData()
     }
     
@@ -113,7 +110,7 @@ final class Results: ObservableObject {
                     self.datapoints.removeAll()
 
                     // parse data and store locally
-                    print(exercise_results.keys)
+//                    print(exercise_results.keys)
                     for (timestamp, values) in exercise_results {
                         if let left = values["max_left"] as? Double, let right = values["max_right"] as? Double,
                            let tDelta = values["delta (s)"] as? Double,

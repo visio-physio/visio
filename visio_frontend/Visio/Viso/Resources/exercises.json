@@ -26,54 +26,28 @@
     },
     {
         "id" : 3,
-        "exercise": "flextion",
-        "bodyPart": "lateral",
+        "exercise": "extension",
+        "bodyPart": "shoulder",
         "isFavorite": true,
         "measurementField": "Range of Motion",
-        "measurementRange": "0° - 40°",
-        "descriptionTitle": "How to Perform Hip Abduction Test",
-        "description": "1. Stand upright with your feet hip-width apart, arms resting by your sides, and your core engaged. \n2. Shift your weight onto one leg, and keep a slight bend in the knee of that leg. \n3. Slowly lift the opposite leg out to the side, keeping it straight and the foot pointing forward. \n4. Lift the leg as high as you can without leaning your upper body to the side, and hold for a second or two. \n5. Slowly lower the leg back down to the starting position. \n6. Repeat the exercise for 10–15 repetitions on one leg before switching to the other side.",
-        "imageName": "lateral_flexion",
-        "imageExample": "lateral_flexion"
-
+        "measurementRange": "0° - 50°",
+        "descriptionTitle": "How to Perform Shoulder Extension Test",
+        "description": "1. Stand with your back against the wall and your arms straight at your sides. \n2. Keeping your elbows straight, push your arms backward as much as you can. Hold for 5 seconds, and then relax. \n3. Repeat 5 to 10 times per session and 3 session per day.",
+        "imageName": "shoulder_extension",
+        "imageExample": "shoulder_extension"
     },
     {
         "id" : 4,
-        "exercise": "abduction",
-        "bodyPart": "back",
+        "exercise": "extension",
+        "bodyPart": "hip",
         "isFavorite": true,
         "measurementField": "Range of Motion",
-        "measurementRange": "0° - 40°",
-        "descriptionTitle": "How to Perform Hip Abduction Test",
-        "description": "1. Stand upright with your feet hip-width apart, arms resting by your sides, and your core engaged. \n2. Shift your weight onto one leg, and keep a slight bend in the knee of that leg. \n3. Slowly lift the opposite leg out to the side, keeping it straight and the foot pointing forward. \n4. Lift the leg as high as you can without leaning your upper body to the side, and hold for a second or two. \n5. Slowly lower the leg back down to the starting position. \n6. Repeat the exercise for 10–15 repetitions on one leg before switching to the other side.",
-        "imageName": "back",
-        "imageExample": "back"
-
-    },
-    {
-        "id" : 5,
-        "exercise": "abduction",
-        "bodyPart": "neck",
-        "isFavorite": true,
-        "measurementField": "Range of Motion",
-        "measurementRange": "0° - 40°",
-        "descriptionTitle": "How to Perform Hip Abduction Test",
-        "description": "1. Stand upright with your feet hip-width apart, arms resting by your sides, and your core engaged. \n2. Shift your weight onto one leg, and keep a slight bend in the knee of that leg. \n3. Slowly lift the opposite leg out to the side, keeping it straight and the foot pointing forward. \n4. Lift the leg as high as you can without leaning your upper body to the side, and hold for a second or two. \n5. Slowly lower the leg back down to the starting position. \n6. Repeat the exercise for 10–15 repetitions on one leg before switching to the other side.",
-        "imageName": "neck",
-        "imageExample": "neck"
-
-    },
-    {
-        "id" : 6,
-        "exercise": "abduction",
-        "bodyPart": "elbow",
-        "isFavorite": true,
-        "measurementField": "Range of Motion",
-        "measurementRange": "0° - 40°",
-        "descriptionTitle": "How to Perform Hip Abduction Test",
-        "description": "1. Stand upright with your feet hip-width apart, arms resting by your sides, and your core engaged. \n2. Shift your weight onto one leg, and keep a slight bend in the knee of that leg. \n3. Slowly lift the opposite leg out to the side, keeping it straight and the foot pointing forward. \n4. Lift the leg as high as you can without leaning your upper body to the side, and hold for a second or two. \n5. Slowly lower the leg back down to the starting position. \n6. Repeat the exercise for 10–15 repetitions on one leg before switching to the other side.",
-        "imageName": "elbow",
-        "imageExample": "elbow"
+        "measurementRange": "5° - 40°",
+        "descriptionTitle": "How to Perform Hip Extension Test",
+        "description": "1. Stand with your legs shoulder width apart and hold onto a table or chair in front of you for support. \n2. Perform an abdominal draw in to protect your back. Do this by pulling your umbilicus (belly button) in towards your back. \n3. Keep your knee straight and toes pointed, and kick your leg backward slowly. \n4. Make sure you keep your upper body and back straight during the exercise. \n5. Return to the starting position. \n6. Repeat 10-15 times, 3 times in a row and Repeat with opposite leg.",
+        "imageName": "hip_extension",
+        "imageExample": "hip_extension"
 
     }
 ]
+
