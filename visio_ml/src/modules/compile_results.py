@@ -40,7 +40,7 @@ class ResultCompiler:
         self.out.write(frame)
     """
         
-    def get_max_range(self, side) -> float:
+    def get_max_min(self, side) -> float:
         hist = self.results[side]
         keys = list(hist.keys())
         mid = (max(keys) + min(keys)) / 2
@@ -56,7 +56,7 @@ class ResultCompiler:
         low.sort(key=lambda x: -hist[x])
         high.sort(key=lambda x: -hist[x])
 
-        return max(high[:min(len(high), 5)]) - min(low[:min(len(low), 5)])
+        return max(high[:min(len(high), 5)]), min(low[:min(len(low), 5)])
     
     def set_timestamped_results(self, res):
         res["delta (s)"] = self.delta
@@ -74,7 +74,9 @@ class ResultCompiler:
 
         res = {}
         for key in self.results:
-            res[f"max_{key}"] = self.get_max_range(key)
+            max_range, min_range = self.get_max_min(key)
+            res[f"max_{key}"] = max_range
+            res[f"min_{key}"] = min_range
 
         self.set_timestamped_results(res)
         identifier = f"{self.exercise}-{self.body_part}"
