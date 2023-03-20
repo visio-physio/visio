@@ -1,80 +1,84 @@
 import SwiftUI
+import Firebase
 
 struct ExerciseDetail: View {
-    @EnvironmentObject var modelData: ModelData
-    @EnvironmentObject var fb_data: FirebaseDataLoader
     @EnvironmentObject var cam: CameraWebsocket
     @State private var isLiveCameraViewActive = false
 
-    var exercise: ExerciseFB
+    @State var exercise: Exercise
+    let userID = Auth.auth().currentUser?.uid ?? "none"
+
     
-    var exerciseIndex: Int {
-        fb_data.exercises_fb.firstIndex(where: { $0.id == exercise.id })!
-    }
-    
-    var chartIndex: Int? {
-        return modelData.exerciseHists.firstIndex(where: { $0.id == exercise.id })
-    }
     @State private var isShowVideo = false
-
     var body: some View {
-        VStack {
-            if let index = chartIndex {
-                Text("Historical Test Results")
-                    .font(.title2)
-                    .padding()
-                ExercisePlotView(exerciseHist: modelData.exerciseHists[index])
-            }
-            HStack {
-                CircleImage(image: exercise.image)
-                VStack (alignment: .leading){
+        TabView {
+            NavigationStack {
+                VStack {
+                    Text("Results")
+                    ExerciseRangeOfMotionPlotView()
+                        .environmentObject(Results(collection: "results", document: userID, exerciseType: exercise.exercise + "-" + exercise.bodyPart))
                     HStack {
-                        Text(exercise.test)
-                            .font(.title2)
-                        FavoriteButton(isSet: $fb_data.exercises_fb[exerciseIndex].isFavorite)
+                        CircleImage(image: exercise.image)
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(exercise.bodyPart + " " + exercise.exercise)
+                                    .font(.title2)
+                                FavoriteButton(isSet: $exercise.isFavorite, exercise_id: exercise.id)
+                            }
+                            HStack {
+                                Text(exercise.measurementField)
+                                    .font(.subheadline)
+                                Spacer()
+                                Text(exercise.measurementRange)
+                                    .font(.subheadline)
+                            }
+                        }
+                    }
+                    Divider()
+                    Text(exercise.descriptionTitle)
+                        .font(.title3)
+                    
+                    HStack{
+                        Image(exercise.imageExample)
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                        Text(exercise.description)
+                            .padding()
+                    }
 
+                    Button("Start Test") {
+                        cam.send(userId: userID, bodyPart: self.exercise.bodyPart, exercise: self.exercise.exercise, state: "start")
+                        isLiveCameraViewActive = true
+                        print("sending to server: \(self.exercise.exercise)")
                     }
-                    HStack {
-                        Text(exercise.measurementField)
-                            .font(.subheadline)
-                        Spacer()
-                        Text(exercise.measurementRange)
-                            .font(.subheadline)
+                    .sheet(isPresented: $isLiveCameraViewActive) {
+                        LiveCameraView()
                     }
+                    Spacer()
                 }
-            }
-            Divider()
-            Text(exercise.descriptionTitle)
-                .font(.title3)
-            Text(exercise.description)
                 .padding()
-            
-            Button("Start Test") {
-                cam.send(exerciseName: self.exercise.test)
-                isLiveCameraViewActive = true
+                .navigationBarTitle(Text(exercise.bodyPart + " " + exercise.exercise))
             }
-            NavigationLink(destination: LiveCameraView(),
-                isActive: $isLiveCameraViewActive
-            ) {
-                EmptyView()
+            .tabItem {
+                Label("Exercise", systemImage: "person.circle")
             }
 
-            Spacer()
+            ResultsView(exercise: exercise.bodyPart + " " + exercise.exercise)
+                .environmentObject(Results(collection: "results", document: userID, exerciseType: exercise.exercise + "-" + exercise.bodyPart))
+                .tabItem {
+                    Label("Results", systemImage: "chart.line.uptrend.xyaxis")
+                }
         }
-        .padding()
     }
 }
 
-
 struct ExerciseDetail_Previews: PreviewProvider {
-    static let modelData = ModelData()
-    static let fb = FirebaseDataLoader()
-    static let exercise = fb.exercises_fb[0]
+    static let load_data = LoadExercises()
+    static var exercise = load_data.exercises[0]
 
     static var previews: some View {
         ExerciseDetail(exercise: exercise)
-            .environmentObject(modelData)
-            .environmentObject(fb)
-            
+            .environmentObject(load_data)
     }
 }
+

@@ -13,19 +13,23 @@ import Network
 class CameraWebsocket: ObservableObject, WebSocketDelegate {
     var socket: WebSocket!
     var isConnected = false
-    let server = WebSocketServer()
+    var url: String
     @Published var img = Data()
-    init(){
-        let monitor = NWPathMonitor()
-        monitor.start(queue: .main)
-        
-        var request = URLRequest(url: URL(string: "http://169.254.238.40:8080/")!) //https://localhost:8080
-        request.timeoutInterval = 5
-        socket = WebSocket(request: request)
-        socket.delegate = self
-        socket.connect()
-        print("trying to connect");
 
+    init(url: String) {
+        self.url = url
+    }
+    func makeConnection() {
+        if self.isConnected{
+            socket.disconnect()
+            self.isConnected = false
+        }
+        let request = URLRequest(url: URL(string: self.url)!, timeoutInterval: 5)
+        self.socket = WebSocket(request: request)
+        self.socket.delegate = self
+        self.socket.connect()
+        self.isConnected = true
+        print("Connecting to websocket at: \(self.url)")
     }
     
     func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocket) {
@@ -78,7 +82,24 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
     func disconnect(){
         socket.write(string: "end")
     }
-    func send(exerciseName:String){
-        socket.write(string: exerciseName)
+    func send(userId: String, bodyPart: String, exercise: String, state: String) {
+        let json: [String: Any] = [
+            "user_id": userId,
+            "body_part": bodyPart,
+            "exercise": exercise,
+            "state": state
+        ]
+    
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                socket.write(string: jsonString)
+            } else {
+                print("Error converting JSON data to string")
+            }
+        } catch {
+            print("Error creating JSON message: \(error.localizedDescription)")
+        }
     }
+
 }

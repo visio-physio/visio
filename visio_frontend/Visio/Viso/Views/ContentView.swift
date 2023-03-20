@@ -1,34 +1,15 @@
-//
-//  ContentView.swift
-//  Viso
-//
-//  Created by person on 2023-01-28.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {        
-        TabView {
-            ExerciseList()
-                .tabItem {
-                    Label("Exercises", systemImage: "figure.strengthtraining.traditional")
-                }
-            UserView()
-                .tabItem {
-                    Label("User", systemImage: "person")
-                }
-            SettingsView()
-                .tabItem {
-                    Label("User", systemImage: "person")
-                }
-        }
+    var body: some View {
+        LoginView()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    let cam = CameraWebsocket(url:"localhost:8080")
     static var previews: some View {
         ContentView()
-            .environmentObject(FirebaseDataLoader())
+            .environmentObject(LoadExercises())
     }
 }

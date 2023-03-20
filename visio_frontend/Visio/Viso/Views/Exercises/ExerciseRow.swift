@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct ExerciseRow: View {
-    var exercise: ExerciseFB
+    var exercise: Exercise
     
     var body: some View {
         HStack {
             exercise.image
                 .resizable()
                 .frame(width: 50, height: 50)
-            Text(exercise.test)
-            
+            Text(exercise.bodyPart + " " + exercise.exercise)
             Spacer()
 
             if exercise.isFavorite {
