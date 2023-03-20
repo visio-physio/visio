@@ -28,6 +28,7 @@ struct LiveCameraView: View {
                 .cornerRadius(10.0)
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

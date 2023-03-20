@@ -97,14 +97,14 @@ struct ExerciseDetail: View {
                         .padding()
 
                         Spacer()
-                        Button("Start Test") {
-                            cam.send(userId: userID, bodyPart: selectedExercises[currentIndex].bodyPart, exercise: selectedExercises[currentIndex].exercise, state: "start")
-                            isLiveCameraViewActive = true
-                            print("sending to server: \(selectedExercises[currentIndex].exercise)")
-                        }
-                        .buttonStyle(LiveCameraButtonStyle())
-                        .sheet(isPresented: $isLiveCameraViewActive) {
-                            LiveCameraView()
+
+                        NavigationLink(destination: LiveCameraView(), isActive: $isLiveCameraViewActive) {
+                            Button("Start Test") {
+                                cam.send(userId: userID, bodyPart: selectedExercises[currentIndex].bodyPart, exercise: selectedExercises[currentIndex].exercise, state: "start")
+                                isLiveCameraViewActive = true
+                                print("sending to server: \(selectedExercises[currentIndex].exercise)")
+                            }
+                            .buttonStyle(LiveCameraButtonStyle())
                         }
                     }
                 }

@@ -1,5 +1,17 @@
 import SwiftUI
 
+struct GradientButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .fontWeight(.bold)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+            .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.8)]), startPoint: .topLeading, endPoint: .bottomTrailing))
+            .cornerRadius(10)
+            .foregroundColor(.white)
+    }
+}
+
 struct ExerciseList: View {
     @EnvironmentObject var load_exercises: LoadExercises
     @EnvironmentObject var camera_socket: CameraWebsocket
@@ -52,13 +64,8 @@ struct ExerciseList: View {
                         UserDefaults.standard.set(url, forKey: "url")
                     }) {
                         Text("Connect")
-                            .fontWeight(.bold)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 10)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                            .foregroundColor(.white)
                     }
+                    .buttonStyle(GradientButtonStyle())
                 }
                 .padding(.bottom, 20)
 
@@ -88,17 +95,15 @@ struct ExerciseList: View {
                 
                 NavigationLink(destination: ExerciseDetail(selectedExercises: selectedExercisesArray)) {
                     Text("Perform Measurements")
-                        .fontWeight(.bold)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(selectedExercisesArray.isEmpty ? Color.gray : Color.blue)
-                        .cornerRadius(10)
-                        .foregroundColor(.white)
                 }
+                .buttonStyle(GradientButtonStyle())
                 .disabled(selectedExercisesArray.isEmpty)
                 
             }
             .padding()
+            .onAppear {
+                  selectedExercises.removeAll()
+              }
         }
         .navigationBarBackButtonHidden(true)
     }
