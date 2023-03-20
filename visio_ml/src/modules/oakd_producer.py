@@ -16,16 +16,16 @@ from visio_pose import VisioPose, VisioPoseRenderer
 from compile_results import ResultCompiler
 
 class OakdProducer():
-    def __init__(self, cpu=False):
+    def __init__(self, oakd=False):
         self.state = 'idle' # 'produce'
         self.exercise = None
         self.body_part = None
         self.user_id = None
         self.websocket = None
-        self.cpu = cpu
+        self.oakd = oakd
         self.result_compilers = {}
 
-        print(f"Running Blazepose model in {'cpu' if self.cpu else 'Oak-D'}")
+        print(f"Running Blazepose model in {'cpu' if self.oakd else 'Oak-D'}")
 
     async def serve(self, host, port):
         server = await websockets.serve(self.handler, host, port)
@@ -56,7 +56,7 @@ class OakdProducer():
 
     
     async def produce(self):
-        if self.cpu:
+        if self.oakd:
             tracker = VisioPose(
                 crop=True,
                 internal_frame_height=600,
@@ -81,6 +81,11 @@ class OakdProducer():
             frame = renderer.draw(frame, body)
 
             if self.state == 'start':
+                if not body.is_body_part_present(self.body_part):
+                    cv2.putText(frame, "Shoulder not present", (50, 300),
+                                    cv2.FONT_HERSHEY_PLAIN, 2.5,
+                                    (0, 0, 255), 2)
+                
                 if self.user_id not in self.result_compilers or (self.result_compilers[self.user_id].get_exercise(), self.result_compilers[self.user_id].get_body_part()) != (self.exercise, self.body_part):
                     self.result_compilers[self.user_id] = ResultCompiler(self.user_id, self.exercise, self.body_part)
 
@@ -92,7 +97,7 @@ class OakdProducer():
                         cv2.putText(frame, f"{body_part}: {round(measurement, 5)}", (390, y_coord),
                                     cv2.FONT_HERSHEY_PLAIN, 1.5,
                                     (0, 0, 255), 2)
-                        print(f"{body_part}: {measurement}\n")
+                        # print(f"{body_part}: {measurement}\n")
                         y_coord += 20
 
                     self.result_compilers[self.user_id].record_angle(result)
@@ -114,13 +119,13 @@ class OakdProducer():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cpu', action="store_true",
-                        help="True for running Blazepose in CPU, False for running in Oak-D")
+    parser.add_argument('--oakd', action="store_false",
+                        help="Set flag to run pose detection in Oak-D")
     
     args = parser.parse_args()
-    print(args.cpu)
+    print(args.oakd)
 
-    server = OakdProducer(cpu=args.cpu)
+    server = OakdProducer(oakd=args.oakd)
     ip = "127.0.0.1"
     print(f"Starting server at {ip}:8080")
     asyncio.run(server.serve(ip, 8080))
