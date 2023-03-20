@@ -31,8 +31,6 @@
 		38EFB7B7298607790018F668 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B6298607790018F668 /* FavoriteButton.swift */; };
 		38EFB7C6298630D10018F668 /* exerciseResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 38EFB7C5298630D10018F668 /* exerciseResults.json */; };
 		38EFB7C8298633CD0018F668 /* ExerciseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7C7298633CD0018F668 /* ExerciseResult.swift */; };
-		38EFB7D3298715520018F668 /* ExercisePlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7D2298715520018F668 /* ExercisePlotView.swift */; };
-		38EFB7D7298730F60018F668 /* ExerciseGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7D6298730F60018F668 /* ExerciseGraph.swift */; };
 		38F653D52985A115004CD110 /* VisoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F653D42985A115004CD110 /* VisoApp.swift */; };
 		38F653D72985A115004CD110 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F653D62985A115004CD110 /* ContentView.swift */; };
 		38F653D92985A116004CD110 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38F653D82985A116004CD110 /* Assets.xcassets */; };
@@ -61,8 +59,6 @@
 		38EFB7B6298607790018F668 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		38EFB7C5298630D10018F668 /* exerciseResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exerciseResults.json; sourceTree = "<group>"; };
 		38EFB7C7298633CD0018F668 /* ExerciseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseResult.swift; sourceTree = "<group>"; };
-		38EFB7D2298715520018F668 /* ExercisePlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePlotView.swift; sourceTree = "<group>"; };
-		38EFB7D6298730F60018F668 /* ExerciseGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseGraph.swift; sourceTree = "<group>"; };
 		38F653D12985A115004CD110 /* Viso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viso.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38F653D42985A115004CD110 /* VisoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisoApp.swift; sourceTree = "<group>"; };
 		38F653D62985A115004CD110 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -156,8 +152,6 @@
 		38EFB7C92986380D0018F668 /* ExercisePlots */ = {
 			isa = PBXGroup;
 			children = (
-				38EFB7D2298715520018F668 /* ExercisePlotView.swift */,
-				38EFB7D6298730F60018F668 /* ExerciseGraph.swift */,
 				3891317E29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift */,
 				38544FB329B46D2A000B8154 /* ResultsView.swift */,
 			);
@@ -334,7 +328,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3891317F29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift in Sources */,
-				38EFB7D7298730F60018F668 /* ExerciseGraph.swift in Sources */,
 				3825271429A45131008F6DF7 /* CameraWebsocket.swift in Sources */,
 				38AEA84429AFF867003ACDB0 /* LoginView.swift in Sources */,
 				38EFB7B32985D9B40018F668 /* ExerciseList.swift in Sources */,
@@ -346,7 +339,6 @@
 				38EFB7C8298633CD0018F668 /* ExerciseResult.swift in Sources */,
 				387026AD29C8F57900EF2A13 /* Styles.swift in Sources */,
 				38EFB7B7298607790018F668 /* FavoriteButton.swift in Sources */,
-				38EFB7D3298715520018F668 /* ExercisePlotView.swift in Sources */,
 				38F653D72985A115004CD110 /* ContentView.swift in Sources */,
 				38AEA84829B0F4E8003ACDB0 /* LoadData.swift in Sources */,
 				38AEA84E29B0F61D003ACDB0 /* Constants.swift in Sources */,

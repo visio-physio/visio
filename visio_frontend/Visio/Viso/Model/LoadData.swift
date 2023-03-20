@@ -6,10 +6,6 @@ final class LoadExercises: ObservableObject {
     @Published var exercises: [Exercise] = load("exercises.json")
 }
 
-//final class ExerciseResults: ObservableObject {
-//    var exerciseHists: [ExerciseResult] = load("exerciseResults.json")
-//}
-
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
 
@@ -31,9 +27,6 @@ func load<T: Decodable>(_ filename: String) -> T {
         fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
     }
 }
-
-
-
 
 final class ExerciseResults: ObservableObject {
     var exerciseHists: [ExerciseResult] = load("exerciseResults.json")

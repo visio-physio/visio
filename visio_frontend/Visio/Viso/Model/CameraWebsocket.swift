@@ -1,4 +1,3 @@
-//
 //  CameraWebsocket.swift
 //  cameraStream
 //
@@ -42,12 +41,16 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let string):
             let compressedData = Data(base64Encoded: string) ?? Data()
-            do {
-                img = try compressedData.gunzipped()
-            } catch {
-                print("Error: \(error)")
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    let decompressedData = try compressedData.gunzipped()
+                    DispatchQueue.main.async {
+                        self.img = decompressedData
+                    }
+                } catch {
+                    print("Error: \(error)")
+                }
             }
-
             
         case .binary(let data):
             print("got some data: \(data.count) bytes")

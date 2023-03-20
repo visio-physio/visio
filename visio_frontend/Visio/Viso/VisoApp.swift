@@ -15,7 +15,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct VisoApp: App {
-    @StateObject private var exercise_results = ExerciseResults()
     @StateObject private var exercises = LoadExercises()
     let cam  = CameraWebsocket(url:"localhost:8080")
 
@@ -24,7 +23,6 @@ struct VisoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(exercise_results)
                 .environmentObject(exercises)
                 .environmentObject(cam)
         }
