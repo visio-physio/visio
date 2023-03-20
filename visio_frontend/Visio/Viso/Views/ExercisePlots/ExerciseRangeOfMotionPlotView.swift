@@ -4,36 +4,26 @@ import Charts
 struct ExerciseRangeOfMotionPlotView: View {
     @EnvironmentObject var results: Results
     @State private var plotType: String = "roi_left"
-
+    
     var body: some View {
         VStack {
             if plotType == "roi_left" {
-                Chart(results.datapoints) {
+                Chart(results.currentData) {
                     LineMark(
                         x: .value("Range of Motion Left", $0.id),
-                        y: .value("Date", $0.roi_left)
+                        y: .value("Date", $0.left)
                     )
                     
                 }
-            } else if plotType == "roi_right" {
-                Chart(results.datapoints) {
+            } else {
+                Chart(results.currentData) {
                     LineMark(
                         x: .value("Range of Motion Right", $0.id),
-                        y: .value("Date", $0.roi_right)
-                    )
-                }
-            } else if plotType == "combine" {
-                Chart(results.datapoints) {
-                    LineMark(
-                        x: .value("Range of Motion Left", $0.id),
-                        y: .value("Left", $0.roi_left)
-                    )
-                    LineMark(
-                        x: .value("Range of Motion Right", $0.id),
-                        y: .value("Right", $0.roi_right)
+                        y: .value("Date", $0.right)
                     )
                 }
             }
+        }
 
             Picker(selection: $plotType, label: Text("Select plot type")) {
                 Text("Left").tag("roi_left")
@@ -43,9 +33,6 @@ struct ExerciseRangeOfMotionPlotView: View {
         }
         
         
-   }
-    
-    
 }
 
 //struct ExerciseRangeOfMotionPlotView_Previews: PreviewProvider {

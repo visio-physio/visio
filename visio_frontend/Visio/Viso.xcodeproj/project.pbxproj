@@ -29,7 +29,6 @@
 		38EFB7B32985D9B40018F668 /* ExerciseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B22985D9B40018F668 /* ExerciseList.swift */; };
 		38EFB7B52985DBA50018F668 /* ExerciseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B42985DBA50018F668 /* ExerciseDetail.swift */; };
 		38EFB7B7298607790018F668 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7B6298607790018F668 /* FavoriteButton.swift */; };
-		38EFB7C6298630D10018F668 /* exerciseResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 38EFB7C5298630D10018F668 /* exerciseResults.json */; };
 		38EFB7C8298633CD0018F668 /* ExerciseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EFB7C7298633CD0018F668 /* ExerciseResult.swift */; };
 		38F653D52985A115004CD110 /* VisoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F653D42985A115004CD110 /* VisoApp.swift */; };
 		38F653D72985A115004CD110 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F653D62985A115004CD110 /* ContentView.swift */; };
@@ -57,7 +56,6 @@
 		38EFB7B22985D9B40018F668 /* ExerciseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseList.swift; sourceTree = "<group>"; };
 		38EFB7B42985DBA50018F668 /* ExerciseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetail.swift; sourceTree = "<group>"; };
 		38EFB7B6298607790018F668 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
-		38EFB7C5298630D10018F668 /* exerciseResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = exerciseResults.json; sourceTree = "<group>"; };
 		38EFB7C7298633CD0018F668 /* ExerciseResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseResult.swift; sourceTree = "<group>"; };
 		38F653D12985A115004CD110 /* Viso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viso.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38F653D42985A115004CD110 /* VisoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisoApp.swift; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 		38EFB7AB2985D3FA0018F668 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				38EFB7C5298630D10018F668 /* exerciseResults.json */,
 				38EFB7A22985CFCD0018F668 /* exercises.json */,
 			);
 			path = Resources;
@@ -289,7 +286,6 @@
 				38EB34E2299EFC5C00C0E4CF /* Podfile in Resources */,
 				38EFB7A32985CFCD0018F668 /* exercises.json in Resources */,
 				38F653DC2985A116004CD110 /* Preview Assets.xcassets in Resources */,
-				38EFB7C6298630D10018F668 /* exerciseResults.json in Resources */,
 				38F653D92985A116004CD110 /* Assets.xcassets in Resources */,
 				381A1A8529B17F3D009BF648 /* GoogleService-Info.plist in Resources */,
 			);

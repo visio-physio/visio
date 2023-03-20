@@ -41,6 +41,18 @@ func load2<T: Decodable>(_ data: Data) -> T {
     }
 }
 
+struct SinePoint: Identifiable {
+    var left: Double
+    var right: Double
+    var id: Double
+    
+    init(left: Double, right: Double, id: Double) {
+        self.left = left
+        self.right = right
+        self.id = id
+    }
+}
+
 struct DataPoint: Identifiable {
     var id: String
     var roi_left: Double
@@ -76,16 +88,18 @@ struct DataPoint: Identifiable {
 final class Results: ObservableObject {
     var db = Firestore.firestore()
     @Published var datapoints: [DataPoint] = []
+    @Published var currentData: [SinePoint] = []
     let collection: String
     let document: String
     let exerciseType: String
-    
+
     private var listenerRegistration: ListenerRegistration?
     
     init(collection: String, document: String, exerciseType: String) {
         self.collection = collection
         self.document = document
         self.exerciseType = exerciseType
+        self.currentData = []
         loadData()
     }
     
@@ -95,6 +109,7 @@ final class Results: ObservableObject {
     
     private func loadData() {
         let docRef = db.collection(collection).document(document)
+        
         listenerRegistration = docRef.addSnapshotListener { documentSnapshot, error in
             if let documentSnapshot = documentSnapshot, documentSnapshot.exists {
                 if let data = documentSnapshot.data(), let exercise_results = data[self.exerciseType] as? [String: [String: Any]] {
@@ -118,6 +133,14 @@ final class Results: ObservableObject {
                     }
                     // sort datapoints based on timestamp
                     self.datapoints.sort(by: { $0.id < $1.id })
+                    let currentDatapoint = self.datapoints.last ?? DataPoint(id: "", roi_left: 0, roi_right: 0, t_delta: 0, t_deltas: [0], left_timeseries: [0], right_timeseries: [0])
+                    let left = currentDatapoint.left_timeseries
+                    let right = currentDatapoint.right_timeseries
+                    let n = left.count
+
+                    for i in 0..<(n) {
+                        self.currentData.append(SinePoint(left: left[i], right: right[i], id: currentDatapoint.t_deltas[i]))
+                    }
                 }
                 else {
                     print("No data was found")
