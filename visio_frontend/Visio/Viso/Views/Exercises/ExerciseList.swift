@@ -90,15 +90,14 @@ struct ExerciseList: View {
                             }
                         }
                     }
+                    
+                    NavigationLink(destination: ExerciseDetail(selectedExercises: selectedExercisesArray)) {
+                        Text("Perform Measurements")
+                    }
+                    .buttonStyle(GradientButtonStyle())
+                    .disabled(selectedExercisesArray.isEmpty)
                 }
                 .padding(.bottom, 20)
-                
-                NavigationLink(destination: ExerciseDetail(selectedExercises: selectedExercisesArray)) {
-                    Text("Perform Measurements")
-                }
-                .buttonStyle(GradientButtonStyle())
-                .disabled(selectedExercisesArray.isEmpty)
-                
             }
             .padding()
             .onAppear {
