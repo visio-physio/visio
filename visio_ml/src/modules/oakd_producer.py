@@ -16,16 +16,16 @@ from visio_pose import VisioPose, VisioPoseRenderer
 from compile_results import ResultCompiler
 
 class OakdProducer():
-    def __init__(self, cpu=False):
+    def __init__(self, oakd=False):
         self.state = 'idle' # 'produce'
         self.exercise = None
         self.body_part = None
         self.user_id = None
         self.websocket = None
-        self.cpu = cpu
+        self.oakd = oakd
         self.result_compilers = {}
 
-        print(f"Running Blazepose model in {'cpu' if self.cpu else 'Oak-D'}")
+        print(f"Running Blazepose model in {'cpu' if self.oakd else 'Oak-D'}")
 
     async def serve(self, host, port):
         server = await websockets.serve(self.handler, host, port)
@@ -56,7 +56,7 @@ class OakdProducer():
 
     
     async def produce(self):
-        if self.cpu:
+        if self.oakd:
             tracker = VisioPose(
                 crop=True,
                 internal_frame_height=600,
@@ -119,13 +119,13 @@ class OakdProducer():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cpu', action="store_true",
-                        help="True for running Blazepose in CPU, False for running in Oak-D")
+    parser.add_argument('--oakd', action="store_false",
+                        help="Set flag to run pose detection in Oak-D")
     
     args = parser.parse_args()
-    print(args.cpu)
+    print(args.oakd)
 
-    server = OakdProducer(cpu=args.cpu)
+    server = OakdProducer(oakd=args.oakd)
     ip = "127.0.0.1"
     print(f"Starting server at {ip}:8080")
     asyncio.run(server.serve(ip, 8080))
