@@ -13,6 +13,12 @@ struct ExerciseList: View {
             (!showFavoritesOnly || exercise.isFavorite)
         }
     }
+    
+    var selectedExercisesArray: [Exercise] {
+        filteredExercises.filter { exercise in
+            selectedExercises.contains(exercise.id)
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -80,15 +86,16 @@ struct ExerciseList: View {
                 }
                 .padding(.bottom, 20)
                 
-                NavigationLink(destination: TestView(selectedExercises: selectedExercises)) {
+                NavigationLink(destination: ExerciseDetail(selectedExercises: selectedExercisesArray)) {
                     Text("Perform Measurements")
                         .fontWeight(.bold)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 10)
-                        .background(Color.blue)
+                        .background(selectedExercisesArray.isEmpty ? Color.gray : Color.blue)
                         .cornerRadius(10)
                         .foregroundColor(.white)
                 }
+                .disabled(selectedExercisesArray.isEmpty)
                 
             }
             .padding()
