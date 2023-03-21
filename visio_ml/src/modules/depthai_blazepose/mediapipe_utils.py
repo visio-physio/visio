@@ -115,6 +115,19 @@ class Body:
         elif plane == 'frontal':
             frontal_n = self.get_frontal_plane_n()
             return v - np.dot(v, frontal_n) * frontal_n
+        
+    # def project_on_anatomical_plane(self, u, plane):
+    #     assert plane == 'sagittal' or plane == 'transverse' or plane == 'frontal'
+    #     v = u
+    #     if plane == 'sagittal':
+    #         v[0] = 0
+    #         return v
+    #     elif plane == 'transverse':
+    #         v[1] = 0
+    #         return v
+    #     elif plane == 'frontal':
+    #         v[2] = 0
+    #         return v
 
     def get_spine(self):
         l_shoulder = self.landmarks[KEYPOINT_DICT['left_shoulder']]
@@ -122,14 +135,23 @@ class Body:
         l_hip = self.landmarks[KEYPOINT_DICT['left_hip']]
         r_hip = self.landmarks[KEYPOINT_DICT['right_hip']]
 
-        mid_shoulder = 1/2 * (l_shoulder + r_shoulder)
-        mid_hip = 1/2 * (l_hip + r_hip)
-        return (mid_hip - mid_shoulder) / np.linalg.norm(mid_hip - mid_shoulder)
+        # mid_shoulder = 1/2 * (l_shoulder + r_shoulder)
+        mid_shoulder = np.mean([l_shoulder, r_shoulder], axis=0)
+        # print(f"l_shoulder: {l_shoulder}; r_shoulder: {r_shoulder}; mid_shoulder: {mid_shoulder}")
+
+        # mid_hip = 1/2 * (l_hip + r_hip)
+        mid_hip = np.mean([l_hip, r_hip], axis=0)
+        # print(f"mid_hip: {mid_hip}")
+        # print(f"spine: {(mid_hip - mid_shoulder) / np.linalg.norm(mid_hip - mid_shoulder)}")
+        return mid_hip - mid_shoulder
     
     def get_landmark_vector(self, tail, head):
         tail_p = self.landmarks[KEYPOINT_DICT[tail]]
         head_p = self.landmarks[KEYPOINT_DICT[head]]
-        return (head_p - tail_p) / np.linalg.norm(head_p - tail_p)
+        return head_p - tail_p
+    
+    def get_unit_vector(self, v):
+        return v / np.linalg.norm(v)
     
     def get_angle(self, v, u):
         return np.arccos(np.clip(np.dot(v, u), -1.0, 1.0)) * 180 / np.pi
@@ -153,16 +175,16 @@ class Body:
     def get_shoulder_angles(self, exercise):
         assert exercise in ["abduction", "extension"]
 
-        right_arm = self.get_landmark_vector('right_shoulder', 'right_elbow')
-        left_arm = self.get_landmark_vector('left_shoulder', 'left_elbow')
+        right_arm = self.get_landmark_vector('right_shoulder', 'right_wrist')        
+        left_arm = self.get_landmark_vector('left_shoulder', 'left_wrist')
         spine = self.get_spine()
 
         if exercise == "abduction":
-            right_shoulder_angle = self.get_angle(self.project_on_anatomical_plane(right_arm, 'frontal'), spine)
-            left_shoulder_angle = self.get_angle(self.project_on_anatomical_plane(left_arm, 'frontal'), spine)
+            right_shoulder_angle = self.get_angle(self.get_unit_vector(self.project_on_anatomical_plane(right_arm, 'frontal')), self.get_unit_vector(self.project_on_anatomical_plane(spine, 'frontal')))
+            left_shoulder_angle = self.get_angle(self.get_unit_vector(self.project_on_anatomical_plane(left_arm, 'frontal')), self.get_unit_vector(self.project_on_anatomical_plane(spine, 'frontal')))
         elif exercise == "extension":
-            right_shoulder_angle = self.get_angle(self.project_on_anatomical_plane(right_arm, 'sagittal'), spine)
-            left_shoulder_angle = self.get_angle(self.project_on_anatomical_plane(left_arm, 'sagittal'), spine)
+            right_shoulder_angle = self.get_angle(self.project_on_anatomical_plane(right_arm, 'sagittal'), self.project_on_anatomical_plane(spine, 'sagittal'))
+            left_shoulder_angle = self.get_angle(self.project_on_anatomical_plane(left_arm, 'sagittal'), self.project_on_anatomical_plane(spine, 'sagittal'))
 
         results = {"right": right_shoulder_angle,
                    "left": left_shoulder_angle}
