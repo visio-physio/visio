@@ -9,6 +9,7 @@ import json
 from concurrent.futures import ProcessPoolExecutor
 import os
 import argparse
+import time
 
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
 from depthai_blazepose.BlazeposeDepthaiEdge import BlazeposeDepthai
@@ -25,7 +26,7 @@ class OakdProducer():
         self.oakd = oakd
         self.result_compilers = {}
 
-        print(f"Running Blazepose model in {'cpu' if self.oakd else 'Oak-D'}")
+        print(f"Running Blazepose model in {'Oak-D' if self.oakd else 'CPU'}")
 
     async def serve(self, host, port):
         server = await websockets.serve(self.handler, host, port)
@@ -56,7 +57,7 @@ class OakdProducer():
 
     
     async def produce(self):
-        if self.oakd:
+        if not self.oakd:
             tracker = VisioPose(
                 crop=True,
                 internal_frame_height=600,
@@ -102,7 +103,9 @@ class OakdProducer():
 
                     self.result_compilers[self.user_id].record_angle(result)
 
+                st = time.time()
                 await self.send_frame(frame)
+                print(f"time: {time.time() - st:.5f}")
 
             elif self.state == 'end':
                 if self.user_id in self.result_compilers:
@@ -119,13 +122,13 @@ class OakdProducer():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--oakd', action="store_false",
+    parser.add_argument('--oakd', action="store_true",
                         help="Set flag to run pose detection in Oak-D")
     
     args = parser.parse_args()
     print(args.oakd)
 
     server = OakdProducer(oakd=args.oakd)
-    ip = "127.0.0.1"
-    print(f"Starting server at {ip}:8080")
+    ip = "192.168.0.194"
+    print(f"Starting server at http://{ip}:8080")
     asyncio.run(server.serve(ip, 8080))

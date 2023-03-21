@@ -30,9 +30,9 @@ class VisioPose:
             if lm_model == "heavy":
                 self.internal_fps = 10
             elif lm_model == "full":
-                self.internal_fps = 20
+                self.internal_fps = 30
             else:
-                self.internal_fps = 20
+                self.internal_fps = 30
         
         if self.crop:
             self.frame_size, self.scale_nd = mpu.find_isp_scale_params(internal_frame_height)
@@ -107,7 +107,7 @@ class VisioPose:
         body = mpu.Body()
         if result.pose_landmarks is not None:
             body.pose_landmarks = result.pose_landmarks
-            landmarks = [np.array([lm.x, lm.y, lm.z]) for lm in result.pose_landmarks.landmark]
+            landmarks = [np.array([lm.x, lm.y, lm.z]) for lm in result.pose_world_landmarks.landmark]
             body.landmarks = np.asarray(landmarks)
             body.presence = [lm.visibility for lm in result.pose_landmarks.landmark]
 
