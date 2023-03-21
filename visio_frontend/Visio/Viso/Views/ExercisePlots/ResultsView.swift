@@ -6,10 +6,34 @@ struct ResultsView: View {
     @EnvironmentObject var results: Results
     
     @State private var selectedRange = "Left"
+    
+    private var initialLeftRange: Double {
+        results.datapoints.first?.roi_left ?? 0
+    }
+    
+    private var initialRightRange: Double {
+        results.datapoints.first?.roi_right ?? 0
+    }
+    
+    private var latestLeftRange: Double {
+        results.datapoints.last?.roi_left ?? 0
+    }
+    
+    private var latestRightRange: Double {
+        results.datapoints.last?.roi_right ?? 0
+    }
+    
+    private var leftImprovementPercentage: Double {
+        ((latestLeftRange - initialLeftRange) / initialLeftRange) * 100
+    }
+    
+    private var rightImprovementPercentage: Double {
+        ((latestRightRange - initialRightRange) / initialRightRange) * 100
+    }
 
     var body: some View {
         VStack {
-            Text("Results for \(exercise)")
+            Text("Results for \(exercise.localizedUppercase)")
                 .font(.largeTitle)
                 .padding()
             
@@ -25,9 +49,10 @@ struct ResultsView: View {
             MotionGraph(dataPoints: results.datapoints, rangeType: selectedRange)
             
             HStack {
+                
                 VStack(alignment: .leading) {
-                    Text("Latest Left Range of Motion: \(results.datapoints.last?.roi_left ?? 0, specifier: "%.2f")")
-                    Text("Latest Right Range of Motion: \(results.datapoints.last?.roi_right ?? 0, specifier: "%.2f")")
+                    Text("Latest Left Range of Motion: \(latestLeftRange, specifier: "%.2f")")
+                    Text("Latest Right Range of Motion: \(latestRightRange, specifier: "%.2f")")
                 }
                 Spacer()
             }
@@ -35,6 +60,11 @@ struct ResultsView: View {
             
             // Add a summary section to show the overall improvement percentage
             // for both Left and Right Range of Motion
+            VStack(alignment: .leading) {
+                Text("Left Improvement: \(leftImprovementPercentage, specifier: "%.2f")%")
+                Text("Right Improvement: \(rightImprovementPercentage, specifier: "%.2f")%")
+            }
+            .padding()
 
             Spacer()
         }
@@ -61,7 +91,7 @@ struct MotionGraph: View {
                 .foregroundStyle(chartColor.gradient)
                 .symbol(Circle().strokeBorder(lineWidth: lineWidth))
                 .symbolSize(60)
-    
+
             }
             .chartXAxis(.automatic)
             .chartYAxis(.automatic)

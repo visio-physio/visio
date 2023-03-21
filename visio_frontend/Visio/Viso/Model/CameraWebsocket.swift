@@ -23,8 +23,6 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
             socket.disconnect()
             self.isConnected = false
         }
-        print(self.url)
-        print(URL(string: self.url))
         let request = URLRequest(url: URL(string: self.url)!, timeoutInterval: 5)
         self.socket = WebSocket(request: request)
         self.socket.delegate = self

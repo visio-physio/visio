@@ -7,22 +7,7 @@ struct ExerciseRangeOfMotionPlotView: View {
     
     var body: some View {
         VStack {
-            if plotType == "roi_left" {
-                Chart(results.currentData) {
-                    LineMark(
-                        x: .value("Range of Motion Left", $0.id),
-                        y: .value("Date", $0.left)
-                    )
-                    
-                }
-            } else {
-                Chart(results.currentData) {
-                    LineMark(
-                        x: .value("Range of Motion Right", $0.id),
-                        y: .value("Date", $0.right)
-                    )
-                }
-            }
+            SinceGraph(dataPoints: results.currentData, rangeType: plotType)
         }
 
             Picker(selection: $plotType, label: Text("Select plot type")) {
@@ -32,14 +17,34 @@ struct ExerciseRangeOfMotionPlotView: View {
             }.pickerStyle(SegmentedPickerStyle())
         }
         
-        
+            
 }
 
-//struct ExerciseRangeOfMotionPlotView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ExerciseRangeOfMotionPlotView()
-//    }
-//}
-//
-//
+struct SinceGraph: View {
+    var dataPoints: [SinePoint]
+    var rangeType: String
 
+    @State private var lineWidth = 2.0
+    @State private var chartColor: Color = .blue
+    @State private var selectedElement: DataPoint? = nil
+    @State private var showLollipop = true
+
+    var body: some View {
+        VStack {
+            Chart(dataPoints, id: \.id) {
+                LineMark(
+                    x: .value("Date", $0.id),
+                    y: .value(rangeType, rangeType == "roi_left" ? $0.left : $0.right)
+                )
+                .lineStyle(StrokeStyle(lineWidth: lineWidth))
+                .foregroundStyle(chartColor.gradient)
+                .symbol(Circle().strokeBorder(lineWidth: lineWidth))
+                .symbolSize(60)
+
+            }
+            .chartXAxis(.automatic)
+            .chartYAxis(.automatic)
+            .frame(height: 300)
+        }
+    }
+}
