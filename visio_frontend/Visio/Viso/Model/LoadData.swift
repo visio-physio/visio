@@ -101,6 +101,7 @@ final class Results: ObservableObject {
         self.exerciseType = exerciseType
         self.currentData = []
         loadData()
+        print("loading data")
     }
     
     deinit {

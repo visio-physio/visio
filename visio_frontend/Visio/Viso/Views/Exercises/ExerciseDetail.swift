@@ -50,7 +50,6 @@ struct ExerciseDetail: View {
           
                         VStack {
                             Text(selectedExercises[currentIndex].bodyPart.capitalized + " " + selectedExercises[currentIndex].exercise.capitalized + " Test")
-                                .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(Color("HeadingColor"))
                             HStack {
@@ -61,7 +60,6 @@ struct ExerciseDetail: View {
                                 VStack(alignment: .leading) {
                                 
                                     Text(selectedExercises[currentIndex].measurementField)
-                                        .font(.headline)
                                         .padding(.top, 8)
                                         .foregroundColor(Color("SubHeadingColor"))
                                     Text(selectedExercises[currentIndex].measurementRange)
@@ -76,14 +74,11 @@ struct ExerciseDetail: View {
                                     .padding(.trailing)
                             }
                             Text("Results")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
                                 .padding(.top)
                                 .foregroundColor(Color("HeadingColor"))
 
                             ExerciseRangeOfMotionPlotView()
                                 .environmentObject(Results(collection: "results", document: userID, exerciseType: selectedExercises[currentIndex].exercise + "-" + selectedExercises[currentIndex].bodyPart))
-
                         }
                         .padding(.top)
 
@@ -92,8 +87,6 @@ struct ExerciseDetail: View {
 
                         VStack(alignment: .leading, spacing: 16) {
                             Text(selectedExercises[currentIndex].descriptionTitle)
-                                .font(.title3)
-                                .fontWeight(.bold)
                                 .foregroundColor(Color("SubHeadingColor"))
 
                             HStack(alignment: .top) {
@@ -122,6 +115,7 @@ struct ExerciseDetail: View {
                 .padding(.horizontal)
                 .navigationBarTitle(Text(selectedExercises[currentIndex].bodyPart + " " + selectedExercises[currentIndex].exercise), displayMode: .inline)
             }
+            .onAppear()
             .backgroundStyle()
 
             .tabItem {

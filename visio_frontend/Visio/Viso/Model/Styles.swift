@@ -38,6 +38,7 @@ struct BackgroundStyle: ViewModifier {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color("BackgroundColor"), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .ignoresSafeArea()
+                .font(.custom("HKGrotesk-Regular", size: 12))
             content
         }
     }
@@ -48,6 +49,7 @@ struct SubtleBackgroundStyle: ViewModifier {
         ZStack {
             RadialGradient(gradient: Gradient(colors: [Color("BackgroundColor"), Color.white]), center: .center, startRadius: 5, endRadius: 500)
                 .ignoresSafeArea()
+                .font(.custom("HKGrotesk-Regular", size: 12))
             content
         }
     }

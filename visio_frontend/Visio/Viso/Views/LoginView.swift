@@ -15,7 +15,6 @@ struct LoginView: View {
             ZStack {
                 VStack {
                     Text("Welcome Back!")
-                        .font(.system(size: 32, weight: .bold, design: .rounded))
                         .foregroundColor(Color("HeadingColor"))
                         .padding(.bottom, 40)
 
@@ -48,7 +47,6 @@ struct LoginView: View {
                         }
                     }) {
                         Text("Log in")
-                            .font(.system(.body, design: .rounded))
                     }
                     .buttonStyle(BlueButton())
                     .navigationDestination(
@@ -60,7 +58,6 @@ struct LoginView: View {
                         self.isRegistering = true
                     }) {
                         Text("Register")
-                            .font(.system(.body, design: .rounded))
                     }
                     .buttonStyle(BlueButton())
                     .navigationDestination(

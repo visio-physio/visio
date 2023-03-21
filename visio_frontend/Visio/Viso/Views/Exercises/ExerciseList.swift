@@ -19,6 +19,15 @@ struct ExerciseList: View {
             selectedExercises.contains(exercise.id)
         }
     }
+    
+    init() {
+        for familyName in UIFont.familyNames {
+            print(familyName)
+            for fontName in UIFont.fontNames(forFamilyName: familyName) {
+                print("-- \(fontName)")
+            }
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -26,15 +35,13 @@ struct ExerciseList: View {
                 VStack {
                 
                     HStack {
-                        Text("Viso")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                        Text("VISIO")
+                            .font(.custom("HKGrotesk-Bold", size: 50))
                         .foregroundColor(Color("HeadingColor"))
                         
                         Image("AppIcon")
                     }
                     Text("Pose Estimation for Physiotherapists")
-                        .font(.headline)
                         .foregroundColor(Color("SubHeadingColor"))
                 }
                 .padding(.top, 20)
@@ -104,10 +111,10 @@ struct ExerciseList: View {
     }
 }
 
-//struct ExerciseList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ExerciseList()
-//            .environmentObject(LoadExercises())
-//
-//    }
-//}
+struct ExerciseList_Previews: PreviewProvider {
+    static var previews: some View {
+        ExerciseList()
+            .environmentObject(LoadExercises())
+
+    }
+}

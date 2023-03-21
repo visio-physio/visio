@@ -13,6 +13,13 @@
 		3825271629A45161008F6DF7 /* LiveCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3825271529A45161008F6DF7 /* LiveCameraView.swift */; };
 		38544FB429B46D2A000B8154 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38544FB329B46D2A000B8154 /* ResultsView.swift */; };
 		387026AD29C8F57900EF2A13 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387026AC29C8F57900EF2A13 /* Styles.swift */; };
+		387026C729C93BD700EF2A13 /* HKGrotesk-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 387026B129C93BD600EF2A13 /* HKGrotesk-Black.otf */; };
+		387026CD29C93BD700EF2A13 /* HKGrotesk-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 387026B729C93BD600EF2A13 /* HKGrotesk-Bold.otf */; };
+		387026CE29C93BD700EF2A13 /* HKGrotesk-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 387026B829C93BD600EF2A13 /* HKGrotesk-ExtraBold.otf */; };
+		387026D129C93BD700EF2A13 /* HKGrotesk-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 387026BB29C93BD600EF2A13 /* HKGrotesk-SemiBold.otf */; };
+		387026D229C93BD700EF2A13 /* HKGrotesk-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 387026BC29C93BD700EF2A13 /* HKGrotesk-Regular.otf */; };
+		387026D429C93BD700EF2A13 /* HKGrotesk-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 387026BE29C93BD700EF2A13 /* HKGrotesk-Medium.otf */; };
+		387026D729C93BD700EF2A13 /* HKGrotesk-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 387026C129C93BD700EF2A13 /* HKGrotesk-Light.otf */; };
 		3891317F29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3891317E29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift */; };
 		38AEA84429AFF867003ACDB0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84329AFF867003ACDB0 /* LoginView.swift */; };
 		38AEA84629AFF87B003ACDB0 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84529AFF87B003ACDB0 /* RegisterView.swift */; };
@@ -44,6 +51,13 @@
 		3825271529A45161008F6DF7 /* LiveCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCameraView.swift; sourceTree = "<group>"; };
 		38544FB329B46D2A000B8154 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		387026AC29C8F57900EF2A13 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		387026B129C93BD600EF2A13 /* HKGrotesk-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Black.otf"; sourceTree = "<group>"; };
+		387026B729C93BD600EF2A13 /* HKGrotesk-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Bold.otf"; sourceTree = "<group>"; };
+		387026B829C93BD600EF2A13 /* HKGrotesk-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-ExtraBold.otf"; sourceTree = "<group>"; };
+		387026BB29C93BD600EF2A13 /* HKGrotesk-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-SemiBold.otf"; sourceTree = "<group>"; };
+		387026BC29C93BD700EF2A13 /* HKGrotesk-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Regular.otf"; sourceTree = "<group>"; };
+		387026BE29C93BD700EF2A13 /* HKGrotesk-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Medium.otf"; sourceTree = "<group>"; };
+		387026C129C93BD700EF2A13 /* HKGrotesk-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Light.otf"; sourceTree = "<group>"; };
 		3891317E29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRangeOfMotionPlotView.swift; sourceTree = "<group>"; };
 		38AEA84329AFF867003ACDB0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		38AEA84529AFF87B003ACDB0 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -122,6 +136,13 @@
 		38EFB7AB2985D3FA0018F668 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				387026B129C93BD600EF2A13 /* HKGrotesk-Black.otf */,
+				387026B729C93BD600EF2A13 /* HKGrotesk-Bold.otf */,
+				387026B829C93BD600EF2A13 /* HKGrotesk-ExtraBold.otf */,
+				387026C129C93BD700EF2A13 /* HKGrotesk-Light.otf */,
+				387026BE29C93BD700EF2A13 /* HKGrotesk-Medium.otf */,
+				387026BC29C93BD700EF2A13 /* HKGrotesk-Regular.otf */,
+				387026BB29C93BD600EF2A13 /* HKGrotesk-SemiBold.otf */,
 				38EFB7A22985CFCD0018F668 /* exercises.json */,
 			);
 			path = Resources;
@@ -283,10 +304,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				387026D129C93BD700EF2A13 /* HKGrotesk-SemiBold.otf in Resources */,
+				387026D729C93BD700EF2A13 /* HKGrotesk-Light.otf in Resources */,
+				387026CE29C93BD700EF2A13 /* HKGrotesk-ExtraBold.otf in Resources */,
+				387026D229C93BD700EF2A13 /* HKGrotesk-Regular.otf in Resources */,
 				38EB34E2299EFC5C00C0E4CF /* Podfile in Resources */,
 				38EFB7A32985CFCD0018F668 /* exercises.json in Resources */,
 				38F653DC2985A116004CD110 /* Preview Assets.xcassets in Resources */,
+				387026D429C93BD700EF2A13 /* HKGrotesk-Medium.otf in Resources */,
 				38F653D92985A116004CD110 /* Assets.xcassets in Resources */,
+				387026C729C93BD700EF2A13 /* HKGrotesk-Black.otf in Resources */,
+				387026CD29C93BD700EF2A13 /* HKGrotesk-Bold.otf in Resources */,
 				381A1A8529B17F3D009BF648 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
