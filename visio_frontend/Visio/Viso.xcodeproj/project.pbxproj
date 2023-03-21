@@ -20,6 +20,8 @@
 		387026D229C93BD700EF2A13 /* HKGrotesk-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 387026BC29C93BD700EF2A13 /* HKGrotesk-Regular.otf */; };
 		387026D429C93BD700EF2A13 /* HKGrotesk-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 387026BE29C93BD700EF2A13 /* HKGrotesk-Medium.otf */; };
 		387026D729C93BD700EF2A13 /* HKGrotesk-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 387026C129C93BD700EF2A13 /* HKGrotesk-Light.otf */; };
+		387026DC29C9FE1500EF2A13 /* ButtonTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387026DB29C9FE1500EF2A13 /* ButtonTemplates.swift */; };
+		387026DE29C9FEC600EF2A13 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387026DD29C9FEC600EF2A13 /* Test.swift */; };
 		3891317F29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3891317E29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift */; };
 		38AEA84429AFF867003ACDB0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84329AFF867003ACDB0 /* LoginView.swift */; };
 		38AEA84629AFF87B003ACDB0 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEA84529AFF87B003ACDB0 /* RegisterView.swift */; };
@@ -58,6 +60,8 @@
 		387026BC29C93BD700EF2A13 /* HKGrotesk-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Regular.otf"; sourceTree = "<group>"; };
 		387026BE29C93BD700EF2A13 /* HKGrotesk-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Medium.otf"; sourceTree = "<group>"; };
 		387026C129C93BD700EF2A13 /* HKGrotesk-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HKGrotesk-Light.otf"; sourceTree = "<group>"; };
+		387026DB29C9FE1500EF2A13 /* ButtonTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTemplates.swift; sourceTree = "<group>"; };
+		387026DD29C9FEC600EF2A13 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		3891317E29B44953004F9232 /* ExerciseRangeOfMotionPlotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRangeOfMotionPlotView.swift; sourceTree = "<group>"; };
 		38AEA84329AFF867003ACDB0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		38AEA84529AFF87B003ACDB0 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -107,6 +111,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		387026DA29C9FDD800EF2A13 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				387026AC29C8F57900EF2A13 /* Styles.swift */,
+				38AEA84D29B0F61D003ACDB0 /* Constants.swift */,
+				387026DB29C9FE1500EF2A13 /* ButtonTemplates.swift */,
+				387026DD29C9FEC600EF2A13 /* Test.swift */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
 		38EFB7A52985D2980018F668 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,7 +143,6 @@
 				38AEA84B29B0F5A1003ACDB0 /* Exercise.swift */,
 				38EFB7C7298633CD0018F668 /* ExerciseResult.swift */,
 				3825271329A45131008F6DF7 /* CameraWebsocket.swift */,
-				387026AC29C8F57900EF2A13 /* Styles.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,7 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				38F653D32985A115004CD110 /* Viso */,
-				38AEA84D29B0F61D003ACDB0 /* Constants.swift */,
+				387026DA29C9FDD800EF2A13 /* Templates */,
 				381A1A8429B17F3D009BF648 /* GoogleService-Info.plist */,
 				38EB34E1299EFC5C00C0E4CF /* Podfile */,
 				38F653D82985A116004CD110 /* Assets.xcassets */,
@@ -362,11 +376,13 @@
 				38AEA84C29B0F5A1003ACDB0 /* Exercise.swift in Sources */,
 				38EFB7C8298633CD0018F668 /* ExerciseResult.swift in Sources */,
 				387026AD29C8F57900EF2A13 /* Styles.swift in Sources */,
+				387026DC29C9FE1500EF2A13 /* ButtonTemplates.swift in Sources */,
 				38EFB7B7298607790018F668 /* FavoriteButton.swift in Sources */,
 				38F653D72985A115004CD110 /* ContentView.swift in Sources */,
 				38AEA84829B0F4E8003ACDB0 /* LoadData.swift in Sources */,
 				38AEA84E29B0F61D003ACDB0 /* Constants.swift in Sources */,
 				38EFB7B52985DBA50018F668 /* ExerciseDetail.swift in Sources */,
+				387026DE29C9FEC600EF2A13 /* Test.swift in Sources */,
 				38F653D52985A115004CD110 /* VisoApp.swift in Sources */,
 				38F653E32985A72E004CD110 /* CircleImage.swift in Sources */,
 			);

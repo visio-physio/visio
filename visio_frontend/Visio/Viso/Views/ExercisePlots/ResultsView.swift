@@ -11,9 +11,9 @@ import Charts
 struct ResultsView: View {
     var exercise: String
     @EnvironmentObject var results: Results
-
+    
     @State private var plotType: String = "roi_left"
-
+    
     var body: some View {
         VStack {
             Text("Results for \(exercise)")
@@ -27,7 +27,7 @@ struct ResultsView: View {
                     y: .value("Date", $0.roi_left)
                 )
             }
-
+            
             Text("Right Range of Motion")
             Chart(results.datapoints) {
                 LineMark(
@@ -37,8 +37,7 @@ struct ResultsView: View {
             }
             
         }
-   }
-    
+    }
     
 }
 
