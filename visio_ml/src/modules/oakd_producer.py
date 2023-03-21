@@ -81,18 +81,6 @@ class OakdProducer():
                 break
             frame = renderer.draw(frame, body)
 
-            if body.landmarks is not None:
-                result = body.get_measurement("shoulder", "abduction")
-                y_coord = 50
-                for body_part, measurement in result.items():
-                    # Append text to each frame in the top left corner with minimum usage of space on the frame
-                    cv2.putText(frame, f"{body_part}: {round(measurement, 5)}", (390, y_coord),
-                                cv2.FONT_HERSHEY_PLAIN, 1.5,
-                                (0, 0, 255), 2)
-                    # print(f"{body_part}: {measurement}\n")
-                    y_coord += 20
-
-
             if self.state == 'start':
                 if not body.is_body_part_present(self.body_part):
                     cv2.putText(frame, "Shoulder not present", (50, 300),
