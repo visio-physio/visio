@@ -70,7 +70,7 @@ class ResultCompiler:
                     res[key].append(angle)
 
     def store_results_in_firebase(self) -> None:
-        db = firestore.client()
+        # db = firestore.client()
 
         res = {}
         for key in self.results:
@@ -80,9 +80,10 @@ class ResultCompiler:
 
         self.set_timestamped_results(res)
         identifier = f"{self.exercise}-{self.body_part}"
-        doc = db.collection(u'results').document(self.user_id)
-        doc.set({
-            identifier: {
-                str(time()): res
-            },
-        }, merge=True)
+        print(res)
+        # doc = db.collection(u'results').document(self.user_id)
+        # doc.set({
+        #     identifier: {
+        #         str(time()): res
+        #     },
+        # }, merge=True)
