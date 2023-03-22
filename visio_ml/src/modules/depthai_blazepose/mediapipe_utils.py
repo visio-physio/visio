@@ -78,6 +78,7 @@ class Body:
         self.presence = None
         self.pose_landmarks = None
         self.pose_world_landmarks = None
+        self.landmarks_world = None
 
     def is_present(self, landmark, presence_threshold=0.9):
         if self.presence is not None:

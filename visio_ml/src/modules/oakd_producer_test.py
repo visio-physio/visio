@@ -70,7 +70,7 @@ class OakdProducer():
                 crop=True,
                 internal_frame_height=600
             )
-            renderer = BlazeposeRenderer(tracker=tracker, show_3d=False)
+            renderer = BlazeposeRenderer(tracker=tracker, show_3d=True)
         
 
         while True:

@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from .o3d_utils import Visu3D
 
 # LINE_BODY and COLORS_BODY are used when drawing the skeleton in 3D. 
 rgb = {"right":(0,1,0), "left":(1,0,0), "middle":(1,1,0)}
@@ -39,6 +40,12 @@ class BlazeposeRenderer:
             self.show_xyz_zone = self.show_xyz = self.tracker.xyz
         else:
             self.show_xyz_zone = False
+
+        if self.show_3d:
+            self.vis3d = Visu3D(bg_color=(0.2, 0.2, 0.2), zoom=1.1, segment_radius=0.01)
+            self.vis3d.create_grid([-1,1,-1],[1,1,-1],[1,1,1],[-1,1,1],2,2) # Floor
+            self.vis3d.create_grid([-1,1,1],[1,1,1],[1,-1,1],[-1,-1,1],2,2) # Wall
+            self.vis3d.init_view()
 
         self.nb_kps = 33
 
@@ -82,6 +89,25 @@ class BlazeposeRenderer:
         if self.show_xyz_zone and body.xyz_ref:
             # Show zone on which the spatial data were calculated
             cv2.rectangle(self.frame, tuple(body.xyz_zone[0:2]), tuple(body.xyz_zone[2:4]), (180,0,180), 2)
+    
+    def draw_3d(self, body):
+        self.vis3d.clear()
+        self.vis3d.try_move()
+        self.vis3d.add_geometries()
+        if body is not None:
+            if body.landmarks_world is None:
+                return
+            
+            points = body.landmarks_world
+
+            lines = LINES_BODY
+            colors = COLORS_BODY
+            for i, a_b in enumerate(lines):
+                a, b = a_b
+                if self.is_present(body, a) and self.is_present(body, b):
+                    self.vis3d.add_segment(points[a], points[b], color=colors[i])
+            
+        self.vis3d.render()
               
         
     def draw(self, frame, body):
@@ -93,6 +119,9 @@ class BlazeposeRenderer:
         elif self.frame is None:
             self.frame = frame
             self.body = None
+        
+        if self.show_3d:
+            self.draw_3d(self.body)
 
         return self.frame
     
