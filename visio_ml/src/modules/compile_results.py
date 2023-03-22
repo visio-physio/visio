@@ -80,6 +80,7 @@ class ResultCompiler:
 
         self.set_timestamped_results(res)
         identifier = f"{self.exercise}-{self.body_part}"
+        print(res)
         doc = db.collection(u'results').document(self.user_id)
         doc.set({
             identifier: {

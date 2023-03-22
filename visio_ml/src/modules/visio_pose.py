@@ -107,7 +107,8 @@ class VisioPose:
         body = mpu.Body()
         if result.pose_landmarks is not None:
             body.pose_landmarks = result.pose_landmarks
-            landmarks = [np.array([lm.x, lm.y, lm.z]) for lm in result.pose_world_landmarks.landmark]
+            body.pose_world_landmarks = result.pose_world_landmarks
+            landmarks = [np.array([lm.x, lm.y, lm.z]) for lm in result.pose_landmarks.landmark]
             body.landmarks = np.asarray(landmarks)
             body.presence = [lm.visibility for lm in result.pose_landmarks.landmark]
 

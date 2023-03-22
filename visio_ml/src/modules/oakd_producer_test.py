@@ -70,7 +70,7 @@ class OakdProducer():
                 crop=True,
                 internal_frame_height=600
             )
-            renderer = BlazeposeRenderer(tracker=tracker, show_3d=False)
+            renderer = BlazeposeRenderer(tracker=tracker, show_3d=True)
         
 
         while True:
@@ -83,7 +83,7 @@ class OakdProducer():
 
             if self.state == 'start':
                 if not body.is_body_part_present(self.body_part):
-                    cv2.putText(frame, "Shoulder not present", (50, 300),
+                    cv2.putText(frame, f"{self.body_part} not present", (50, 300),
                                     cv2.FONT_HERSHEY_PLAIN, 2.5,
                                     (0, 0, 255), 2)
                 
@@ -116,6 +116,13 @@ class OakdProducer():
             key = renderer.waitKey(delay=1)
             if key == ord('q') or key == 27:
                 break
+            elif key == ord('s'):
+                self.state = 'start'
+                self.user_id = time.time()
+            elif key == ord('e'):
+                self.state = 'end'
+            elif key == ord('i'):
+                self.state = 'idle'
 
         renderer.exit()
         tracker.exit()
@@ -129,6 +136,6 @@ if __name__ == "__main__":
     print(args.oakd)
 
     server = OakdProducer(oakd=args.oakd)
-    ip = "10.32.83.23"
+    ip = "10.33.128.185"
     print(f"Starting server at http://{ip}:8080")
     asyncio.run(server.serve(ip, 8080))
