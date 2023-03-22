@@ -19,8 +19,8 @@ from compile_results import ResultCompiler
 class OakdProducer():
     def __init__(self, oakd=False):
         self.state = 'idle' # 'produce'
-        self.exercise = 'split'
-        self.body_part = 'hip'
+        self.exercise = None
+        self.body_part = None
         self.user_id = None
         self.websocket = None
         self.oakd = oakd
@@ -104,7 +104,7 @@ class OakdProducer():
                     self.result_compilers[self.user_id].record_angle(result)
 
                 st = time.time()
-                # await self.send_frame(frame)
+                await self.send_frame(frame)
                 print(f"time: {time.time() - st:.5f}")
 
             elif self.state == 'end':
@@ -136,6 +136,6 @@ if __name__ == "__main__":
     print(args.oakd)
 
     server = OakdProducer(oakd=args.oakd)
-    ip = "192.168.0.194"
+    ip = "10.33.128.185"
     print(f"Starting server at http://{ip}:8080")
     asyncio.run(server.serve(ip, 8080))

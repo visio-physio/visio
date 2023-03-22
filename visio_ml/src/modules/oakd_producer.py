@@ -129,6 +129,6 @@ if __name__ == "__main__":
     print(args.oakd)
 
     server = OakdProducer(oakd=args.oakd)
-    ip = "192.168.0.194"
+    ip = "10.32.83.23"
     print(f"Starting server at http://{ip}:8080")
     asyncio.run(server.serve(ip, 8080))
