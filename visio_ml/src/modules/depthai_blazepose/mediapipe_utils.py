@@ -93,6 +93,8 @@ class Body:
             return self.is_present("left_hip") and self.is_present("right_hip")
         elif body_part == "elbow":
             return self.is_present("left_elbow") and self.is_present("right_elbow")
+        elif body_part == "knee":
+            return self.is_present("left_knee") and self.is_present("right_knee")
         else:
             return False
 
@@ -202,7 +204,8 @@ class Body:
         left_thigh = self.get_unit_vector(self.get_landmark_vector('left_hip', 'left_knee'))
         split_angle = self.get_angle(left_thigh, right_thigh)
 
-        result = {"split": round(split_angle)}
+        result = {"left": round(split_angle),
+                  "right": round(split_angle)}
         return result
     
     def get_shoulder_angles(self, exercise):

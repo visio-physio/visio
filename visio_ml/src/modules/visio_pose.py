@@ -132,11 +132,6 @@ class VisioPoseRenderer():
                 body.pose_landmarks,
                 self.pose_connection,
                 landmark_drawing_spec=self.mp_drawing_styles.get_default_pose_landmarks_style())
-            
-        # if body.pose_world_landmarks is not None:
-        #     self.mp_drawing.plot_landmarks(
-        #         body.pose_world_landmarks, 
-        #         self.pose_connection)
         
         self.tracker.fps.draw(self.frame, orig=(50,50), size=1, color=(240,180,100))
         
