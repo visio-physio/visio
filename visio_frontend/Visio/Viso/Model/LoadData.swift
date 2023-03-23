@@ -134,6 +134,7 @@ final class Results: ObservableObject {
                     let right = currentDatapoint.right_timeseries
                     let n = left.count
                     
+                    self.currentData.removeAll() // Clear the previous data points
                     for i in 0..<(n) {
                         self.currentData.append(SinePoint(left: left[i], right: right[i], id: currentDatapoint.t_deltas[i]))
                     }

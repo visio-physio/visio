@@ -16,8 +16,6 @@ struct ExerciseRangeOfMotionPlotView: View {
 //                Text("Combine").tag("combine")
             }.pickerStyle(SegmentedPickerStyle())
         }
-        
-            
 }
 
 struct SinceGraph: View {

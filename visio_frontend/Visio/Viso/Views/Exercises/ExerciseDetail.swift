@@ -9,7 +9,10 @@ struct ExerciseDetail: View {
     @State private var isLiveCameraViewActive = false
     @State  var selectedExercises: [Exercise]
     @State  var currentIndex: Int = 0
-    
+    private var results: Results {
+        Results(collection: "results", document: userID, exerciseType: selectedExercises[currentIndex].exercise + "-" + selectedExercises[currentIndex].bodyPart)
+    }
+
     let userID = Auth.auth().currentUser?.uid ?? "none"
     
     var body: some View {
@@ -24,7 +27,7 @@ struct ExerciseDetail: View {
                     
                     PreviousButton(action: {
                         currentIndex = max(currentIndex - 1, 0)
-                    }, isEnabled: currentIndex > 1)
+                    }, isEnabled: currentIndex >= 1)
                     
                     Spacer()
                     
@@ -67,7 +70,7 @@ struct ExerciseDetail: View {
                                 .foregroundColor(Color("HeadingColor"))
                             
                             ExerciseRangeOfMotionPlotView()
-                                .environmentObject(Results(collection: "results", document: userID, exerciseType: selectedExercises[currentIndex].exercise + "-" + selectedExercises[currentIndex].bodyPart))
+                                .environmentObject(results)
                         }
                         .padding(.top)
                         
@@ -112,7 +115,7 @@ struct ExerciseDetail: View {
             }
             
             ResultsView(exercise: selectedExercises[currentIndex].bodyPart + " " + selectedExercises[currentIndex].exercise)
-                .environmentObject(Results(collection: "results", document: userID, exerciseType: selectedExercises[currentIndex].exercise + "-" + selectedExercises[currentIndex].bodyPart))
+                .environmentObject(results)
                 .tabItem {
                     Label("Results", systemImage: "chart.line.uptrend.xyaxis")
                 }
