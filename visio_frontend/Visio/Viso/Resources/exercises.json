@@ -7,9 +7,9 @@
         "measurementField": "Range of Motion",
         "measurementRange": "30° - 180°",
         "descriptionTitle": "How to Perfrom Shoulder Abduction Test",
-        "description": "1. Stand up straight with relaxed arms and palms facing your body. \n2. Steadily perform lateral raise until your hands are as high as possible. \n3. Steadily lower to resting position.\n4. Repeat 3–5 times.",
+        "description": "1. Stand up straight with relaxed arms and palms facing your body. \n2. Steadily perform lateral raise until your hands are as high as possible. \n3. Steadily lower to resting position.",
         "imageName": "shoulder_abduction",
-        "imageExample": "shoulder_abduction_example"
+        "imageExample": "shoulder_abduction"
     },
     {
         "id" : 2,
@@ -19,9 +19,70 @@
         "measurementField": "Range of Motion",
         "measurementRange": "0° - 40°",
         "descriptionTitle": "How to Perform Hip Abduction Test",
-        "description": "1. Stand upright with your feet hip-width apart, arms resting by your sides, and your core engaged. \n2. Shift your weight onto one leg, and keep a slight bend in the knee of that leg. \n3. Slowly lift the opposite leg out to the side, keeping it straight and the foot pointing forward. \n4. Lift the leg as high as you can without leaning your upper body to the side, and hold for a second or two. \n5. Slowly lower the leg back down to the starting position. \n6. Repeat the exercise for 10–15 repetitions on one leg before switching to the other side.",
+        "description": "1. Stand upright with your feet hip-width apart, arms resting by your sides, and your core engaged. \n2. Shift your weight onto one leg, and slowly lift the opposite leg out to the side, keeping it straight. \n3. Lift the leg as high as you can without leaning your upper body to the side, and hold for a few seconds. \n4. Steadily lower the leg back down to the starting position. \n5. Repeat the exercise for the other side of your body.",
         "imageName": "hip_abduction",
-        "imageExample": "hip_abduction_example"
+        "imageExample": "hip_abduction"
 
+    },
+    {
+        "id" : 3,
+        "exercise": "flexion",
+        "bodyPart": "shoulder",
+        "isFavorite": true,
+        "measurementField": "Range of Motion",
+        "measurementRange": "0° - 50°",
+        "descriptionTitle": "How to Perform Shoulder Flexion Test",
+        "description": "1. Stand with your back against the wall and your arms straight at your sides. \n2. Keeping your elbows straight, raise your arms forwards as far as you can, and hold for a few seconds. \n3. Steadily lower your arms back to the starting position.",
+        "imageName": "shoulder_flexion",
+        "imageExample": "shoulder_flexion"
+    },
+    {
+        "id" : 4,
+        "exercise": "flexion",
+        "bodyPart": "hip",
+        "isFavorite": true,
+        "measurementField": "Range of Motion",
+        "measurementRange": "5° - 40°",
+        "descriptionTitle": "How to Perform Hip Flexion Test",
+        "description": "1. Stand with your feet hip-width apart. \n2. Shift your weight onto one leg, and slowly lift the opposite leg in front of you, pulling your knee towards your chest. \n3. Make sure you keep your upper body and back straight during the exercise, and hold for a few seconds. \n4. Steadily lower your leg back to the starting position. \n5. Repeat the excercise for the other side of your body.",
+        "imageName": "hip_flexion",
+        "imageExample": "hip_flexion"
+
+    },
+    {
+        "id" : 5,
+        "exercise": "flexion",
+        "bodyPart": "elbow",
+        "isFavorite": true,
+        "measurementField": "Range of Motion",
+        "measurementRange": "0° - 130°/154°",
+        "descriptionTitle": "How to Perform Elbow Flexion Test",
+        "description": "1. Stand with your arms at your sides. \n2. Steadily raise your wrists laterally, bending your elbows up as far as possible, and hold for a few seconds. \n3. Steadily lower your wrists and return to the starting position.",
+        "imageName": "elbow_flexion",
+        "imageExample": "elbow_flexion"
+    },
+    {
+        "id" : 6,
+        "exercise": "flexion",
+        "bodyPart": "knee",
+        "isFavorite": true,
+        "measurementField": "Range of Motion",
+        "measurementRange": "0° - 135°",
+        "descriptionTitle": "How to Perform Knee Flexion Test",
+        "description": "1. Stand with your feet hip-width apart. \n2. Shift your weight onto one leg, and slowly lift the opposite foot behind you, keeping your knee directly below your body and bending it back as far as possible. \n3. Make sure you keep your upper body and back straight during the exercise, and hold for a few seconds. \n4. Steadily lower your leg back to the starting position. \n5. Repeat the excercise for the other side of your body.",
+        "imageName": "knee_flexion",
+        "imageExample": "knee_flexion"
+    },
+    {
+        "id" : 7,
+        "exercise": "split",
+        "bodyPart": "hip",
+        "isFavorite": true,
+        "measurementField": "Range of Motion",
+        "measurementRange": "0° - 180°",
+        "descriptionTitle": "How to Perform Hip Split Test",
+        "description": "1. Stand with your feet hip-width apart. \n2. Slowly spread your feet as far apart as possible. \n3. Stop when you feel resistance, and hold for a few seconds. \n4. Slowly stand back up and return to the starting position.",
+        "imageName": "hip_split",
+        "imageExample": "hip_split"
     }
 ]

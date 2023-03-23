@@ -3,82 +3,134 @@ import Firebase
 
 struct ExerciseDetail: View {
     @EnvironmentObject var cam: CameraWebsocket
-    @State private var isLiveCameraViewActive = false
-
-    @State var exercise: Exercise
-    let userID = Auth.auth().currentUser?.uid ?? "none"
-
+    @EnvironmentObject var load_exercises: LoadExercises
+    @Environment(\.presentationMode) var presentationMode
     
-    @State private var isShowVideo = false
+    @State private var isLiveCameraViewActive = false
+    @State  var selectedExercises: [Exercise]
+    @State  var currentIndex: Int = 0
+    private var results: Results {
+        Results(collection: "results", document: userID, exerciseType: selectedExercises[currentIndex].exercise + "-" + selectedExercises[currentIndex].bodyPart)
+    }
+
+    let userID = Auth.auth().currentUser?.uid ?? "none"
+    
     var body: some View {
         TabView {
-            NavigationStack {
-                VStack {
-                    Text("Results")
-                    ExerciseRangeOfMotionPlotView()
-                        .environmentObject(Results(collection: "results", document: userID, exerciseType: exercise.exercise + "-" + exercise.bodyPart))
-                    HStack {
-                        CircleImage(image: exercise.image)
-                        VStack(alignment: .leading) {
+            VStack {
+                HStack {
+                    EndExamButton{
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    
+                    Spacer()
+                    
+                    PreviousButton(action: {
+                        currentIndex = max(currentIndex - 1, 0)
+                    }, isEnabled: currentIndex >= 1)
+                    
+                    Spacer()
+                    
+                    NextButton(action: {
+                        if currentIndex < selectedExercises.count - 1 {
+                            currentIndex += 1
+                        }
+                    }, isEnabled: currentIndex < selectedExercises.count - 1)
+                }
+                .padding(.top,20)
+                .padding(.horizontal)
+                
+                ScrollView {
+                    
+                    VStack {
+                        VStack {
+                            Text(selectedExercises[currentIndex].bodyPart.capitalized + " " + selectedExercises[currentIndex].exercise.capitalized + " Test")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color("HeadingColor"))
                             HStack {
-                                Text(exercise.bodyPart + " " + exercise.exercise)
-                                    .font(.title2)
-                                FavoriteButton(isSet: $exercise.isFavorite, exercise_id: exercise.id)
-                            }
-                            HStack {
-                                Text(exercise.measurementField)
-                                    .font(.subheadline)
+                                
+                                VStack(alignment: .leading) {
+                                    
+                                    Text(selectedExercises[currentIndex].measurementField)
+                                        .padding(.top, 8)
+                                        .foregroundColor(Color("SubHeadingColor"))
+                                    Text(selectedExercises[currentIndex].measurementRange)
+                                        .font(.subheadline)
+                                        .foregroundColor(.black)
+                                }
+                                .padding(.leading)
+                                
                                 Spacer()
-                                Text(exercise.measurementRange)
-                                    .font(.subheadline)
+                                
+                                FavoriteButton(isSet: $selectedExercises[currentIndex].isFavorite, exercise_id: selectedExercises[currentIndex].id)
+                                    .padding(.trailing)
+                            }
+                            Text("Results")
+                                .padding(.top)
+                                .foregroundColor(Color("HeadingColor"))
+                            
+                            ExerciseRangeOfMotionPlotView()
+                                .environmentObject(results)
+                        }
+                        .padding(.top)
+                        
+                        Divider()
+                            .padding(.vertical)
+                        
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text(selectedExercises[currentIndex].descriptionTitle)
+                                .foregroundColor(Color("SubHeadingColor"))
+                            
+                            HStack(alignment: .top) {
+                                Image(selectedExercises[currentIndex].imageExample)
+                                    .resizable()
+                                    .frame(width: 150, height: 150)
+                                
+                                Text(selectedExercises[currentIndex].description)
+                                    .padding(.leading)
                             }
                         }
+                        .padding()
+                        
+                        Spacer()
+                        
+                        NavigationLink(destination: LiveCameraView(), isActive: $isLiveCameraViewActive) {
+                            Button("Start Test") {
+                                cam.send(userId: userID, bodyPart: selectedExercises[currentIndex].bodyPart, exercise: selectedExercises[currentIndex].exercise, state: "start")
+                                isLiveCameraViewActive = true
+                                print("sending to server: \(selectedExercises[currentIndex].exercise)")
+                            }
+                            .buttonStyle(BlueButton())
+                        }
                     }
-                    Divider()
-                    Text(exercise.descriptionTitle)
-                        .font(.title3)
-                    
-                    HStack{
-                        Image(exercise.imageExample)
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                        Text(exercise.description)
-                            .padding()
-                    }
-
-                    Button("Start Test") {
-                        cam.send(userId: userID, bodyPart: self.exercise.bodyPart, exercise: self.exercise.exercise, state: "start")
-                        isLiveCameraViewActive = true
-                        print("sending to server: \(self.exercise.exercise)")
-                    }
-                    .sheet(isPresented: $isLiveCameraViewActive) {
-                        LiveCameraView()
-                    }
-                    Spacer()
                 }
-                .padding()
-                .navigationBarTitle(Text(exercise.bodyPart + " " + exercise.exercise))
+                .padding(.horizontal)
+                .navigationBarTitle(Text(selectedExercises[currentIndex].bodyPart + " " + selectedExercises[currentIndex].exercise), displayMode: .inline)
             }
+            .onAppear()
+            .backgroundStyle()
+            
             .tabItem {
                 Label("Exercise", systemImage: "person.circle")
             }
-
-            ResultsView(exercise: exercise.bodyPart + " " + exercise.exercise)
-                .environmentObject(Results(collection: "results", document: userID, exerciseType: exercise.exercise + "-" + exercise.bodyPart))
+            
+            ResultsView(exercise: selectedExercises[currentIndex].bodyPart + " " + selectedExercises[currentIndex].exercise)
+                .environmentObject(results)
                 .tabItem {
                     Label("Results", systemImage: "chart.line.uptrend.xyaxis")
                 }
         }
+        .navigationBarBackButtonHidden(true) // Add this line to hide the back button
     }
 }
 
 struct ExerciseDetail_Previews: PreviewProvider {
     static let load_data = LoadExercises()
     static var exercise = load_data.exercises[0]
-
+    static var selectedExercises = [load_data.exercises[0], load_data.exercises[1], load_data.exercises[2]]
+    
     static var previews: some View {
-        ExerciseDetail(exercise: exercise)
-            .environmentObject(load_data)
+        ExerciseDetail(selectedExercises: selectedExercises)
     }
 }
 

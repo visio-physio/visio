@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "shoulder_abduction_example.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "shoulder_abduction.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

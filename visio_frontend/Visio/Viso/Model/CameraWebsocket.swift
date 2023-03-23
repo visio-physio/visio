@@ -1,4 +1,3 @@
-//
 //  CameraWebsocket.swift
 //  cameraStream
 //
@@ -42,12 +41,16 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let string):
             let compressedData = Data(base64Encoded: string) ?? Data()
-            do {
-                img = try compressedData.gunzipped()
-            } catch {
-                print("Error: \(error)")
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    let decompressedData = try compressedData.gunzipped()
+                    DispatchQueue.main.async {
+                        self.img = decompressedData
+                    }
+                } catch {
+                    print("Error: \(error)")
+                }
             }
-
             
         case .binary(let data):
             print("got some data: \(data.count) bytes")
@@ -90,16 +93,21 @@ class CameraWebsocket: ObservableObject, WebSocketDelegate {
             "state": state
         ]
     
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                socket.write(string: jsonString)
-            } else {
-                print("Error converting JSON data to string")
+        if let socket = socket {
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
+                if let jsonString = String(data: jsonData, encoding: .utf8) {
+                    socket.write(string: jsonString)
+                } else {
+                    print("Error converting JSON data to string")
+                }
+            } catch {
+                print("Error creating JSON message: \(error.localizedDescription)")
             }
-        } catch {
-            print("Error creating JSON message: \(error.localizedDescription)")
+        } else {
+            print("Error: socket is nil")
         }
+
     }
 
 }
