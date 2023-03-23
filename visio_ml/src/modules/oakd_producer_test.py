@@ -110,6 +110,7 @@ class OakdProducer():
             elif self.state == 'end':
                 if self.user_id in self.result_compilers:
                     self.result_compilers[self.user_id].store_results_in_firebase()
+                    self.result_compilers[self.user_id].clear_results()
 
                 self.state = 'idle'
             

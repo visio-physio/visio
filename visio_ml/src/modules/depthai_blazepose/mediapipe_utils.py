@@ -77,7 +77,6 @@ class Body:
         self.landmarks = None
         self.presence = None
         self.pose_landmarks = None
-        self.pose_world_landmarks = None
         self.landmarks_world = None
 
     def is_present(self, landmark, presence_threshold=0.9):
@@ -156,12 +155,12 @@ class Body:
         target = f"{joint}_{exercise}"
         if target == "shoulder_abduction":
             return self.get_shoulder_angles("abduction")
-        elif target == "shoulder_extension":
-            return self.get_shoulder_angles("extension")
+        elif target == "shoulder_flexion":
+            return self.get_shoulder_angles("flexion")
         elif target == "hip_abduction":
             return self.get_hip_angles("abduction")
-        elif target == "hip_extension":
-            return self.get_hip_angles("extension")
+        elif target == "hip_flexion":
+            return self.get_hip_angles("flexion")
         elif target == "elbow_flexion":
             return self.get_elbow_angles()
         elif target == "knee_flexion":
@@ -209,7 +208,7 @@ class Body:
         return result
     
     def get_shoulder_angles(self, exercise):
-        assert exercise in ["abduction", "extension"]
+        assert exercise in ["abduction", "flexion"]
 
         spine = self.get_spine()
 
@@ -219,7 +218,7 @@ class Body:
             spine_frontal = self.get_unit_vector(self.project_on_anatomical_plane(spine, 'frontal'))
             right_shoulder_angle = self.get_angle(right_arm_frontal, spine_frontal)
             left_shoulder_angle = self.get_angle(left_arm_frontal, spine_frontal)
-        elif exercise == "extension":
+        elif exercise == "flexion":
             right_arm_sagittal = self.get_unit_vector(self.project_on_anatomical_plane(self.get_landmark_vector('right_shoulder', 'right_elbow'), 'sagittal'))
             left_arm_sagittal = self.get_unit_vector(self.project_on_anatomical_plane(self.get_landmark_vector('left_shoulder', 'left_elbow'), 'sagittal'))
             spine_sagittal = self.get_unit_vector(self.project_on_anatomical_plane(spine, 'sagittal'))
@@ -232,7 +231,7 @@ class Body:
         return results
     
     def get_hip_angles(self, exercise):
-        assert exercise in ["abduction", "extension"]
+        assert exercise in ["abduction", "flexion"]
         
         spine = self.get_spine()
 
@@ -242,7 +241,7 @@ class Body:
             spine_frontal = self.get_unit_vector(self.project_on_anatomical_plane(spine, 'frontal'))
             right_hip_angle = self.get_angle(right_thigh_frontal, spine_frontal)
             left_hip_angle = self.get_angle(left_thigh_frontal, spine_frontal)
-        elif exercise == "extension":
+        elif exercise == "flexion":
             right_thigh_sagittal = self.get_unit_vector(self.project_on_anatomical_plane(self.get_landmark_vector('right_hip', 'right_knee'), 'sagittal'))
             left_thigh_sagittal = self.get_unit_vector(self.project_on_anatomical_plane(self.get_landmark_vector('left_hip', 'left_knee'), 'sagittal'))
             spine_sagittal = self.get_unit_vector(self.project_on_anatomical_plane(spine, 'sagittal'))

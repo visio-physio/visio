@@ -17,13 +17,14 @@ from visio_pose import VisioPose, VisioPoseRenderer
 from compile_results import ResultCompiler
 
 class OakdProducer():
-    def __init__(self, oakd=False):
+    def __init__(self, oakd=False, show_3d=True):
         self.state = 'idle' # 'produce'
         self.exercise = None
         self.body_part = None
         self.user_id = None
         self.websocket = None
         self.oakd = oakd
+        self.show3d = show_3d
         self.result_compilers = {}
 
         print(f"Running Blazepose model in {'Oak-D' if self.oakd else 'CPU'}")
@@ -63,14 +64,14 @@ class OakdProducer():
                 internal_frame_height=600,
                 lm_model='full'
             )
-            renderer = VisioPoseRenderer(tracker)
+            renderer = VisioPoseRenderer(tracker, show_3d=self.show3d)
         else:
             tracker = BlazeposeDepthai(
                 xyz=True,
                 crop=True,
                 internal_frame_height=600
             )
-            renderer = BlazeposeRenderer(tracker=tracker, show_3d=False)
+            renderer = BlazeposeRenderer(tracker=tracker, show_3d=self.show3d)
         
 
         while True:
@@ -110,6 +111,7 @@ class OakdProducer():
             elif self.state == 'end':
                 if self.user_id in self.result_compilers:
                     self.result_compilers[self.user_id].store_results_in_firebase()
+                    self.result_compilers[self.user_id].clear_results()
 
                 self.state = 'idle'
             
@@ -124,11 +126,24 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--oakd', action="store_true",
                         help="Set flag to run pose detection in Oak-D")
+    parser.add_argument('--show3d_off', action="store_false",
+                        help="Turn off 3D plot of human pose")
+    parser.add_argument('--ngrok', action="store_true",
+                       help="Use internet websocket")
     
     args = parser.parse_args()
-    print(args.oakd)
+    print(f"Running in Oak-D: {args.oakd}")
+    print(f"Show 3d: {args.show3d_off}")
 
-    server = OakdProducer(oakd=args.oakd)
-    ip = "10.32.83.23"
+    ip = "127.0.0.1"
+    if not args.ngrok:
+        import socket
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = f"{s.getsockname()[0]}"
+        
+        s.close()
+
     print(f"Starting server at http://{ip}:8080")
+    server = OakdProducer(oakd=args.oakd, show_3d=args.show3d_off)
     asyncio.run(server.serve(ip, 8080))

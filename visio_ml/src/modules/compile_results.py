@@ -20,7 +20,7 @@ class ResultCompiler:
         self.results = defaultdict(lambda: defaultdict(int))
         self.timestamped_angles = defaultdict(list)
         self.peaks_and_valleys = defaultdict(list)
-        self.video_file_name = f"{local_file_path}/{user_id}_{exercise}_{body_part}_{frame_rate}fps_{datetime.datetime.now()}.avi"
+        # self.video_file_name = f"{local_file_path}/{user_id}_{exercise}_{body_part}_{frame_rate}fps_{datetime.datetime.now()}.avi"
         # self.out = cv2.VideoWriter(self.video_file_name, cv2.VideoWriter_fourcc('M','J','P','G'), frame_rate, frame_size)
 
     def get_body_part(self):
@@ -87,3 +87,8 @@ class ResultCompiler:
                 str(time()): res
             },
         }, merge=True)
+
+    def clear_results(self) -> None:
+        self.results = defaultdict(lambda: defaultdict(int))
+        self.timestamped_angles = defaultdict(list)
+        self.peaks_and_valleys = defaultdict(list)

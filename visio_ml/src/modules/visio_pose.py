@@ -6,6 +6,22 @@ import depthai as dai
 import depthai_blazepose.mediapipe_utils as mpu
 from depthai_blazepose.FPS import FPS, now
 from depthai_blazepose.BlazeposeRenderer import BlazeposeRenderer
+from depthai_blazepose.o3d_utils import Visu3D
+
+rgb = {"right":(0,1,0), "left":(1,0,0), "middle":(1,1,0)}
+LINES_BODY = [[9,10],[4,6],[1,3],
+            [12,14],[14,16],[16,20],[20,18],[18,16],
+            [12,11],[11,23],[23,24],[24,12],
+            [11,13],[13,15],[15,19],[19,17],[17,15],
+            [24,26],[26,28],[32,30],
+            [23,25],[25,27],[29,31]]
+
+COLORS_BODY = ["middle","right","left",
+                "right","right","right","right","right",
+                "middle","middle","middle","middle",
+                "left","left","left","left","left",
+                "right","right","right","left","left","left"]
+COLORS_BODY = [rgb[x] for x in COLORS_BODY]
 
 class VisioPose:
     complexity = {'lite': 0, 'full': 1, 'heavy': 2}
@@ -107,8 +123,8 @@ class VisioPose:
         body = mpu.Body()
         if result.pose_landmarks is not None:
             body.pose_landmarks = result.pose_landmarks
-            body.pose_world_landmarks = result.pose_world_landmarks
-            landmarks = [np.array([lm.x, lm.y, lm.z]) for lm in result.pose_landmarks.landmark]
+            body.landmarks_world = [np.array([lm.x, lm.y, lm.z]) for lm in result.pose_world_landmarks.landmark]
+            landmarks = [np.array([lm.x, lm.y, lm.z]) for lm in result.pose_world_landmarks.landmark]
             body.landmarks = np.asarray(landmarks)
             body.presence = [lm.visibility for lm in result.pose_landmarks.landmark]
 
@@ -118,11 +134,21 @@ class VisioPose:
         pass
     
 class VisioPoseRenderer():
-    def __init__(self, tracker):
+    def __init__(self, tracker, show_3d=False):
         self.tracker = tracker
         self.mp_drawing = mp.solutions.drawing_utils
         self.mp_drawing_styles = mp.solutions.drawing_styles
         self.pose_connection = mp.solutions.pose.POSE_CONNECTIONS
+        self.show_3d = show_3d
+
+        if self.show_3d:
+            self.vis3d = Visu3D(bg_color=(0.2, 0.2, 0.2), zoom=1.1, segment_radius=0.01)
+            self.vis3d.create_grid([-1,1,-1],[1,1,-1],[1,1,1],[-1,1,1],2,2) # Floor
+            self.vis3d.create_grid([-1,1,1],[1,1,1],[1,-1,1],[-1,-1,1],2,2) # Wall
+            self.vis3d.init_view()
+
+    def is_present(self, body, lm_id):
+        return body.presence[lm_id] > self.tracker.presence_threshold
 
     def draw(self, frame, body):
         self.frame = frame
@@ -135,7 +161,29 @@ class VisioPoseRenderer():
         
         self.tracker.fps.draw(self.frame, orig=(50,50), size=1, color=(240,180,100))
         
+        if self.show_3d:
+            self.draw_3d(body)
+            
         return self.frame
+    
+    def draw_3d(self, body):
+        self.vis3d.clear()
+        self.vis3d.try_move()
+        self.vis3d.add_geometries()
+        if body is not None:
+            if body.landmarks_world is None:
+                return
+            
+            points = body.landmarks_world
+
+            lines = LINES_BODY
+            colors = COLORS_BODY
+            for i, a_b in enumerate(lines):
+                a, b = a_b
+                if self.is_present(body, a) and self.is_present(body, b):
+                    self.vis3d.add_segment(points[a], points[b], color=colors[i])
+            
+        self.vis3d.render()
     
     def waitKey(self, delay=1):
         cv2.imshow("Blazepose", self.frame)

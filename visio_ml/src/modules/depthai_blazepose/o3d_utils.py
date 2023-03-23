@@ -152,7 +152,7 @@ class Visu3D:
 
     def init_view(self):
         self.angle_view = 0
-        self.rot_speed = 2
+        self.rot_speed = 0
         self.set_view()
         self.view_control.set_zoom(self.zoom)
         
