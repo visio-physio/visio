@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIRequiresFullScreen</key>
-	<true/>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
 	<false/>
 	<key>UIApplicationSceneManifest</key>
@@ -13,5 +11,13 @@
 		<key>UISceneConfigurations</key>
 		<dict/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>HKGrotesk-Light.otf</string>
+		<string>HKGrotesk-Medium.otf</string>
+		<string>HKGrotesk-SemiBold.otf</string>
+		<string>HKGrotesk-Bold.otf</string>
+		<string>HKGrotesk-Regular.otf</string>
+	</array>
 </dict>
 </plist>

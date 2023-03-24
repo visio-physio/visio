@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ExerciseRow: View {
     var exercise: Exercise
-    
     var body: some View {
         HStack {
             exercise.image
                 .resizable()
                 .frame(width: 50, height: 50)
             Text(exercise.bodyPart + " " + exercise.exercise)
+                .foregroundColor(Color("SubHeadingColor"))
             Spacer()
 
             if exercise.isFavorite {

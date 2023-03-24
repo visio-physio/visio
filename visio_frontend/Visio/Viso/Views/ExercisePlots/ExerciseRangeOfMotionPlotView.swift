@@ -4,36 +4,11 @@ import Charts
 struct ExerciseRangeOfMotionPlotView: View {
     @EnvironmentObject var results: Results
     @State private var plotType: String = "roi_left"
-
+    
     var body: some View {
         VStack {
-            if plotType == "roi_left" {
-                Chart(results.datapoints) {
-                    LineMark(
-                        x: .value("Range of Motion Left", $0.id),
-                        y: .value("Date", $0.roi_left)
-                    )
-                    
-                }
-            } else if plotType == "roi_right" {
-                Chart(results.datapoints) {
-                    LineMark(
-                        x: .value("Range of Motion Right", $0.id),
-                        y: .value("Date", $0.roi_right)
-                    )
-                }
-            } else if plotType == "combine" {
-                Chart(results.datapoints) {
-                    LineMark(
-                        x: .value("Range of Motion Left", $0.id),
-                        y: .value("Left", $0.roi_left)
-                    )
-                    LineMark(
-                        x: .value("Range of Motion Right", $0.id),
-                        y: .value("Right", $0.roi_right)
-                    )
-                }
-            }
+            SinceGraph(dataPoints: results.currentData, rangeType: plotType)
+        }
 
             Picker(selection: $plotType, label: Text("Select plot type")) {
                 Text("Left").tag("roi_left")
@@ -41,18 +16,33 @@ struct ExerciseRangeOfMotionPlotView: View {
 //                Text("Combine").tag("combine")
             }.pickerStyle(SegmentedPickerStyle())
         }
-        
-        
-   }
-    
-    
 }
 
-struct ExerciseRangeOfMotionPlotView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExerciseRangeOfMotionPlotView()
+struct SinceGraph: View {
+    var dataPoints: [SinePoint]
+    var rangeType: String
+
+    @State private var lineWidth = 2.0
+    @State private var chartColor: Color = .blue
+    @State private var selectedElement: DataPoint? = nil
+    @State private var showLollipop = true
+
+    var body: some View {
+        VStack {
+            Chart(dataPoints, id: \.id) {
+                LineMark(
+                    x: .value("Date", $0.id),
+                    y: .value(rangeType, rangeType == "roi_left" ? $0.left : $0.right)
+                )
+                .lineStyle(StrokeStyle(lineWidth: lineWidth))
+                .foregroundStyle(chartColor.gradient)
+                .symbol(Circle().strokeBorder(lineWidth: lineWidth))
+                .symbolSize(60)
+
+            }
+            .chartXAxis(.automatic)
+            .chartYAxis(.automatic)
+            .frame(height: 300)
+        }
     }
 }
-
-
-

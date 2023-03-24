@@ -22,12 +22,11 @@ struct LiveCameraView: View {
                     cam.send(userId: userID, bodyPart: "String", exercise: "String", state: "end")
                     dismiss()
                 }
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.red)
-                .cornerRadius(10.0)
+                .buttonStyle(BlueButton())
             }
         }
+        .backgroundStyle()
+        .navigationBarBackButtonHidden(true)
     }
 }
 
