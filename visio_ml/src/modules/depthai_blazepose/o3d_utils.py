@@ -150,6 +150,10 @@ class Visu3D:
         self.view_control.set_front(np.array([ax,0,az]))
         self.view_control.set_up(np.array([0,-1,0]))
 
+    def reset_view(self):
+        self.view_control.set_front(np.array([0,0,-1]))
+        self.view_control.set_up(np.array([0, -1, 0]))
+
     def init_view(self):
         self.angle_view = 0
         self.rot_speed = 0

@@ -140,7 +140,7 @@ class BlazeposeRenderer:
             # Pause on space bar
             self.pause = not self.pause
         elif key == ord('r'):
-            self.show_rot_rect = not self.show_rot_rect
+            self.vis3d.reset_view()
         elif key == ord('l'):
             self.show_landmarks = not self.show_landmarks
         elif key == ord('s'):
