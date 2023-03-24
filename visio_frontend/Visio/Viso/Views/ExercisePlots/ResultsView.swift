@@ -37,7 +37,7 @@ struct ResultsView: View {
         
         ScrollView {
             VStack {
-                Text("Results for \(exercise.localizedUppercase)")
+                Text("Results for \(exercise.capitalized)")
                     .font(.largeTitle)
                     .padding()
                 
